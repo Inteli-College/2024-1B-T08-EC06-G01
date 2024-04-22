@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - stable
-      - docs/setup
   workflow_dispatch:
 
 permissions:
