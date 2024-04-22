@@ -8,7 +8,7 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://inteli-college.github.io/2024-1B-T08-EC06-G01/',
+  url: 'https://inteli-college.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/2024-1B-T08-EC06-G01/',
@@ -39,7 +39,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           routeBasePath: '/',
-          editUrl: 'https://github.com/',
+          editUrl: 'https://github.com/Inteli-College/2024-1B-T08-EC06-G01/tree/docs/setup/docs',
         },
         blog: false,
         theme: {
