@@ -39,7 +39,6 @@ jobs:
           cd docs
           npm i
           npm run build
-          mv build ../build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -47,7 +46,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./build
+          path: ./docs/build
 
       - name: Deploy to GitHub Pages
         id: deployment
