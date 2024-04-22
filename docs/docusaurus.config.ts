@@ -39,7 +39,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           routeBasePath: '/',
-          editUrl: 'https://github.com/Inteli-College/2024-1B-T08-EC06-G01/tree/docs/setup/docs',
+          editUrl: 'https://github.com/',
         },
         blog: false,
         theme: {
