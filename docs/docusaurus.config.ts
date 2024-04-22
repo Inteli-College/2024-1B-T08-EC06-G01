@@ -3,9 +3,9 @@ import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
-  title: 'Grupo 1',
+  title: 'CANNABOT',
   tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/cannabot.png',
 
   // Set the production url of your site here
   url: 'https://inteli-college.github.io/',
@@ -39,7 +39,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           routeBasePath: '/',
-          editUrl: 'https://github.com/Inteli-College/2024-1B-T08-EC06-G01/tree/docs/setup/docs',
+          // editUrl: 'https://github.com/Inteli-College/2024-1B-T08-EC06-G01/tree/docs/setup/docs',
         },
         blog: false,
         theme: {
@@ -51,11 +51,11 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    // image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: '2024-1B-T08-EC06-G01',
+      title: 'CANNABOT',
       logo: {
-        alt: 'Grupo 1 Logo',
+        alt: 'CANNABOT Logo',
         src: 'img/logo.svg',
       },
       items: [],
@@ -63,7 +63,7 @@ const config: Config = {
     footer: {
       style: 'dark',
       links: [],
-      copyright: `Copyright © ${new Date().getFullYear()} Grupo 1, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} CANNABOT. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
