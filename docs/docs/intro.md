@@ -1,47 +1,24 @@
 ---
+title: Solução
 sidebar_position: 1
+slug: "/"
 ---
+import {Membro} from "@site/src/components/profile.jsx";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import styles from "@site/src/css/profile.module.css";
 
-# Tutorial Intro
+# Solução
+&emsp;
 
-Let's discover **Docusaurus in less than 5 minutes**.
+## Group
+### Members
+<div className={styles.profiles}>
+    <Membro nome="Ana Marques" imagem={useBaseUrl("/img/integrantes/ana_marques.jpg")} linkedin="https://www.linkedin.com/in/ana-clara-madureira-marques/"></Membro>
+    <Membro nome="Eduardo França Porto" imagem={useBaseUrl("/img/integrantes/eduardo_porto.jpg")} linkedin="https://www.linkedin.com/in/eduardo-franca-porto/"></Membro>
+    <Membro nome="Gustavo Wagon Widman" imagem={useBaseUrl("/img/integrantes/gustavo_widman.jpg)} linkedin="https://www.linkedin.com/in/gustavo-widman/"></Membro>
+    <Membro nome="Laura Padilha Bueno" imagem={useBaseUrl("/img/integrantes/laura_bueno.jpg")} linkedin="https://www.linkedin.com/in/laura-padilha-bueno-b358419a/"></Membro>
+    <Membro nome="Luiz Fernando Villaça Leão" imagem={useBaseUrl("/img/integrantes/luiz_fernando.jpg")} linkedin="https://www.linkedin.com/in/luiz-fernando-villa%C3%A7a-le%C3%A3o-930568271/"></Membro>
+    <Membro nome="Marco Antonio Rizzi" imagem={useBaseUrl("/img/integrantes/marco_rizzi.jpg")} linkedin="https://www.linkedin.com/in/marco-antonio-rizzi-620b56257/"></Membro>
+    <Membro nome="Rodrigo Sales" imagem={useBaseUrl("/img/integrantes/rodrigo_sales.jpg")} linkedin="https://www.linkedin.com/in/rodrigo-sales-07/"></Membro>
+</div>
 
-## Getting Started
-
-Get started by **creating a new site**.
-
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
-
-### What you'll need
-
-- [Node.js](https://nodejs.org/en/download/) version 18.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
