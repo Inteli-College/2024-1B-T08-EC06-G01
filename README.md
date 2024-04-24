@@ -32,12 +32,7 @@
 
 ## 📚 Professores
 
-- <a href="https://www.linkedin.com/in/anderson-oliveira-7b2b3b1b/">Anderson Oliveira</a>
-- <a href="https://www.linkedin.com/in/bruno-oliveira-ribeiro/">Bruno Ribeiro</a>
-- <a href="https://www.linkedin.com/in/eduardo-ferreira-oliveira/">Eduardo Oliveira</a>
-- <a href="https://www.linkedin.com/in/fernando-bernardo/">Fernando Bernardo</a>
-- <a href="https://www.linkedin.com/in/luiz-fernando-ferreira/">Luiz Fernando Ferreira</a>
-- <a href="https://www.linkedin.com/in/rodrigo-campos-oliveira/">Rodrigo Campos</a>
+A SER FEITO
 
 ## 📁 Estrutura de diretórios
 
