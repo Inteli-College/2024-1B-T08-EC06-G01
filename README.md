@@ -1,7 +1,7 @@
 # Inteli - Instituto de Tecnologia e Liderança
 
 <p align="center">
-<a href= "https://www.inteli.edu.br/"><img src="docs\static\img\inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0" width=40% height=40%></a>
+<a href= "https://www.inteli.edu.br/"><img src="docs/static/img/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0" width=40% height=40%></a>
 </p>
 
 <br>
@@ -9,7 +9,7 @@
 # CANNABOT
 
 <p align="center">
-<a href="https://inteli-college.github.io/2024-1B-T08-EC06-G01/"><img src="docs/static/img/cannabot.png" alt="CANNABOT" border="0" width="40%" height="40%">
+<a href="https://inteli-college.github.io/2024-1B-T08-EC06-G01/"><img src="docs/static/img/cannabot.png" alt="CANNABOT" border="0" width="20%" height="20%">
 </p>
 
 ## 🟣 GitHub Pages
