@@ -8,11 +8,9 @@
 
 # CANNABOT
 
-<figure>
-  <figcaption style="text-align: center;"></figcaption>
-  <img src="docs\static\img\cannabot.png" />
-  <figcaption style="text-align: center;">Fonte: Autoria própria.</figcaption>
-</figure>
+<p align="center">
+<a href="https://inteli-college.github.io/2024-1B-T08-EC06-G01/"><img src="docs/static/img/cannabot.png" alt="CANNABOT" border="0" width="40%" height="40%">
+</p>
 
 ## 🟣 GitHub Pages
 
