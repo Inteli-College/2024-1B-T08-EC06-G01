@@ -24,7 +24,7 @@ sidebar_position: 2
 
 &emsp;Esses elementos combinados fornecem uma visão geral das necessidades dos usuários e orientam o desenvolvimento do sistema de forma a atender às suas expectativas e objetivos. A partir dessa contextualização, é possível elencar as prioridades do projeto e desenvolver uma solução mais próxima 
 
-<!-- ![User Stories](../../../static/img/user_stories.png) -->
+![User Stories](../../../../static/img/sprint1/user_stories.png)
 
 
 
