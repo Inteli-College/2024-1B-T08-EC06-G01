@@ -11,13 +11,13 @@ sidebar_position: 1
 
 <p align="center"><b> Figura persona 1 - Persona:</b> Ísis Leila </p>
 <div align="center">
-  ![Arquitetura](../../../static/img/isis-leila.png)
+  ![Arquitetura](../../../../static/img/sprint1/isis-leila.png)
   <p><b>Fonte:</b> Elaborado por Cannabot</p>
 </div>
 
 <p align="center"><b> Figura persona 1 - Persona:</b> Cleber Vínicius </p>
 <div align="center">
-  ![Arquitetura](../../../static/img/cleber-vini.png)
+  ![Arquitetura](../../../../static/img/sprint1/cleber-vini.png)
   <p><b>Fonte:</b> Elaborado por Cannabot</p>
 </div>
 

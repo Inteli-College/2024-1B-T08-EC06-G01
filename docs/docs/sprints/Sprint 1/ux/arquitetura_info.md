@@ -8,7 +8,7 @@ sidebar_position: 3
 
 ## Diagrama de Contexto
 
-![User Stories](../../../../static/img/sprint1/diagrama_contexto.jpg)
+![User Strories](../../../../static/img/sprint1/diagrama_contexto.jpg)
 
 ### Diagrama de Sequência
 
@@ -16,7 +16,7 @@ sidebar_position: 3
 
 <p align="center"><b> Figura persona 1 - Persona:</b> Cleber Vínicius </p>
 <div align="center">
-  ![Arquitetura](../../../static/img/diagrama-seq.png)
+  ![Arquitetura](../../../../static/img/sprint1/diagrama-seq.png)
   <p><b>Fonte:</b> Elaborado por Cannabot</p>
 </div>
 
