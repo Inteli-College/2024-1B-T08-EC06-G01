@@ -17,6 +17,9 @@ Pensando em uma arquitetura modularizada capaz de atender às demandas especific
 
 ![Arquitetura](../../../../static/img/sprint1/arq1.jpg)
 
+
+**Legenda**: Um aspecto importante ao observar a arquitetura é que cada quadrado representa um bloco individual do sistema. Além disso, as figuras em formato de losango representam partes do software, enquanto os retângulos representam peças de hardware. 
+
 Nos parágrafos a seguir, serão destacados a função de cada um desses módulos e a integração dos mesmos.
 
 #### Mapeamento 
