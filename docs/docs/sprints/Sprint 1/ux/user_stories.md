@@ -22,7 +22,7 @@ sidebar_position: 2
 
 &emsp;*-Para que:* Este elemento delineia o objetivo final que o usuário pretende alcançar ao realizar a ação descrita. É a motivação por trás das interações e evidencia o papel tanto do usuário quanto da tecnologia no contexto geral. Esclarece por que a ação é relevante e como ela se encaixa no fluxo de trabalho ou na jornada do usuário.
 
-&emsp;Esses elementos combinados fornecem uma visão geral das necessidades dos usuários e orientam o desenvolvimento do sistema de forma a atender às suas expectativas e objetivos. A partir dessa contextualização, é possível elencar as prioridades do projeto e desenvolver uma solução mais próxima 
+&emsp;Esses elementos combinados fornecem uma visão geral das necessidades dos usuários e orientam o desenvolvimento do sistema de forma a atender às suas expectativas e objetivos. A partir dessa contextualização, é possível elencar as prioridades do projeto e desenvolver uma solução mais próxima.
 
 ![User Stories](../../../../static/img/sprint1/user_stories.png)
 
