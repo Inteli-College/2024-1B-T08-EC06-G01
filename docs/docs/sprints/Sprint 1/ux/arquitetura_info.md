@@ -8,7 +8,11 @@ sidebar_position: 3
 
 ## Diagrama de Contexto
 
-![User Strories](../../../../static/img/sprint1/diagrama_contexto.jpg)
+&emsp;Um diagrama de contexto é um diagrama que foca mais em uma visão de mais alto nível do sitema, monstrando como o sistema interage com componentes externos e como eles se interragem entre si. A seguir temos o diagrama de contexto do projeto:
+
+![User Stories](../../../../static/img/sprint1/diagrama_contexto.jpg)
+
+&emsp;Nosso sistema é composto pelo robô teleoperado chamado Turtlebot, backend que recebe os dados do robô e trato eles, e o frontend que exibe os dados para o usuário. De elemetnos externos temos a operadora de sistemas autônomos, que na nossa persona é a ísis Leila, responsável por monitorar o robô e o sistema. Também temos o operário de manunteção, que é representado pela persona Cleber Vinicius, que é responsável por posicionar o robô, iniciar e finalizar seu funcionamento e realizar manutenções básicas. Além disso, temos a equipe de manunteção, que é como fosse um time ou empresa que presta serviços de manutenção para a Atvos que possui o sistema, responsável por fazer manutenções mais complexas, periódica e espeficas no robô. Por último, temos o Sistema de Power BI externo, que é um sistema de visualização de dados que a Atvos já utiliza, e que será alimentado com os dados do nosso sistema atraves de uma API que será desenvolvida.
 
 ### Diagrama de Sequência
 
