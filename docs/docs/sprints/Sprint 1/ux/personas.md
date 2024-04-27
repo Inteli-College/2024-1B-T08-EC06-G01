@@ -25,4 +25,15 @@ sidebar_position: 1
 
 &emsp;Portanto, a construção de personas transcende a esfera do design e se estende a toda a estratégia empresarial, orientando-nos na busca constante pela satisfação do cliente e pela inovação centrada nas pessoas. Dessa maneira, destaca-se o público raiz que vai utilizar a solução: profissionais fabris e equipes de gestão. Com isso em mente, a equipe CannaBot pode guiar o desenvolvimento com objetivos claros e palpáveis.
 
+&emsp;Fontes da pesquisa feita por trás da elaboração das personas do grupo Cannabot:
+
+&emsp;Para o gerador facial de pessoas que não existem:
+  - THIS PERSON DOES NOT EXIST. [S.l.], [s.d.]. Disponível em: https://this-person-does-not-exist.com/pt. Acesso em: 27 abr. 2024.
+
+&emsp;Para o artigo da União Europeia sobre letramento digital:
+  - JOINT RESEARCH CENTRE. Novo relatório DigComp desenvolve níveis de proficiência. [S.l.], 12 maio 2017. Disponível em: https://joint-research-centre.ec.europa.eu/jrc-news-and-updates/new-digcomp-report-develops-proficiency-levels-2017-05-12_en. Acesso em: 27 abr. 2024.
+
+&emsp;Para observar dados demográficos da persona no relatório anual da Atvos:
+  - ATVOS. Relatório anual. [S.l.], [s.d.]. Disponível em: https://atvos.com/comunicacao/relatorio-anual/. Acesso em: 27 abr. 2024.
+
 
