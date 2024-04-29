@@ -9,7 +9,7 @@ description : Arquitetura referente a primeira sprint.
 
 A arquitetura de um sistema é uma parte primordial para compreender como as diferentes partes se conectam e como a integração dessas partes foi pensada.
 
-Nesta primeira iteração, foi concebida uma arquitetura simples. O objetivo inicial é permitir que o robô mapeie o reboiler para se localizar e identificar os tubos individuais. Posteriormente, o robô se desloca para cada tubo, inserindo uma câmera de endoscopia dentro do cano para realizar a análise dos dados. Isso permite que o modelo de inteligência artificial determine se o tubo está limpo ou não.
+Nesta primeira interação, foi concebida uma arquitetura simples. O objetivo inicial é permitir que o robô mapeie o reboiler para se localizar e identificar os tubos individuais. Posteriormente, o robô se desloca para cada tubo, inserindo uma câmera de endoscopia dentro do cano para realizar a análise dos dados. Isso permite que o modelo de inteligência artificial determine se o tubo está limpo ou não.
 
 ## Fluxo de dados na arquitetura
 
@@ -126,9 +126,9 @@ A tecnologia do modelo de visão computacional ainda não foi escolhida, mas com
 
 Ao realizar uma pesquisa na literatura científica sobre o tema, é possível encontrar artigos sobre a utilização de IA para identificação de obstruções em tubulações.
 
-[exemplo - 1](https://onlinelibrary.wiley.com/doi/10.1002/cjce.24202)
+[Exemplo - 1](https://onlinelibrary.wiley.com/doi/10.1002/cjce.24202)
 
-[exemplo - 2](https://www.mdpi.com/2079-9292/12/17/3606)
+[Exemplo - 2](https://www.mdpi.com/2079-9292/12/17/3606)
 
 Os estudos apontam resultados extremamente satisfatórios e indicam uma grande vantagem em utilizar modelos pré-treinados. Especialmente no segundo exemplo, que utiliza redes neurais profundas para detectar obstruções em tubulações de água em ambientes urbanos.
 
