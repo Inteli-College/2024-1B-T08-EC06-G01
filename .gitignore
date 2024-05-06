@@ -133,3 +133,7 @@ dist
 install/
 build/
 log/
+
+# venv
+venv/
+env/
