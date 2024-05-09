@@ -1,11 +1,11 @@
 ---
 title: Classe Robô
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Classe Robô
 
-A seguir segue a estrutura da classe Robô, que é responsável por fazer o conrole do robô e das suas funções. 
+A seguir segue a estrutura da classe Robô, que é responsável por fazer o conrole do robô e das suas funções.
 
 ```python
 
@@ -25,7 +25,7 @@ class TurtleBot(Node):
         # Esperar o tempo de duração antes de para o movimento
         time.sleep(duration)  # Simples delay para esperar antes de parar o movimento
         self.stop()
-    
+
     def stop(self):
         stop_msg = Twist()
         self.publisher_.publish(stop_msg)
@@ -43,7 +43,7 @@ class TurtleBot(Node):
 
     def rotate_right(self, speed: float, duration: float):
         self.move(Vector3(), Vector3(z=-speed), duration)
-    
+
     # Seta todas as velocidades para 0 para parar o robô imediatamente
     def emergency_stop(self):
         self.move(Vector3(x=0.0, y=0.0, z=0.0), Vector3(), 0.0)
