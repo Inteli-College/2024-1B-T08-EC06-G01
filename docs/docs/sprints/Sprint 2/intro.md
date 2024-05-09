@@ -1,6 +1,6 @@
 ---
 title: Segunda sprint
-sidebar_position: 1
+sidebar_position: 0
 description : Nesta secção será comentado as principais mudanças da primeira para a segunda sprint.
 ---
 

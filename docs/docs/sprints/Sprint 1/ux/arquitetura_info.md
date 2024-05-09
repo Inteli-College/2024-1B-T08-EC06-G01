@@ -6,7 +6,7 @@ sidebar_position: 3
 # Arquitetura da informação
 
 
-## Diagrama de Contexto 
+### Diagrama de Contexto 
 
 &emsp;Um diagrama de contexto é um diagrama que foca mais em uma visão de mais alto nível do sitema, mostrando como o sistema interage com componentes externos e como eles interragem entre si. A seguir temos o diagrama de contexto do projeto:
 
