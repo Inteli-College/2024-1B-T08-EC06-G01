@@ -37,11 +37,11 @@ def back():
     print("Move to the back of the line")
 
 def left():
-    graus_left = inquirer.text("Quantos graus para esquerda deseja virar?")
+    graus_left = inquirer.text("How many degrees to the left do you want to turn?")
     print(f"Move to the left in {graus_left} degrees")
 
 def right():
-    graus_right = inquirer.text("Quantos graus para direita deseja virar?")
+    graus_right = inquirer.text("How many degrees to the right do you want to turn?")
     print(f"Move to the right in {graus_right} degrees")
 
 def show_menu():
