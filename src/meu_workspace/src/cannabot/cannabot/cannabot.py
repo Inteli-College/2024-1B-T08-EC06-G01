@@ -13,7 +13,7 @@ app = typer.Typer()
 def show_menu():
     questions = [
         inquirer.List('action', message="What do you want to do?", choices=[
-            'front', 'back', 'left', 'right', 'exit'
+            'front', 'back', 'left', 'right', 'exit','stop'
         ])
     ]
     return inquirer.prompt(questions)['action']
@@ -37,6 +37,9 @@ def main():
             case 'right':
                 print("Mover para a direita")
                 robot.rotate_right(2.0, 1.0)
+            case 'stop':
+                print("Parada de emergência")
+                robot.emergency_stop()
             case 'exit':
                 print("Exit")
                 break
@@ -98,3 +101,7 @@ class TurtleBot(Node):
 
     def rotate_right(self, speed: float, duration: float):
         self.move(Vector3(), Vector3(z=-speed), duration)
+    
+    # Seta todas as velocidades para 0 para parar o robô imediatamente
+    def emergency_stop(self):
+        self.move(Vector3(x=0.0, y=0.0, z=0.0), Vector3(), 0.0)
