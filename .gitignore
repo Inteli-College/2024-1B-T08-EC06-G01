@@ -137,3 +137,6 @@ log/
 # venv
 venv/
 env/
+
+.vscode/
+.vscode
