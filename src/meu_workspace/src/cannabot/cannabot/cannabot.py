@@ -41,6 +41,21 @@ def main():
                 print("Exit")
                 break
 
+    # while True:
+    # if keyboard.is_pressed('w'):
+    #     robot.move_forward(speed)
+    # elif keyboard.is_pressed('s'):
+    #     robot.move_backward(speed)
+    # elif keyboard.is_pressed('a'):
+    #     robot.rotate_left(speed)
+    # elif keyboard.is_pressed('d'):
+    #     robot.rotate_right(speed)
+    # elif keyboard.is_pressed('esc'):
+    #     break  # Exit on pressing 'esc'
+    # else:
+    #     robot.stop()  # Stop if no key is pressed
+    # rclpy.spin_once(robot, timeout_sec=0.1)
+
     robot.destroy_node()
     rclpy.shutdown()
 
