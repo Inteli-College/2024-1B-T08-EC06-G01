@@ -4,6 +4,8 @@ sidebar_position: 2
 ---
 
 # CLI: Command-Line Interface
+
+## Introdução
 ### O que é 'CLI' afinal?
 
 &emsp;A CLI, ou Interface de Linha de Comando, é uma área de interação simplificada que permite aos usuários interagirem com um software através de comandos de texto. Geralmente integrada no início do desenvolvimento de um projeto, ela é crucial para testar e validar funcionalidades de maneira simplificada. Sua importância se torna evidente à medida que o projeto evolui e se integra a uma aplicação frontend no futuro.
@@ -12,7 +14,7 @@ sidebar_position: 2
 
 ### Interface
 
-&emsp;Ao executar nosso pacote ROS, uma interface gráfica será exibida no terminal, permitindo a interação com a solução. As opções disponíveis são as seguintes:
+&emsp;Ao executar o pacote ROS, uma interface gráfica será exibida no terminal, permitindo a interação com a solução. As opções disponíveis são as seguintes:
 
 <p align="center">Figura Command-Line Interface 1:</p>
 <div align="center">
@@ -36,7 +38,7 @@ sidebar_position: 2
 
 ### Código
 
-&emsp;Ao executar nosso pacote com o comando ros2 run cannabot cannabot no terminal, na verdade estamos chamando o arquivo cannabot.py e executando sua função principal main() a partir do seguinte trecho de código:
+&emsp;Ao executar o pacote com o comando ros2 run cannabot cannabot no terminal, na verdade estamos chamando o arquivo cannabot.py e executando sua função principal main() a partir do seguinte trecho de código:
 
 <p align="center">Figura Command-Line Interface code 4:</p>
 <div align="center">
