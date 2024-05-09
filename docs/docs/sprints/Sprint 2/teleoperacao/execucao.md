@@ -1,5 +1,5 @@
 ---
-title: CLI
+title: Instruções de Execução
 sidebar_position: 1
 ---
 
