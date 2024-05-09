@@ -4,7 +4,7 @@ sidebar_position: 2
 ---
 
 ## Introdução
-Tendo em mente as mudanças que foram realizadas na arquitetura do projeto é preciso atualizar os requisitos funcionais e não funcionais do projeto. 
+&emsp;Tendo em mente as mudanças que foram realizadas na arquitetura do projeto é preciso atualizar os requisitos funcionais e não funcionais do projeto. 
 Os requisitos geralmente são classificados em duas categorias principais:
 
 - Requisitos funcionais: são as funcionalidades específicas que o sistema deve oferecer para realizar as operações desejadas.
@@ -62,7 +62,7 @@ Os requisitos que sofreram mudanças da sprint passada para a próxima foram: **
 
 
 ## Conclusão 
-Tendo em mente a mudança do escopo do projeto, a atualização nos requisitos funcionais e não funcionais destacados acima é de suma importância para o desenvolvimento de uma solução segura e eficaz. As principais alterações ocorreram nos requisitos funcionais, uma vez que o robô não irá mais verificar o estado de cada tubo do reboiler. Para mais explicações sobre as alterações, consultar a seção *Segunda Sprint*. 
+&emsp;Tendo em mente a mudança do escopo do projeto, a atualização nos requisitos funcionais e não funcionais destacados acima é de suma importância para o desenvolvimento de uma solução segura e eficaz. As principais alterações ocorreram nos requisitos funcionais, uma vez que o robô não irá mais verificar o estado de cada tubo do reboiler. Para mais explicações sobre as alterações, consultar a seção *Segunda Sprint*. 
 
 
 

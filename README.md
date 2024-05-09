@@ -30,9 +30,15 @@
 
 &emsp;A solução proposta aborda o desafio apresentado pela empresa Atvos, que consiste em desenvolver um robô capaz de inspecionar os tubos dos reboilers, utilizados na produção de etanol e outros produtos derivados da cana-de-açúcar. O robô se locomoverá na superfície do reboiler e descerá uma câmera em cada um dos tubos, extraindo informações para determinar se o tubo está limpo ou sujo. Dito isso, o projeto visa automatizar o processo de inspeção, tornando-o mais eficiente e seguro.
 
-## 📚 Professores
+## 📚 Professores e Orientadores
 
-A SER FEITO
+- <a href="https://www.linkedin.com/in/geraldo-magela-severino-vasconcelos-22b1b220/">Geraldo Vasconcelos</a>
+- <a href="https://www.linkedin.com/in/gui-cestari/">Guilherme Cestari</a>
+- <a href="https://www.linkedin.com/in/lisane-valdo/">Lisane Valdo</a>
+- <a href="https://www.linkedin.com/in/michele-bazana-de-souza-69b77763/">Michele Bazana de Souza</a>
+- <a href="https://www.linkedin.com/in/monica-anastassiu-d-sc-2568522/">Monica Anastassiu</a>
+- <a href="https://www.linkedin.com/in/murilo-zanini-de-carvalho-0980415b/">Murilo Zanini de Carvalho</a>
+- <a href="https://www.linkedin.com/in/rodrigo-mangoni-nicola-537027158/">Rodrigo Mangoni Nicola</a>
 
 ## 📁 Estrutura de diretórios
 
@@ -57,6 +63,11 @@ A SER FEITO
 ├── LICENSE
 ├── README.md
 └── src
+    ├── meu_workspace
+    │   └── src
+    │       └── cannabot
+    ├── requirements.txt
+    └── ros-run.bash
 ```
 
 &emsp;&emsp;Dentre os arquivos e pastas presentes na raiz do projeto, define-se:
@@ -73,4 +84,23 @@ A SER FEITO
 
 ## 🚀 Setup
 
-A SER FEITO
+Clone o repositório do projeto:
+
+```bash
+git clone https://github.com/Inteli-College/2024-1B-T08-EC06-G01.git
+```
+
+## Instalação e Execução
+
+Entre na pasta do projeto:
+
+```bash
+cd 2024-1B-T08-EC06-G01/src
+```
+
+Rode o script de instalação e execução automático:
+
+```bash
+chmod +x ros-run.bash
+./ros-run.bash
+```
