@@ -10,17 +10,6 @@ import time
 
 app = typer.Typer()
 
-def custom_input(prompt):
-    """Custom input function that checks for 'Q' and raises an exception."""
-    try:
-        user_input = input(prompt)
-        print(user_input)
-        if user_input.upper() == 'Q':
-            raise KeyboardInterrupt  # Simulate KeyboardInterrupt on 'Q' press
-        return user_input
-    except EOFError:
-        return ''  # Handle EOFError if needed
-
 def show_menu():
     questions = [
         {
