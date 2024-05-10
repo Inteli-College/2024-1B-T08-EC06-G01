@@ -1,2 +1,2 @@
-inquirer==3.2.4
+inquirerpy==0.3.4
 typer==0.9.0

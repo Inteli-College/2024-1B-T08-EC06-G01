@@ -1,9 +1,9 @@
-import inquirer
 import typer
 import rclpy
 from rclpy.node import Node
+from InquirerPy.resolver import prompt
+from InquirerPy.utils import InquirerPyKeybindings
 from geometry_msgs.msg import Twist, Vector3
-from std_msgs.msg import String
 import time
 
 # from classes.robot import TurtleBot
@@ -12,16 +12,32 @@ app = typer.Typer()
 
 def show_menu():
     questions = [
-        inquirer.List('action', message="What do you want to do?", choices=[
-            'front', 'back', 'left', 'right', 'exit','stop'
-        ])
+        {
+            'type': 'list',
+            'name': 'action',
+            'message': 'What do you want to do?',
+            'choices': ['front', 'back', 'left', 'right', 'exit', 'stop'],
+        },
     ]
-    return inquirer.prompt(questions)['action']
 
+    keybindings: InquirerPyKeybindings = {
+        "interrupt": [{"key": "q"}, {"key": "c-c"}],
+    }
+
+    try:
+        return prompt(questions, keybindings=keybindings)['action']
+    except KeyboardInterrupt:
+        return 'panic'
 
 def main():
     rclpy.init(args=None)
     robot = TurtleBot()
+
+    print(
+"""
+Se em qualquer momento você desejar parar o robô, pressione 'Q'.
+"""
+    )
     while True:
         action = show_menu()
         match action:
@@ -40,27 +56,16 @@ def main():
             case 'stop':
                 print("Parada de emergência")
                 robot.emergency_stop()
+            case 'panic':
+                print("Parada de emergência")
+                robot.emergency_stop()
+                robot.destroy_node()
+                rclpy.shutdown()
+                exit()
             case 'exit':
-                print("Exit")
-                break
-
-    # while True:
-    # if keyboard.is_pressed('w'):
-    #     robot.move_forward(speed)
-    # elif keyboard.is_pressed('s'):
-    #     robot.move_backward(speed)
-    # elif keyboard.is_pressed('a'):
-    #     robot.rotate_left(speed)
-    # elif keyboard.is_pressed('d'):
-    #     robot.rotate_right(speed)
-    # elif keyboard.is_pressed('esc'):
-    #     break  # Exit on pressing 'esc'
-    # else:
-    #     robot.stop()  # Stop if no key is pressed
-    # rclpy.spin_once(robot, timeout_sec=0.1)
-
-    robot.destroy_node()
-    rclpy.shutdown()
+                robot.destroy_node()
+                rclpy.shutdown()
+                exit()
 
 if __name__ == "__main__":
     main()
@@ -82,8 +87,8 @@ class TurtleBot(Node):
         # Esperar o tempo de duração antes de para o movimento
         time.sleep(duration)  # Simples delay para esperar antes de parar o movimento
         self.stop()
-    
-    # 
+
+    #
     def stop(self):
         stop_msg = Twist()
         self.publisher_.publish(stop_msg)
@@ -101,7 +106,7 @@ class TurtleBot(Node):
 
     def rotate_right(self, speed: float, duration: float):
         self.move(Vector3(), Vector3(z=-speed), duration)
-    
+
     # Seta todas as velocidades para 0 para parar o robô imediatamente
     def emergency_stop(self):
         self.move(Vector3(x=0.0, y=0.0, z=0.0), Vector3(), 0.0)

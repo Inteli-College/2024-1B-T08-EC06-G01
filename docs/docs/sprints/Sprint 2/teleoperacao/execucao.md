@@ -14,7 +14,7 @@ O projeto foi desenvolvido e testado usando as seguintes versões de dependênci
 - **ROS2**: `humble`
 - **Python**: `3.10.12`
 - **Typer**: `0.9.0`
-- **Inquirer**: `3.2.4`
+- **InquirerPy**: `0.3.4`
 
 ## Preparo do Ambiente de Execução
 
