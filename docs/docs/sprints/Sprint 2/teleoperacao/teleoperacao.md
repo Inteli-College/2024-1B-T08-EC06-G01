@@ -14,25 +14,24 @@ sidebar_position: 2
 
 ### Interface
 
-&emsp;Ao executar o pacote ROS, uma interface gráfica será exibida no terminal, permitindo a interação com a solução. As opções disponíveis são as seguintes:
+&emsp;Ao iniciar o pacote ROS, uma interface gráfica é exibida no terminal, permitindo a interação com o robô. A CLI apresenta um menu interativo onde os usuários podem selecionar a ação desejada para o robô. As opções disponíveis são:
+
+- `front`: Move o robô para frente.
+- `back`: Move o robô para trás.
+- `left`: Move o robô para a esquerda.
+- `right`: Move o robô para a direita.
+- `stop`: Ativa a parada de emergência, interrompendo imediatamente todas as operações do robô.
+- `exit`: Sai da CLI.
+
+:::warning
+`Se em qualquer momento você desejar parar o robô, pressione 'Q'`
+
+A tecla "Q" é designada como atalho para ativar a parada de emergência. Este sistema de segurança é essencial para interromper imediatamente todas as operações do robô em caso de emergência ou mau funcionamento. Isso garante a segurança do ambiente e do robô, evitando danos ou acidentes.
+::: 
 
 <p align="center">Figura Command-Line Interface 1:</p>
 <div align="center">
-  ![CLI](../../../../static/img/sprint2/cli-principal.png)
-  <p><b>Fonte:</b> Elaborado por Cannabot</p>
-</div>
-
-&emsp;Ao selecionar a opção 'right', será exibida uma segunda pergunta para inserir o comando, que consiste na quantidade de graus que o usuário deseja que o robô vire para a direita:
-<p align="center">Figura Command-Line Interface 2:</p>
-<div align="center">
-  ![CLI](../../../../static/img/sprint2/cli-right.png)
-  <p><b>Fonte:</b> Elaborado por Cannabot</p>
-</div>
-
-&emsp;Ao selecionar a opção 'left', também será exibida uma segunda pergunta para inserir o comando, que consiste na quantidade de graus que o usuário deseja que o robô vire para a esquerda:
-<p align="center">Figura Command-Line Interface 3:</p>
-<div align="center">
-  ![CLI](../../../../static/img/sprint2/cli-left.png)
+  ![CLI](../../../../static/img/sprint2/cli-certa.png)
   <p><b>Fonte:</b> Elaborado por Cannabot</p>
 </div>
 
@@ -40,27 +39,75 @@ sidebar_position: 2
 
 &emsp;Ao executar o pacote com o comando ros2 run cannabot cannabot no terminal, na verdade estamos chamando o arquivo cannabot.py e executando sua função principal main() a partir do seguinte trecho de código:
 
-<p align="center">Figura Command-Line Interface code 4:</p>
-<div align="center">
-  ![CLI](../../../../static/img/sprint2/if-main.png)
-  <p><b>Fonte:</b> Elaborado por Cannabot</p>
-</div>
+```python
+if __name__ == "__main__":
+    main()
+```
 
-&emsp;Ao executar a função principal, ela inicia o seu propósito, que é emular a nossa CLI e apresentar as opções possíveis para a movimentação do robô:
+&emsp;Ao executar o pacote com o comando `ros2 run cannabot cannabot` no terminal, a função principal `main()` é acionada, iniciando a CLI: 
 
-<p align="center">Figura Command-Line Interface code 5:</p>
-<div align="center">
-  ![CLI](../../../../static/img/sprint2/def-menu.png)
-  <p><b>Fonte:</b> Elaborado por Cannabot</p>
-</div>
+```python
+def show_menu():
+    questions = [
+        {
+            'type': 'list',
+            'name': 'action',
+            'message': 'What do you want to do?',
+            'choices': ['front', 'back', 'left', 'right', 'exit', 'stop'],
+        },
+    ]
 
-&emsp;Quando o usuário interage com nossa CLI e escolhe um comando para executar, a parte do código que interage com a classe do robô é acionada, resultando na movimentação correspondente. Por exemplo, se o usuário escolher "front", a classe do robô será chamada e ele executará a movimentação:
+    keybindings: InquirerPyKeybindings = {
+        "interrupt": [{"key": "q"}, {"key": "c-c"}],
+    }
 
-<p align="center">Figura Command-Line Interface code 6:</p>
-<div align="center">
-  ![CLI](../../../../static/img/sprint2/def-main.png)
-  <p><b>Fonte:</b> Elaborado por Cannabot</p>
-</div>
+    try:
+        return prompt(questions, keybindings=keybindings)['action']
+    except KeyboardInterrupt:
+        return 'panic'
+```
+
+&emsp;Quando o usuário interage com nossa CLI e escolhe um comando para executar, a parte do código que interage com a classe do robô é acionada, resultando na movimentação correspondente. Por exemplo, se o usuário escolher "front", a classe do robô será chamada e ele executará a movimentação. A interação com o usuário é facilitada pela função `show_menu()`, onde as escolhas do usuário são processadas e as ações correspondentes do robô são executadas.
+
+```python 
+def main():
+    rclpy.init(args=None)
+    robot = TurtleBot()
+
+    print(
+"""
+Se em qualquer momento você desejar parar o robô, pressione 'Q'.
+"""
+    )
+    while True:
+        action = show_menu()
+        match action:
+            case 'front':
+                print("Mover para frente")
+                robot.move_forward(0.1, 1.0)
+            case 'back':
+                print("Mover para trás")
+                robot.move_backward(0.1, 1.0)
+            case 'left':
+                print("Mover para a esquerda")
+                robot.rotate_left(2.0, 1.0)
+            case 'right':
+                print("Mover para a direita")
+                robot.rotate_right(2.0, 1.0)
+            case 'stop':
+                print("Parada de emergência")
+                robot.emergency_stop()
+            case 'panic':
+                print("Parada de emergência")
+                robot.emergency_stop()
+                robot.destroy_node()
+                rclpy.shutdown()
+                exit()
+            case 'exit':
+                robot.destroy_node()
+                rclpy.shutdown()
+                exit()
+```
 
 ### Conclusão
 
