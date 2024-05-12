@@ -11,7 +11,7 @@ description : Desenvolvimentos do robô referente a segunda sprint.
 
 ## Sistema de Emergência
 
-&emsp;A partir disso, um mecanismo de emergência foi criado neste projeto, em que permite o operador enviar um comando de parada imediata ao robô através da CLI para o TurtleBot, em caso de qualquer eventualidade ou risco observado.
+&emsp;Pensando em um robô teleoperado, desenvolver um mecanismo de emergência foi criado neste projeto, em que permite o operador enviar um comando de parada imediata ao robô através da CLI para o TurtleBot, em caso de qualquer eventualidade ou risco observado.
 
 &emsp;Para interromper a operação do robô durante a execução dos comandos desejados pelo usuário, basta pressionar a tecla Q na CLI. Isso fará com que a execução do script seja interrompida imediatamente e o robô pare de realizar suas ações.
 
@@ -19,14 +19,14 @@ Na figura abaixo, é possível ver o prompt que faz o robô parar completamente.
 
 <p align="center"><b> Como utilizar a parada de emergência </b></p>
 <div align="center">
-  ![](../../../../static/img/sprint2/cli-certa.png)
+  ![imagem](../../../../static/img/sprint2/cli-certa.png)
   <p><b>Fonte:</b> Elaborado por Cannabot</p>
 </div>
 
 
 &emsp; Com o sistema de emergência podendo ser acionado a qualquer instante, é adicionada uma camada a mais de proteção ao operador e ao próprio robô. Garantir que o robô pare imediatamente evita grandes complicações e aumenta significativamente a segurança.
 
-Tudo isso é garantido com a biblioteca Typer, que possibilita a criação da CLI e dentro dela a definição de ações quando determinada tecla for pressionada.
+&emsp;Tudo isso é garantido com a biblioteca Typer, que possibilita a criação da CLI e dentro dela a definição de ações quando determinada tecla for pressionada.
 
 No código abaixo, é possível notar que todos os parâmetros de velocidade são definidos como zero no instante em que o usuário pressiona a tecla Q.
 
@@ -54,9 +54,9 @@ def show_menu():
 ```
 </div>
 
-Logo que a tecla *Q* é pressionada, ocorre o acionamento da função de parada de emergência que interrompe completamente o movimento do robô, definindo a movimentação para zero em todos os eixos e desligando o nó ROS em seguida.
+&emsp;Logo que a tecla *Q* é pressionada, ocorre o acionamento da função de parada de emergência que interrompe completamente o movimento do robô, definindo a movimentação para zero em todos os eixos e desligando o nó ROS em seguida.
 
-Ao entrar no código da função Main, é possível ver que a função que zera toda a velocidade do robô é acionada imediatamente, seguida pela destruição do nó ROS, o que interrompe completamente a comunicação e torna a solução mais segura.
+&emsp;Ao entrar no código da função Main, é possível ver que a função que zera toda a velocidade do robô é acionada imediatamente, seguida pela destruição do nó ROS, o que interrompe completamente a comunicação e torna a solução mais segura.
 
 <div>
 <p>Desligamento completo do robô  </p>
@@ -96,5 +96,4 @@ Assim, quando o usuário pressiona a tecla Q, o robô tem todos os seus parâmet
 
 ## Conclusão
 
-&emsp;Dessa forma, é possível dizer que a implementação de um sistema de emergência ao robô teleoperado é crucial para garantir a segurança durante os testes e as operações do protótipo. Ao permitir que o operador interrompa imediatamente as operações do robô através de um comando simples, pressionando a tecla *Q*, potenciais riscos e eventualidades podem ser mitigados de forma eficaz. 
-Essa abordagem não apenas proporciona uma camada adicional de segurança para o ambiente de trabalho, mas também oferece uma maneira prática de garantir que o robô opere conforme o esperado, contribuindo assim para o sucesso do projeto como um todo.
+&emsp;Dessa forma, é possível dizer que a implementação de um sistema de emergência ao robô teleoperado é crucial para garantir a segurança para que o robô opere conforme o esperado. Ao permitir que o operador interrompa imediatamente as operações do robô através de um comando simples, pressionando a tecla *Q*, potenciais riscos e eventualidades podem ser mitigados de forma eficaz. 

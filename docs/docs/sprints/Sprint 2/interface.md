@@ -82,15 +82,12 @@ Depois de elaborado o wireframe, o grupo prototipou o Mockup de alta fidelidade.
 
 ![Tela de Cadastro - Mockup](../../../..\docs\static\img\sprint2\mockup\cadastromoc.png)
 Fonte: Elaborado pelo grupo Cannabot
-</div
+</div>
 
 Ou através da tela de login se já for um usuário cadastrado:
 
-<div align="center"> 
-
-![Tela de Login - Mockup](../../../..\docs\static\img\sprint2\mockup\loginmoc.png)
-Fonte: Elaborado pelo grupo Cannabot
-</div
+<div align="center"> [Tela de Login - Mockup](../../../..\docs\static\img\sprint2\mockup\loginmoc.png)
+Fonte: Elaborado pelo grupo Cannabot</div>
 
 Então, o fluxo prossegue para a tela de home, que exibe o histórico de dados:
 
@@ -98,7 +95,7 @@ Então, o fluxo prossegue para a tela de home, que exibe o histórico de dados:
 
 ![Histórico de Dados - Mockup](../../../..\docs\static\img\sprint2\mockup\historicomoc.png)
 Fonte: Elaborado pelo grupo Cannabot
-</div
+</div>
 
 Todas as telas também acompanham a seguinte sidebar:
 
@@ -106,7 +103,7 @@ Todas as telas também acompanham a seguinte sidebar:
 
 ![Sidebar - Mockup](../../../..\docs\static\img\sprint2\mockup\historicosidemoc.png)
 Fonte: Elaborado pelo grupo Cannabot
-</div
+</div>
 
 Usando a sidebar para navegar até a central de controle, a seguinte tela - Central de Controle Autônomo - é exibida:
 
@@ -114,7 +111,7 @@ Usando a sidebar para navegar até a central de controle, a seguinte tela - Cent
 
 ![Central de Controle Autonômo - Mockup](../../../..\docs\static\img\sprint2\mockup\controleautomoc.png)
 Fonte: Elaborado pelo grupo Cannabot
-</div
+</div>
 
 Se utilizado a função de desativar o modo autônomo, a visualização muda para:
 
@@ -122,7 +119,7 @@ Se utilizado a função de desativar o modo autônomo, a visualização muda par
 
 ![Central de Controle Manual - Mockup](../../../..\docs\static\img\sprint2\mockup\controlemanumoc.png)
 Fonte: Elaborado pelo grupo Cannabot
-</div
+</div>
 
 Ainda através da sidebar, o usuário pode navegar para os registros de uso:
 
@@ -130,7 +127,7 @@ Ainda através da sidebar, o usuário pode navegar para os registros de uso:
 
 ![Registros de Uso - Mockup](../../../..\docs\static\img\sprint2\mockup\registromoc.png)
 Fonte: Elaborado pelo grupo Cannabot
-</div
+</div>
 
 E novamente, o fluxo acaba na tela de histórico de dados (home): 
 
@@ -138,4 +135,4 @@ E novamente, o fluxo acaba na tela de histórico de dados (home):
 
 ![Histórico de Dados - Mockup](../../../..\docs\static\img\sprint2\mockup\historicomoc.png)
 Fonte: Elaborado pelo grupo Cannabot
-</div
+</div>
