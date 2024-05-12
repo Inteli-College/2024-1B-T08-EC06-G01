@@ -6,6 +6,8 @@ sidebar_position: 2
 # CLI: Command-Line Interface
 
 ## Introdução
+&emsp; Nessa secção será discustido a Interface de Linha de Comando e todos os processos que estão envolvidos com a mesma. Isso significa a movimentação do robô e o sistema de emergência por trás. 
+
 ### O que é 'CLI' afinal?
 
 &emsp;A CLI, ou Interface de Linha de Comando, é uma área de interação simplificada que permite aos usuários interagirem com um software através de comandos de texto. Geralmente integrada no início do desenvolvimento de um projeto, ela é crucial para testar e validar funcionalidades de maneira simplificada. Sua importância se torna evidente à medida que o projeto evolui e se integra a uma aplicação frontend no futuro.

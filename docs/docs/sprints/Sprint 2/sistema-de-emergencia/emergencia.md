@@ -1,5 +1,5 @@
 ---
-title: Desenvolvimento do sistema de emergência do Robô
+title: Sistema de emergência do Robô
 sidebar_position: 1
 description : Desenvolvimentos do robô referente a segunda sprint.
 ---
@@ -13,24 +13,88 @@ description : Desenvolvimentos do robô referente a segunda sprint.
 
 &emsp;A partir disso, um mecanismo de emergência foi criado neste projeto, em que permite o operador enviar um comando de parada imediata ao robô através da CLI para o TurtleBot, em caso de qualquer eventualidade ou risco observado.
 
-Na figura abaixo, é possível ver o código que faz com que o robô pare completamente.
+&emsp;Para interromper a operação do robô durante a execução dos comandos desejados pelo usuário, basta pressionar a tecla Q na CLI. Isso fará com que a execução do script seja interrompida imediatamente e o robô pare de realizar suas ações.
 
-<p align="center"><b> Figura Código da parada de Emergência </b></p>
+Na figura abaixo, é possível ver o prompt que faz o robô parar completamente.
+
+<p align="center"><b> Como utilizar a parada de emergência </b></p>
 <div align="center">
-  ![](../../../../static/img/sprint2/stop-code.png)
+  ![](../../../../static/img/sprint2/cli-certa.png)
   <p><b>Fonte:</b> Elaborado por Cannabot</p>
 </div>
 
-&emsp;Para interromper a operação do robô quando estiver executando os comandos designados para o mesmo, é preciso apenas escolher a opção *stop* na CLI. Com isso, a execução do script é interrompida imediatamente e o robô para de realizar suas ações. Ao designar a função de interromper a operação com o uso de apenas uma tecla, o mecanismo de emergência pode ser ativado com facilidade e rapidez, o que promove a eficácia desse mecanismo.
 
-Na figura abaixo, é possível ver qual a resposta que a CLI retorna após clicar no botão que aciona a parada de emergência.
+&emsp; Com o sistema de emergência podendo ser acionado a qualquer instante, é adicionada uma camada a mais de proteção ao operador e ao próprio robô. Garantir que o robô pare imediatamente evita grandes complicações e aumenta significativamente a segurança.
 
-<p align="center"><b> Figura Parada de Emergência </b></p>
-<div align="center">
-  ![](../../../../static/img/sprint2/cli-stop.png)
-  <p><b>Fonte:</b> Elaborado por Cannabot</p>
+Tudo isso é garantido com a biblioteca Typer, que possibilita a criação da CLI e dentro dela a definição de ações quando determinada tecla for pressionada.
+
+No código abaixo, é possível notar que todos os parâmetros de velocidade são definidos como zero no instante em que o usuário pressiona a tecla Q.
+
+<p>Função que define uma exceção quando uma tecla for pressionada </p>
+<div>
+```python
+def show_menu():
+    questions = [
+        {
+            'type': 'list',
+            'name': 'action',
+            'message': 'What do you want to do?',
+            'choices': ['front', 'back', 'left', 'right', 'exit', 'stop'],
+        },
+    ]
+    # Definição da tecla Q 
+    keybindings: InquirerPyKeybindings = {
+        "interrupt": [{"key": "q"}, {"key": "c-c"}],
+    }
+
+    try:
+        return prompt(questions, keybindings=keybindings)['action']
+    except KeyboardInterrupt:
+        return 'panic'
+```
 </div>
+
+Logo que a tecla *Q* é pressionada, ocorre o acionamento da função de parada de emergência que interrompe completamente o movimento do robô, definindo a movimentação para zero em todos os eixos e desligando o nó ROS em seguida.
+
+Ao entrar no código da função Main, é possível ver que a função que zera toda a velocidade do robô é acionada imediatamente, seguida pela destruição do nó ROS, o que interrompe completamente a comunicação e torna a solução mais segura.
+
+<div>
+<p>Desligamento completo do robô  </p>
+
+```python 
+def main():
+    rclpy.init(args=None)
+    robot = TurtleBot()
+
+    print(
+"""
+Se em qualquer momento você desejar parar o robô, pressione 'Q'.
+"""
+    )
+    while True:
+        action = show_menu()
+        match action:
+            case 'panic':
+                print("Parada de emergência")
+                robot.emergency_stop()
+                robot.destroy_node()
+                rclpy.shutdown()
+                exit()
+```
+</div>
+
+
+<p>Função que para o robô completamente </p>
+<div>
+```python 
+    def emergency_stop(self):
+        self.move(Vector3(x=0.0, y=0.0, z=0.0), Vector3(), 0.0)
+```
+</div>
+
+Assim, quando o usuário pressiona a tecla Q, o robô tem todos os seus parâmetros de velocidade definidos como zero, a comunicação entre nós ROS é interrompida e o sistema do robô é desligado por completo. 
 
 ## Conclusão
 
-&emsp;Dessa forma, é possível dizer que a implementação de um sistema de emergência ao robô teleoperado é crucial para garantir a segurança durante os testes e as operações do protótipo. Ao permitir que o operador interrompa imediatamente as operações do robô através de um comando simple, a tecla ESQ do computador, potenciais riscos e eventualidades podem ser mitigados de forma eficaz. Essa abordagem não apenas proporciona uma camada adicional de segurança para o ambiente de trabalho, mas também oferece uma maneira prática de garantir que o robô opere conforme o esperado, contribuindo assim para o sucesso do projeto como um todo.
+&emsp;Dessa forma, é possível dizer que a implementação de um sistema de emergência ao robô teleoperado é crucial para garantir a segurança durante os testes e as operações do protótipo. Ao permitir que o operador interrompa imediatamente as operações do robô através de um comando simples, pressionando a tecla *Q*, potenciais riscos e eventualidades podem ser mitigados de forma eficaz. 
+Essa abordagem não apenas proporciona uma camada adicional de segurança para o ambiente de trabalho, mas também oferece uma maneira prática de garantir que o robô opere conforme o esperado, contribuindo assim para o sucesso do projeto como um todo.
