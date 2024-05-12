@@ -6,7 +6,7 @@ description : Matriz de risco referente a primeira sprint.
 
 ## Introdução
 
-A matriz de riscos é uma ferramenta essencial na análise de negócios, organizada em forma de tabela onde os riscos são listados nas linhas, e os impactos e probabilidades são definidos nas colunas. Então, ao preencher as células da matriz com informações sobre a gravidade do risco (impacto) e a probabilidade de ocorrência, a organização consegue identificar os riscos mais críticos e aqueles que requerem maior atenção e alocação de recursos para serem gerenciados.
+&emsp;A matriz de riscos é uma ferramenta essencial na análise de negócios, organizada em forma de tabela onde os riscos são listados nas linhas, e os impactos e probabilidades são definidos nas colunas. Então, ao preencher as células da matriz com informações sobre a gravidade do risco (impacto) e a probabilidade de ocorrência, a organização consegue identificar os riscos mais críticos e aqueles que requerem maior atenção e alocação de recursos para serem gerenciados.
 Essa ferramenta é fundamental na avaliação e gestão de riscos em projetos ou implementações, pois uma matriz bem elaborada permite à equipe priorizar os riscos mais críticos, facilitando a implementação de medidas preventivas e corretivas adequadas para reduzir os possíveis impactos negativos. Com base nas particularidades da equipe e do projeto em questão, a seguir apresenta-se uma análise de riscos específica para esta solução:
 
 
@@ -37,7 +37,7 @@ Riscos Reais:
 
 ## Plano de ação em relação aos riscos 
 
-Nesta secção será detalhado como é possível lidar com os riscos e respostas ao mesmo.
+&emsp;Nesta secção será detalhado como é possível lidar com os riscos e respostas ao mesmo.
 
 ##### O sistema de IA para encontrar os buracos correspondentes a cada tubo não tem uma precisão boa o suficiente. Assim, o robô não garante a checagem de todos tubos.
 
