@@ -5,15 +5,15 @@ sidebar_position: 3
 
 # Requisitos do Sistema
 
-Os requisitos de um sistema delineiam as funcionalidades essenciais que uma solução deve incluir para satisfazer as necessidades e expectativas dos usuários e partes interessadas, além de alcançar os objetivos estabelecidos pelos stakeholders.
+&emsp;Os requisitos de um sistema delineiam as funcionalidades essenciais que uma solução deve incluir para satisfazer as necessidades e expectativas dos usuários e partes interessadas, além de alcançar os objetivos estabelecidos pelos stakeholders.
 
-Esses requisitos são geralmente classificados em duas categorias principais:
+&emsp;Esses requisitos são geralmente classificados em duas categorias principais:
 
 - Requisitos funcionais: são as funcionalidades específicas que o sistema deve oferecer para realizar as operações desejadas.
 
 - Requisitos não funcionais: são as características de qualidade essenciais para o sistema. Eles asseguram que a solução atenda aos critérios de eficiência e eficácia, proporcionando uma base sólida para alcançar os requisitos funcionais com excelência.
 
-Para o presente projeto, visando satisfazer as necessidades das personas identificadas e entregar o valor estipulado, a equipe elaborou os seguintes requisitos:
+&emsp;Para o presente projeto, visando satisfazer as necessidades das personas identificadas e entregar o valor estipulado, a equipe elaborou os seguintes requisitos:
 
 ## Requisitos Funcionais
 
@@ -73,7 +73,7 @@ Para o presente projeto, visando satisfazer as necessidades das personas identif
 - Métrica associada: A usabilidade da interface será avaliada com base no número de etapas (cliques) necessárias para concluir uma tarefa, limitado a no máximo 3 cliques. Além disso, espera-se que 90% das funcionalidades estejam disponíveis ou indicadas diretamente na tela inicial, facilitando o acesso às ferramentas necessárias.
 
 
-Com base na cuidadosa definição dos requisitos funcionais e não funcionais destacados acima, nossa solução assegura a acessibilidade e eficácia tanto para Cleber, garantindo o funcionamento otimizado do robô e a validação da limpeza dos tubos, quanto para Ísis, proporcionando a capacidade de monitorar o processo de forma remota, visualizando dados correlacionados e intervindo conforme necessário. Esta abordagem abrangente garante uma experiência integrada e eficiente para todos os usuários envolvidos.
+&emsp;Com base na cuidadosa definição dos requisitos funcionais e não funcionais destacados acima, nossa solução assegura a acessibilidade e eficácia tanto para Cleber, garantindo o funcionamento otimizado do robô e a validação da limpeza dos tubos, quanto para Ísis, proporcionando a capacidade de monitorar o processo de forma remota, visualizando dados correlacionados e intervindo conforme necessário. Esta abordagem abrangente garante uma experiência integrada e eficiente para todos os usuários envolvidos.
 
 
 
