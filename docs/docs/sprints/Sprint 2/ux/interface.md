@@ -1,6 +1,6 @@
 ---
 title: "Protótipo da Interface de Usuário"
-sidebar_position: 3
+sidebar_position: 1
 ---
 
 &emsp;Durante a Sprint 2, o grupo Cannabot deu início ao processo de desenvolvimento de um ambiente dedicado ao acompanhamento e controle dos dados coletados pela solução proposta. Esta etapa visa possibilitar aos usuários monitorar o desempenho do robô, além de oferecer a capacidade de controle remoto, quando necessário.
@@ -18,13 +18,13 @@ Esse desenvolvimento pode ser acompanhado a seguir:
 
 <div align="center"> 
 
-![Tela de Cadastro - Wireframe](../../../..\docs\static\img\sprint2\wireframe\cadastrowir.png)
+![Tela de Cadastro - Wireframe](../../../../..\docs\static\img\sprint2\wireframe\cadastrowir.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
 <div align="center"> 
 
-![Tela de Login - Wireframe](../../../..\docs\static\img\sprint2\wireframe\loginwir.png)
+![Tela de Login - Wireframe](../../../../..\docs\static\img\sprint2\wireframe\loginwir.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -32,13 +32,13 @@ Fonte: Elaborado pelo grupo Cannabot
 
 <div align="center"> 
 
-![Histórico de Dados - Wireframe](../../../..\docs\static\img\sprint2\wireframe\historicowir.png)
+![Histórico de Dados - Wireframe](../../../../..\docs\static\img\sprint2\wireframe\historicowir.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
 <div align="center"> 
 
-![Histórico de Dados e Menu - Wireframe](../../../..\docs\static\img\sprint2\wireframe\historicomenuwir.png)
+![Histórico de Dados e Menu - Wireframe](../../../../..\docs\static\img\sprint2\wireframe\historicomenuwir.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -46,7 +46,7 @@ Ao selecionar "Central de Controle", o usuário é conduzido à tela de acompanh
 
 <div align="center"> 
 
-![Central de Controle Automática - Wireframe](../../../..\docs\static\img\sprint2\wireframe\controleautowir.png)
+![Central de Controle Automática - Wireframe](../../../../..\docs\static\img\sprint2\wireframe\controleautowir.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -54,7 +54,7 @@ Para alternar entre o modo autônomo e o modo manual (teleoperado), basta ao usu
 
 <div align="center"> 
 
-![Central de Controle Manual - Wireframe](../../../..\docs\static\img\sprint2\wireframe\controlemanwir.png)
+![Central de Controle Manual - Wireframe](../../../../..\docs\static\img\sprint2\wireframe\controlemanwir.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -62,7 +62,7 @@ Ao clicar em "Registros de Uso", o usuário é encaminhado a uma tela que aprese
 
 <div align="center"> 
 
-![Central de Controle Manual - Wireframe](../../../..\docs\static\img\sprint2\wireframe\registrowir.png)
+![Central de Controle Manual - Wireframe](../../../../..\docs\static\img\sprint2\wireframe\registrowir.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -70,7 +70,7 @@ E por fim, ao clicar em "Histórico de Dados", o usuário retorna para à págin
 
 <div align="center"> 
 
-![Histórico de Dados - Wireframe](../../../..\docs\static\img\sprint2\wireframe\historicowir.png)
+![Histórico de Dados - Wireframe](../../../../..\docs\static\img\sprint2\wireframe\historicowir.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -80,7 +80,7 @@ Depois de elaborado o wireframe, o grupo prototipou o Mockup de alta fidelidade.
 
 <div align="center"> 
 
-![Tela de Cadastro - Mockup](../../../..\docs\static\img\sprint2\mockup\cadastromoc.png)
+![Tela de Cadastro - Mockup](../../../../..\docs\static\img\sprint2\mockup\cadastromoc.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -88,7 +88,7 @@ Ou através da tela de login se já for um usuário cadastrado:
 
 <div align="center"> 
 
-![Tela de Login - Mockup](../../../..\docs\static\img\sprint2\mockup\loginmoc.png)
+![Tela de Login - Mockup](../../../../..\docs\static\img\sprint2\mockup\loginmoc.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -96,7 +96,7 @@ Então, o fluxo prossegue para a tela de home, que exibe o histórico de dados:
 
 <div align="center"> 
 
-![Histórico de Dados - Mockup](../../../..\docs\static\img\sprint2\mockup\historicomoc.png)
+![Histórico de Dados - Mockup](../../../../..\docs\static\img\sprint2\mockup\historicomoc.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -104,7 +104,7 @@ Todas as telas também acompanham a seguinte sidebar:
 
 <div align="center"> 
 
-![Sidebar - Mockup](../../../..\docs\static\img\sprint2\mockup\historicosidemoc.png)
+![Sidebar - Mockup](../../../../..\docs\static\img\sprint2\mockup\historicosidemoc.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -112,7 +112,7 @@ Usando a sidebar para navegar até a central de controle, a seguinte tela - Cent
 
 <div align="center"> 
 
-![Central de Controle Autonômo - Mockup](../../../..\docs\static\img\sprint2\mockup\controleautomoc.png)
+![Central de Controle Autonômo - Mockup](../../../../..\docs\static\img\sprint2\mockup\controleautomoc.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -120,7 +120,7 @@ Se utilizado a função de desativar o modo autônomo, a visualização muda par
 
 <div align="center"> 
 
-![Central de Controle Manual - Mockup](../../../..\docs\static\img\sprint2\mockup\controlemanumoc.png)
+![Central de Controle Manual - Mockup](../../../../..\docs\static\img\sprint2\mockup\controlemanumoc.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -128,7 +128,7 @@ Ainda através da sidebar, o usuário pode navegar para os registros de uso:
 
 <div align="center"> 
 
-![Registros de Uso - Mockup](../../../..\docs\static\img\sprint2\mockup\registromoc.png)
+![Registros de Uso - Mockup](../../../../..\docs\static\img\sprint2\mockup\registromoc.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -136,6 +136,6 @@ E novamente, o fluxo acaba na tela de histórico de dados (home):
 
 <div align="center"> 
 
-![Histórico de Dados - Mockup](../../../..\docs\static\img\sprint2\mockup\historicomoc.png)
+![Histórico de Dados - Mockup](../../../../..\docs\static\img\sprint2\mockup\historicomoc.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
