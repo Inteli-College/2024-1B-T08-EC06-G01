@@ -86,8 +86,11 @@ Fonte: Elaborado pelo grupo Cannabot
 
 Ou através da tela de login se já for um usuário cadastrado:
 
-<div align="center"> [Tela de Login - Mockup](../../../..\docs\static\img\sprint2\mockup\loginmoc.png)
-Fonte: Elaborado pelo grupo Cannabot</div>
+<div align="center"> 
+
+![Tela de Login - Mockup](../../../..\docs\static\img\sprint2\mockup\loginmoc.png)
+Fonte: Elaborado pelo grupo Cannabot
+</div>
 
 Então, o fluxo prossegue para a tela de home, que exibe o histórico de dados:
 
