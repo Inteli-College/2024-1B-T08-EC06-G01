@@ -1,6 +1,6 @@
 ---
 title: Sistema de emergência do Robô
-sidebar_position: 1
+sidebar_position: 2
 description : Desenvolvimentos do robô referente a segunda sprint.
 ---
 
@@ -11,7 +11,7 @@ description : Desenvolvimentos do robô referente a segunda sprint.
 
 ## Sistema de Emergência
 
-&emsp;Pensando em um robô teleoperado, desenvolver um mecanismo de emergência foi criado neste projeto, em que permite o operador enviar um comando de parada imediata ao robô através da CLI para o TurtleBot, em caso de qualquer eventualidade ou risco observado.
+&emsp;Pensando em um robô teleoperado, um mecanismo de emergência foi criado neste projeto, permitindo o operador enviar um comando de parada imediata ao robô através da CLI para o TurtleBot, em caso de qualquer eventualidade ou risco observado.
 
 &emsp;Para interromper a operação do robô durante a execução dos comandos desejados pelo usuário, basta pressionar a tecla Q na CLI. Isso fará com que a execução do script seja interrompida imediatamente e o robô pare de realizar suas ações.
 
