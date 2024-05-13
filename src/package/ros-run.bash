@@ -11,7 +11,7 @@ source env/bin/activate
 echo "Installing dependencies..."
 pip install -r requirements.txt > /dev/null
 
-cd meu_workspace
+cd workspace
 
 # get the site-packages path by getting pip show setuptools (setuptools always comes with pip)
 VENV_PATH=$(pip show setuptools | grep "Location: " | awk '{print $2}')
