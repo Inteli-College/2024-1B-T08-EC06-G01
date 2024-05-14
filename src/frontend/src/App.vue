@@ -10,6 +10,11 @@ import HelloWorld from './components/HelloWorld.vue'
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
+    <nav class="p-4 bg-gray-200">
+      <router-link to="/" class="mr-4">Home</router-link>
+      <router-link to="/about">About</router-link>
+    </nav>
+    <router-view></router-view>
   </div>
   <HelloWorld msg="Vite + Vue" />
 </template>
