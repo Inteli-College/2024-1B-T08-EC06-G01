@@ -13,9 +13,9 @@ def main():
     qos = QoSProfile(depth=10)
     node = rclpy.create_node('scan_listener')
     sub = node.create_subscription(LaserScan,
-                                'scan',
+                                '/scan',
                                 chatter_callback,
-                                qos_profile=10)
+                                qos_profile=qos_profile_sensor_data)
     try:
         while True:
             rclpy.spin_once(node)
