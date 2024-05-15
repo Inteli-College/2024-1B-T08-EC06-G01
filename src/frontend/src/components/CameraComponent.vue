@@ -1,7 +1,10 @@
 <template>
-    <div class="box">
-      Box Component
-    </div>
+      <div class="flex-1 flex flex-col items-center justify-center bg-white p-4">
+        <!-- Real-time Image Box -->
+        <div class="flex-1 flex items-center justify-center bg-gray-200 w-full mb-4">
+          <span>Imagem em tempo real</span>
+        </div>
+        </div>
   </template>
   
   <script>

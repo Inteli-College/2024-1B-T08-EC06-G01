@@ -1,7 +1,11 @@
 <template>
-    <div class="bottom">
-      Bottom Component
-    </div>
+        <!-- Temperature Display -->
+        <div class="flex items-center">
+          <div class="w-20 h-20 bg-gradient-to-r from-green-400 to-yellow-400 rounded-full flex items-center justify-center">
+            <span class="text-2xl">45º</span>
+          </div>
+          <span class="ml-2 text-xl">Temperatura Atual</span>
+        </div>
   </template>
   
   <script>
@@ -13,7 +17,7 @@
   <style scoped>
   .bottom {
     background-color: #d4edda;
-    height: 100%;
+    height: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
