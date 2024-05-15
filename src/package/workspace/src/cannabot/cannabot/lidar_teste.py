@@ -18,22 +18,29 @@ class CollisionAvoidance(Node):
             qos_profile=qos_profile_sensor_data
         )
 
-        self.safe_distance = 0.5 # Defina a distância de segurança em metros
+        self.safe_distance = 0.2 # Defina a distância de segurança em metros
 
     def scan_callback(self, data):
         # Obtém os dados do Lidar
         ranges = data.ranges
 
         # Verifica se há obstáculos dentro da distância de segurança e enviar o índice da array
-        if min(ranges) < self.safe_distance:
+        if min(ranges) <= self.safe_distance:
             # Se houver obstáculos próximos, pare o TurtleBot3
-            print('Obstáculo detectado')
-            print('Distância:', min(ranges))
-            print('Índice:', ranges.index(min(ranges)))
+            # print('Obstáculo detectado')
+            # print('Distância:', min(ranges))
+            # print('Índice:', ranges.index(min(ranges)))
+
+            if ranges.index(min(ranges)) < 80 and ranges.index(min(ranges)) > 242:
+                print("Obstaculo na frente")
+            elif ranges.index(min(ranges)) < 240 and ranges.index(min(ranges)) > 80:
+                print("Obstaculo atrás")
+            else:
+                print('Índice:', ranges.index(min(ranges)))
+
         else:
             # Se não houver obstáculos próximos, continue em frente
             print('Nenhum obstáculo detectado')
-            pass
 
 def main(args=None):
     print('Starting scan listener')
