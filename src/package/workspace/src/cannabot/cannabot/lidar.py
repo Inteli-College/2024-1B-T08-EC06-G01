@@ -3,7 +3,9 @@ from sensor_msgs.msg import LaserScan
 import rclpy
 
 def chatter_callback(msg):
-    print('I heard: [%s]' % msg.ranges)
+    # print('I heard: [%s]' % msg.ranges)
+
+    print(msg.ranges)
 
 def main():
     
@@ -13,7 +15,7 @@ def main():
     sub = node.create_subscription(LaserScan,
                                 'scan',
                                 chatter_callback,
-                                qos_profile=qos_profile_sensor_data)
+                                qos_profile=10)
     try:
         while True:
             rclpy.spin_once(node)

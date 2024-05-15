@@ -23,4 +23,4 @@ colcon build > /dev/null
 
 source install/setup.bash
 
-ROS_DOMAIN_ID=69 ros2 run cannabot lidar
+ROS_DOMAIN_ID=69 ros2 run cannabot lidar_teste
