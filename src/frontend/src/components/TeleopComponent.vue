@@ -1,21 +1,47 @@
 <template>
-  <div class="flex justify-between items-center w-full">
-    <div class="flex space-x-2">
-      <button class="p-2 bg-gray-300 rounded" @click="moveForward">&#9650; Hi</button>
-      <button class="p-2 bg-gray-300 rounded">&#9664;</button>
-      <button class="p-2 bg-gray-300 rounded">&#9660;</button>
-      <button class="p-2 bg-gray-300 rounded">&#9654;</button>
+  <div class="flex justify-center items-center w-full">
+    <div class="flex flex-col items-center space-y-2">
+      <div>
+        <button @click="moveForward" ><ArrowUp /></button>
+      </div>
+      <div class="flex space-x-2">
+        <button @click="moveLeft" ><ArrowLeft /></button>
+        <button @click="moveBackward" ><ArrowDown /></button>
+        <button @click="moveRight"><ArrowRight /></button>
+      </div>
     </div>
-    </div>  
-  </template>
+  </div>  
+</template>
   
   <script>
+  // Importando o SVG das setinhas 
+  import ArrowUp from '../assets/arrow-up.svg';
+  import ArrowDown from '../assets/arrow-down.svg';
+  import ArrowRight from '../assets/arrow-right.svg';
+  import ArrowLeft from '../assets/arrow-left.svg';
+
+
+
+
   export default {
     name: 'TeleopComponent',
+
+    // Adicionando o SVG das setinhas ao componente
+    components: {
+      ArrowUp,
+      ArrowDown,
+      ArrowRight,
+      ArrowLeft
+    },
+      
+
     // Em métodos vocÊ define as funções que serão chamadas no template 
     methods: {
+      emergencyStop() {
+        console.log('Emergency Stop')
+      },
       moveForward() {
-        console.log('Moving Forward')
+        console.log('Moving Forward');
       },
       moveBackward() {
         console.log('Moving Backward')
@@ -44,6 +70,9 @@
         else if ( event.key === 'd' || event.key === 'ArrowRight' || event.key === 'D') {
           this.moveRight()
         }
+        else if ( event.key === 'q' || event.key === 'Q') {
+          this.emergencyStop()
+        }
       },
     },
       mounted(){
@@ -64,5 +93,8 @@
     justify-content: center;
     font-size: 20px;
   }
+
+
+
   </style>
   
