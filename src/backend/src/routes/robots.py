@@ -11,10 +11,10 @@ router = APIRouter(
 )
 
 @router.post("/register")
-async def register(user: Robot):
+async def register(robot: Robot):
 	return await RobotModel.objects.create(
-		name=user.name,
-		user_id=user.user_id
+		name=robot.name,
+		user_id=robot.user_id
 	)
 
 
