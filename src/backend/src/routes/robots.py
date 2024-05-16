@@ -2,32 +2,19 @@ from fastapi import APIRouter
 import ormar
 import ormar.exceptions
 
-from schemas.users import User
-from models.users import User as UserModel
-from utils.crypto import get_password_hash, verify_password
+from schemas.robots import Robot
+from models.robots import Robot as RobotModel
 
 router = APIRouter(
-	prefix="/users",
-	tags=["users"],
+	prefix="/robots",
+	tags=["robots"],
 )
 
 @router.post("/register")
-async def register(user: User):
-	return await UserModel.objects.create(
-		username=user.username,
-		password=get_password_hash(user.password),
-		admin=False
+async def register(user: Robot):
+	return await RobotModel.objects.create(
+		name=user.name,
+		user_id=user.user_id
 	)
 
-@router.post("/login")
-async def login(user: User):
-	try:
-		result = await UserModel.objects.get(username=user.username)
-
-		if verify_password(user.password, result.password):
-			return result
-		else:
-			return {"error": "Invalid password"}
-	except ormar.exceptions.NoMatch:
-		return {"error": "User not found"}
 
