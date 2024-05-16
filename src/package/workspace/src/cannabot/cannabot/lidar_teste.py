@@ -26,18 +26,23 @@ class CollisionAvoidance(Node):
 
         # Verifica se há obstáculos dentro da distância de segurança e enviar o índice da array
         if min(ranges) <= self.safe_distance:
-            # Se houver obstáculos próximos, pare o TurtleBot3
-            # print('Obstáculo detectado')
-            # print('Distância:', min(ranges))
-            # print('Índice:', ranges.index(min(ranges)))
+            min_index = ranges.index(min(ranges))
+            numero_indices = len(ranges)
+            print('Número de índices:', numero_indices)
 
-            if ranges.index(min(ranges)) < 80 and ranges.index(min(ranges)) > 242:
-                print("Obstaculo na frente")
-            elif ranges.index(min(ranges)) < 240 and ranges.index(min(ranges)) > 80:
-                print("Obstaculo atrás")
+            # Calcule os índices que representam a frente e as traseiras
+            valor_A = numero_indices // 4
+            valor_B = valor_A * 3
+
+            print('Valor A:', valor_A)
+            print('Valor B:', valor_B)
+            print('Índice:', min_index)
+
+            # Dividir o array de distâncias em frente (de valor_A até valor_B) e trás (de valor_B até o final mais de 0 até valor_A)
+            if valor_A < min_index < valor_B:
+                print("Obstáculo átras")
             else:
-                print('Índice:', ranges.index(min(ranges)))
-
+                print("Obstáculo na frente")
         else:
             # Se não houver obstáculos próximos, continue em frente
             print('Nenhum obstáculo detectado')
