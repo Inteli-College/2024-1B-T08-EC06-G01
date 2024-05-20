@@ -31,16 +31,16 @@ services:
   #   depends_on:
   #     - postgres
   #   container_name: cannabot-backend
-  bucket:
-    image: bitnami/minio
-    container_name: cannabot-bucket
-    restart: unless-stopped
-    volumes:
-      - ./bucket_data:/data
-    environment:
-      MINIO_ROOT_USER: cannabot
-      MINIO_ROOT_PASSWORD: gWJMhBesSFK3Fq6dTG2WbxHuQBx3oDz4
-      MINIO_DEFAULT_BUCKETS: cannabot
-    ports:
-      - "9000:9000"
-      - "9001:9001"
+ # bucket:
+ #   image: bitnami/minio
+ #   container_name: cannabot-bucket
+ #   restart: unless-stopped
+ #   volumes:
+ #     - ./bucket_data:/data
+ #   environment:
+ #     MINIO_ROOT_USER: cannabot
+ #     MINIO_ROOT_PASSWORD: gWJMhBesSFK3Fq6dTG2WbxHuQBx3oDz4
+ #     MINIO_DEFAULT_BUCKETS: cannabot
+ #   ports:
+ #     - "9000:9000"
+ #     - "9001:9001"
