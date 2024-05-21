@@ -3,13 +3,10 @@
 
 <template>
   <div>
-    <nav class="p-4 bg-gray-200">
+    <nav>
       <router-link to="/" class="mr-4">Home</router-link>
-      
       <router-link to="/control"> Robô</router-link>
-
-      <router-link to="/about">About</router-link>
-
+      <router-link to="/about">Registros</router-link>
     </nav>
     <router-view></router-view>
   </div>
