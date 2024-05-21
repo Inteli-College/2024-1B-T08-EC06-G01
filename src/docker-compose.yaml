@@ -1,0 +1,46 @@
+version: '3'
+services:
+  postgres:
+    build: ./database
+    image: cannabot/postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: Cnh39pKWBV4mNpzcxMcBdLxud5nJxKzWsq6iXstdeLf2vZbCHKtAn36w8wqBmFHL
+      POSTGRES_USER: cannabot
+      POSTGRES_DB: cannabot
+    volumes:
+      - ./postgres_data/:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    container_name: cannabot-postgres
+  # backend:
+  #   build: ./backend
+  #   image: cannabot/backend
+  #   restart: unless-stopped
+  #   environment:
+  #     DATABASE_URL: ""
+  #     JWT_SECRET: ""
+  #     AES_SECRET: ""
+  #     BUCKET_HOST: ""
+  #     BUCKET_PORT: "9000"
+  #     BUCKET_ACCESS_KEY: ""
+  #     BUCKET_SECRET_KEY: ""
+  #     BUCKET_USE_SSL: "false"
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - postgres
+  #   container_name: cannabot-backend
+ # bucket:
+ #   image: bitnami/minio
+ #   container_name: cannabot-bucket
+ #   restart: unless-stopped
+ #   volumes:
+ #     - ./bucket_data:/data
+ #   environment:
+ #     MINIO_ROOT_USER: cannabot
+ #     MINIO_ROOT_PASSWORD: gWJMhBesSFK3Fq6dTG2WbxHuQBx3oDz4
+ #     MINIO_DEFAULT_BUCKETS: cannabot
+ #   ports:
+ #     - "9000:9000"
+ #     - "9001:9001"
