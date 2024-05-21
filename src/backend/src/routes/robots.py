@@ -35,10 +35,10 @@ async def get(robot_id: int):
 	
 @router.put("/update")
 async def update(robot: Robot):
-	await RobotModel.objects.update(
-		robot.name,
-		robot.user_id
-	).where(RobotModel.id == robot.id)
+    await RobotModel.objects.filter(id=robot.id).update(
+        name=robot.name,
+        user_id=robot.user_id
+    )
 
 @router.delete("/delete/{robot_id}")
 async def delete(robot_id: int):
