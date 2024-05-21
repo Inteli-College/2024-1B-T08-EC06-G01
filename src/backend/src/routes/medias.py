@@ -25,7 +25,7 @@ async def register(media: Media):
             "error": False,
             "message": "Media criada com sucesso"
         }, status_code=201)
-    except ormar.ModelError as e:
+    except Exception as e:
         if "UNIQUE constraint failed" in str(e):
             return JSONResponse(content={
                 "error": True,
@@ -52,10 +52,12 @@ async def list():
             media_dict = media.dict()
             for key, value in media_dict.items():
                 if isinstance(value, uuid.UUID):
+                    print(value)
                     media_dict[key] = str(value)
                 elif isinstance(value, datetime):
                     media_dict[key] = value.isoformat()
             media_dicts.append(media_dict)
+            print(media_dict)
         
         return JSONResponse(content={
             "error": False,
@@ -82,7 +84,7 @@ async def get(media_id: uuid.UUID):
             "error": True,
             "message": "Mídia não encontrada"
         }, status_code=404)
-    except ormar.ModelError as e:
+    except Exception as e:
         return JSONResponse(content={
             "error": True,
             "message": f"Erro interno do servidor: {e}"
@@ -105,7 +107,7 @@ async def update(media: Media):
             "error": True,
             "message": "Mídia não encontrada"
         }, status_code=404)
-    except ormar.ModelError as e:
+    except Exception as e:
         return JSONResponse(content={
             "error": True,
             "message": f"Erro interno do servidor: {e}"
@@ -124,7 +126,7 @@ async def delete(media_id: uuid.UUID):
             "error": True,
             "message": "Mídia não encontrada"
         }, status_code=404)
-    except ormar.ModelError as e:
+    except Exception as e:
         return JSONResponse(content={
             "error": True,
             "message": f"Erro interno do servidor: {e}"
