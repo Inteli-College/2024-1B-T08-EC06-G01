@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'websocket-robot'
+package_name = 'websocket_robot'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'websocket-robot = websocket_robot.websocket_robot:main',
+            'websocket_robot = websocket_robot.websocket_robot:main',
         ],
     },
 )
