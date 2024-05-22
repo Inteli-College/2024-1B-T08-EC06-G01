@@ -1,6 +1,7 @@
 ---
 title: "Análise Financeira da PoC"
 sidebar_position: 1
+description: Nessa secção iremos analisar quanto é necessário aportar para construir a PoC do projeto cannabot.
 ---
 
 # Análise Financeira PoC: Prova de Conceito
