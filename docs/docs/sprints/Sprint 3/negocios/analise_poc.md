@@ -41,6 +41,7 @@ description: Nessa secção iremos analisar quanto é necessário aportar para c
 OBS: O imposto nacional que é cobrado nas plataformas pode variar entre 15% e 22%, entretanto, já está incluído no valor final apresentado na tabela acima. O cálculo já é feito na própria plataforma ao fechar a compra.
 :::
 
+>Nota: Ao clicar no nome das lojas na coluna "**Fontes**", onde pesquisamos, você será redirecionado diretamente para o produto em questão.
 
 ### Custos médios de Mão de Obra
 
@@ -56,5 +57,3 @@ OBS: O imposto nacional que é cobrado nas plataformas pode variar entre 15% e 2
 ## Otimização dos custos
 ### Estratégias para aplicar na redução de custos 
 ### Valor mínimo aceitável para realização da PoC
-
-## Conclusão
