@@ -101,7 +101,7 @@ def main(args=None):
     robot = Robot()
 
     # Iniciar o servidor WebSocket em uma thread separada
-    ws_thread = threading.Thread(target=lambda: uvicorn.run(ws_app(robot), host="0.0.0.0", port=8000))
+    ws_thread = threading.Thread(target=lambda: uvicorn.run(ws_app(robot), host="0.0.0.0", port=3000))
     ws_thread.start()
 
     rclpy.spin(robot)
