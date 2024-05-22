@@ -38,22 +38,39 @@ description: Nessa secção iremos analisar quanto é necessário aportar para c
 
 &emsp;A coluna “Valor Final” inclui valores de frete e impostos de importação.
 
-OBS: O imposto nacional que é cobrado nas plataformas pode variar entre 15% e 22%, entretanto, já está incluído no valor final apresentado na tabela acima. O cálculo já é feito na própria plataforma ao fechar a compra.
+`OBS:` O imposto nacional que é cobrado nas plataformas pode variar entre 15% e 22%, entretanto, já está incluso no valor final apresentado na tabela acima. O cálculo já é feito na própria plataforma ao fechar a compra.
 :::
 
 >Nota: Ao clicar no nome das lojas na coluna "**Fontes**", onde pesquisamos, você será redirecionado diretamente para o produto em questão.
 
-### Custos médios de Mão de Obra
+>Data da pesquisa: 21/05/2024
+
+### Custos médios da Mão de Obra
 
 | Função                 | Quantidade | Meses | Salário Mensal | Valor Final    | Fonte                |
 | ---------------------  | ---------- | ----- | -------------- | -------------- | -------------------- |
-| Engenheiro de Software | 2          | 2     | R$ 6.000,00    | R$ 24.000,00   | Glassdoor|
-| Engenheiro Robótico    | 2          | 2     | R$ 7.000,00    | R$ 28.000,00   | Glassdoor|
-| Gestor de Projetos     | 1          | 2     | R$ 7.500,00    | R$ 13.500,00   | Glassdoor|
-| **Total**              |            |       |                | **R$ 65.500,00** |                    |
+| Engenheiro de Software | 2          | 2     | R$ 6.303,00    | R$ 25.212,00 | [VAGAS](https://www.vagas.com.br/cargo/engenheiro-de-software#:~:text=No%20cargo%20de%20Engenheiro%20de,de%20R%24%206.303%2C00.) |
+| Engenheiro Robótico    | 2          | 2     | R$ 6.399,92   | R$ 25.599,68  | [QueroBolsa](https://querobolsa.com.br/carreiras-e-profissoes/engenheiro-robotico) |
+| Gestor de Projetos     | 1          | 2     | R$ 4.742,00    | R$ 9.484,00   | [VAGAS](https://www.vagas.com.br/cargo/gestao-de-projetos) |
+| **Total**              |            |       |                | **R$ 60.295,68** |                    |
+
+&emsp;Os valores salariais das profissões podem variar dependendo de fatores como localidade e experiência. Os valores apresentados acima são uma média considerando diferentes localidades e níveis de experiência.
+
+>Nota: Ao clicar no nome dos sites na coluna "**Fontes**", onde pesquisamos, você será redirecionado diretamente para visualizar os dados da média salarial de cada profissão em questão.
+
+>Data da pesquisa: 22/05/2024
 
 ### Custos totais
+
+| Descrição                                  | Valor        |
+| ------------------------------------------ | ------------ |
+| Custos relacionados ao Hardware            | R$ 12.923,52 |
+| Custos relacionados à mão de obra          | R$ 60.295,68 |
+| Aporte final estimado para produzir a PoC  | R$ 73.219,20 |
 
 ## Otimização dos custos
 ### Estratégias para aplicar na redução de custos 
 ### Valor mínimo aceitável para realização da PoC
+
+
+
