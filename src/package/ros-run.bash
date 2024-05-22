@@ -18,9 +18,11 @@ VENV_PATH=$(pip show setuptools | grep "Location: " | awk '{print $2}')
 
 export PYTHONPATH="$PYTHONPATH:$VENV_PATH"
 
-echo "Building package..."
-colcon build > /dev/null
+#echo "Building package..."
+#colcon build > /dev/null
 
 source install/setup.bash
 
 ROS_DOMAIN_ID=69 ros2 run cannabot cannabot
+
+ROS_DOMAIN_ID=69 ros2 run cannabot_camera camera
