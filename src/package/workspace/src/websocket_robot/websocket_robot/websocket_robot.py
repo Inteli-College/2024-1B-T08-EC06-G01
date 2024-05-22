@@ -25,11 +25,26 @@ class Robot(Node):
         self.timer = self.create_timer(0.1, self.timer_callback)
         self.get_logger().info('Aguardando o estado de prontidão do robô...')
 
+         # Cliente de serviço
+        self.cli = self.create_client(Empty, '/emergency_stop_teleop')
+        while not self.cli.wait_for_service(timeout_sec=1.0):
+            self.get_logger().info('Serviço /emergency_stop_teleop não disponível, esperando...')
+        self.req = Empty.Request()
+
     def emergency_stop_external(self, request, response):
         self.get_logger().info('Recebido pedido de parada de emergência externa')
         self.get_logger().info('PARADA DE EMERGÊNCIA ATIVADA')
         self.stop()
         return response
+
+    def call_emergency_stop_service(self):
+        self.get_logger().info('Chamando serviço de parada de emergência...')
+        self.future = self.cli.call_async(self.req)
+        rclpy.spin_until_future_complete(self, self.future)
+        if self.future.result() is not None:
+            self.get_logger().info('Parada de emergência realizada com sucesso')
+        else:
+            self.get_logger().error('Falha ao chamar o serviço de parada de emergência')
 
     def timer_callback(self):
         twist = Twist()
@@ -99,6 +114,14 @@ def ws_app(robot):
                     break
 
                 robot.state = command
+
+                # Verificar se o comando é de parada de emergência
+                #if command == 'emergency_stop':
+                 #   robot.call_emergency_stop_service()
+                #else:
+                    # Atualizar o estado do robô
+                  #  robot.state = command
+
 
         except Exception as e:
             print(f"Erro: {e}")
