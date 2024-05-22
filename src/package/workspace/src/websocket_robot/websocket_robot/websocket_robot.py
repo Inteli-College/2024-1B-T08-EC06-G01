@@ -38,7 +38,7 @@ class Robot(Node):
             twist.linear.x = 0.0
             twist.angular.z = 0.0
         elif self.state == 'forward':
-            twist.linear.x = 0.5
+            twist.linear.x = 0.2
             twist.angular.z = 0.0
         elif self.state == 'left':
             twist.linear.x = 0.0
@@ -47,7 +47,7 @@ class Robot(Node):
             twist.linear.x = 0.0
             twist.angular.z = -1.0
         elif self.state == 'backward':
-            twist.linear.x = -0.5
+            twist.linear.x = -0.2
             twist.angular.z = 0.0
         else:
             self.get_logger().warn(f'Invalid state: {self.state}')
