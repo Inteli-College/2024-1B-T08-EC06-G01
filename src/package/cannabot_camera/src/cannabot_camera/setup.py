@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'cannabot'
+package_name = 'cannabot_camera'
 
 setup(
     name=package_name,
@@ -13,16 +13,14 @@ setup(
     ],
     install_requires=['setuptools'],
     zip_safe=True,
-    maintainer='rizzi26',
-    maintainer_email='marco.meneguetti@sou.inteli.edu.br',
+    maintainer='luiz',
+    maintainer_email='lfhsvleao@gmail.com',
     description='TODO: Package description',
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-		"cannabot = cannabot.cannabot:main",
-        "lidar = cannabot.lidar:main",
-        "lidar_teste = cannabot.lidar_teste:main",
+            "camera = cannabot_camera.sender2:main"
         ],
     },
 )
