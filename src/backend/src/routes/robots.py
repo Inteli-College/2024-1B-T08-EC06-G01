@@ -1,10 +1,9 @@
-from fastapi import APIRouter
 import ormar
 import ormar.exceptions
+from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-
-from schemas.robots import Robot
 from models.robots import Robot as RobotModel
+from schemas.robots import Robot
 
 router = APIRouter(
 	prefix="/robots",
@@ -27,13 +26,13 @@ async def register(robot: Robot):
 			"error": True,
 			"message": f"Erro interno do servidor: {e}"
 		}, status_code=500)
-	
+
 @router.get("/list")
 async def list():
 	try:
 		robots = await RobotModel.objects.all()
 		return JSONResponse(content={
-			"error": False, 
+			"error": False,
 			"message": "Robots encontrados com sucesso",
 			"data": robots
 		}, status_code=200)
@@ -63,7 +62,7 @@ async def get(robot_id: int):
 			"error": True,
 			"message": f"Erro interno do servidor: {e}"
 		}, status_code=500)
-	
+
 @router.put("/update")
 async def update(robot: Robot):
 	try:
