@@ -88,6 +88,16 @@ def ws_app(robot):
                 command = message_data['control']  # Comando de movimento
                 print(f"Comando: {command}")
                 # Atualizar o estado do robô
+
+                if command not in ['stopped', 'forward', 'left', 'right', 'backward', 'emergency']:
+                    # Enviar mensagem de erro pelo WebSocket
+                    await websocket.send_text(json.dumps({'error': 'Comando inválido'}))
+                    continue
+                
+                if command == "emergency":
+                    robot.emergency()
+                    break
+
                 robot.state = command
 
         except Exception as e:
