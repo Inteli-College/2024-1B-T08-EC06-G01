@@ -10,17 +10,31 @@
         <button :class="{ 'clicked': isRightClicked }"><ArrowRight /></button>
       </div>
     </div>
-  </div>  
+  </div>
 </template>
-  
+
 <script>
-  // Importando o SVG das setinhas 
+  // Importando o SVG das setinhas
   import ArrowUp from '../assets/arrow-up.svg';
   import ArrowDown from '../assets/arrow-down.svg';
   import ArrowRight from '../assets/arrow-right.svg';
   import ArrowLeft from '../assets/arrow-left.svg';
 
+  const websocket = new WebSocket(import.meta.env.VITE_CONTROL_WEBSOCKET);
 
+  console.log(import.meta.env.VITE_CONTROL_WEBSOCKET)
+
+  websocket.onopen = () => {
+    console.log('Connected to the control websocket');
+  };
+
+  websocket.onclose = () => {
+    console.log('Disconnected from the control websocket');
+  };
+
+  websocket.onerror = (error) => {
+    console.error('Error:', error);
+  };
 
 
   export default {
@@ -40,35 +54,66 @@
         isForwardClicked: false,
         isBackwardClicked: false,
         isLeftClicked: false,
-        isRightClicked: false
+        isRightClicked: false,
+        websocket: websocket
       }
     },
-      
 
-    // Em métodos vocÊ define as funções que serão chamadas no template 
+
+    // Em métodos vocÊ define as funções que serão chamadas no template
     methods: {
       emergencyStop() {
         console.log('Emergency Stop')
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "emergency"
+          }
+        }))
       },
       moveForward() {
         this.isForwardClicked = true;
         console.log('Moving Forward');
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "forward"
+          }
+        }))
 
       },
       moveBackward() {
         this.isBackwardClicked = true;
         console.log('Moving Backward')
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "backward"
+          }
+        }))
       },
       moveLeft() {
         this.isLeftClicked = true;
         console.log('Moving Left')
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "left"
+          }
+        }))
       },
       moveRight() {
         this.isRightClicked = true;
         console.log('Moving Right')
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "right"
+          }
+        }))
       },
 
-      // As funções abaixo são utilizadas para detectar quando as teclas foram pressionadas 
+      // As funções abaixo são utilizadas para detectar quando as teclas foram pressionadas
       handleKeypress(event) {
       if (event.key === 'w' || event.key === 'ArrowUp' || event.key === 'W') {
         this.moveForward();
@@ -86,31 +131,70 @@
     handleKeyup(event) {
       if (event.key === 'w' || event.key === 'ArrowUp' || event.key === 'W') {
         this.isForwardClicked = false;
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "stopped"
+          }
+        }))
       }
       else if (event.key === 's' || event.key === 'ArrowDown' || event.key === 'S') {
         this.isBackwardClicked = false;
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "stopped"
+          }
+        }))
       }
       else if (event.key === 'a' || event.key === 'ArrowLeft' || event.key === 'A') {
         this.isLeftClicked = false;
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "stopped"
+          }
+        }))
       }
       else if (event.key === 'd' || event.key === 'ArrowRight' || event.key === 'D') {
         this.isRightClicked = false;
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "stopped"
+          }
+        }))
       }
     }
   },
-  
+
   mounted() {
     window.addEventListener('keydown', this.handleKeypress);
     window.addEventListener('keyup', this.handleKeyup);
+    this.websocket.onmessage = (event) => {
+      console.log('Message:', event.data);
+
+
+      if ("obstacle" in JSON.parse(event.data)) {
+        const obstacle = JSON.parse(event.data).obstacle;
+
+        if (obstacle != 'none')
+          return this.$notify({
+            title: 'Obstaculo detectado',
+            text:`Obstaculo detectado na direção "${obstacle}"`,
+            type: 'warn'
+          });
+      }
+    };
   },
-  
+
   beforeDestroy() {
     window.removeEventListener('keydown', this.handleKeypress);
     window.removeEventListener('keyup', this.handleKeyup);
   }
 };
   </script>
-  
+
   <style scoped>
   .top {
     background-color: #cce5ff;
@@ -134,4 +218,3 @@
 
 
   </style>
-  
