@@ -1,3 +1,4 @@
+import asyncio
 from fastapi import FastAPI, WebSocket
 import time
 import json
@@ -12,6 +13,9 @@ from rclpy.qos import qos_profile_sensor_data, QoSProfile
 from sensor_msgs.msg import LaserScan
 import signal
 
+
+clients = set()
+
 class Robot(Node):
     def __init__(self):
         super().__init__('ros_turtlebot_teleop')
@@ -22,6 +26,7 @@ class Robot(Node):
         self.reported_speed = Twist()
 
         self.state = 'stopped'
+        self.lidar_data = 'none'
         self.ready = False
 
         # Subscrever no tópico do Lidar
@@ -48,7 +53,7 @@ class Robot(Node):
         self.get_logger().info('PARADA DE EMERGÊNCIA ATIVADA')
         self.stop()
         return response
-    
+
     def scan_callback(self, data):
         # Obtém os dados do Lidar
         ranges = data.ranges
@@ -69,15 +74,30 @@ class Robot(Node):
 
             # Dividir o array de distâncias em frente (de valor_A até valor_B) e trás (de valor_B até o final mais de 0 até valor_A)
             if valor_A < min_index < valor_B:
-                print("Obstáculo átras")
-                return {'obstacle': 'back'}
+                # print("Obstáculo átras")
+                # return {'obstacle': 'back'}
+
+                if self.lidar_data != 'back':
+                    print('Obstáculo detectado atrás')
+                    self.lidar_data = 'back'
+                    broadcast(json.dumps({'obstacle': 'back'}))
             else:
-                print("Obstáculo na frente")
-                return {'obstacle': 'front'}
+                # print("Obstáculo na frente")
+                # return {'obstacle': 'front'}
+
+                if self.lidar_data != 'front':
+                    print('Obstáculo detectado à frente')
+                    self.lidar_data = 'front'
+                    broadcast(json.dumps({'obstacle': 'front'}))
         else:
             # Se não houver obstáculos próximos, continue em frente
-            print('Nenhum obstáculo detectado')
-            return {'obstacle': 'none'}
+            # print('Nenhum obstáculo detectado')
+            # return {'obstacle': 'none'}
+
+            if self.lidar_data != 'none':
+                print('Nenhum obstáculo detectado')
+                self.lidar_data = 'none'
+                broadcast(json.dumps({'obstacle': 'none'}))
 
     def call_emergency_stop_service(self):
         self.get_logger().info('Chamando serviço de parada de emergência...')
@@ -91,23 +111,28 @@ class Robot(Node):
     def timer_callback(self):
         twist = Twist()
 
-        if self.state == 'stopped':
-            twist.linear.x = 0.0
-            twist.angular.z = 0.0
-        elif self.state == 'forward' and self.scan_callback() == {'obstacle': 'none'}:
-            twist.linear.x = 0.2
-            twist.angular.z = 0.0
-        elif self.state == 'left':
-            twist.linear.x = 0.0
-            twist.angular.z = 1.0
-        elif self.state == 'right':
-            twist.linear.x = 0.0
-            twist.angular.z = -1.0
-        elif self.state == 'backward' and self.scan_callback() == {'obstacle': 'none'}:
-            twist.linear.x = -0.2
-            twist.angular.z = 0.0
-        else:
-            self.get_logger().warn(f'Invalid state: {self.state}')
+        match self.state:
+            case 'stopped':
+                twist.linear.x = 0.0
+                twist.angular.z = 0.0
+            case 'forward':
+                if self.lidar_data == 'none' or self.lidar_data == 'back':
+                    twist.linear.x = 0.2
+                    twist.angular.z = 0.0
+            case 'left':
+                twist.linear.x = 0.0
+                twist.angular.z = 1.0
+            case 'right':
+                twist.linear.x = 0.0
+                twist.angular.z = -1.0
+            case 'backward':
+                if self.lidar_data == 'none' or self.lidar_data == 'front':
+                    twist.linear.x = -0.2
+                    twist.angular.z = 0.0
+            case 'emergency':
+                self.emergency()
+            case _:
+                self.get_logger().warn(f'Invalid state: {self.state}')
 
         self.publisher.publish(twist)
 
@@ -133,6 +158,9 @@ def ws_app(robot):
     @app.websocket("/ws_control")
     async def websocket_endpoint(websocket: WebSocket):
         await websocket.accept()
+
+        clients.add(websocket)
+
         try:
             while True:
                 # Receber o comando de movimento do robô
@@ -150,7 +178,7 @@ def ws_app(robot):
                     # Enviar mensagem de erro pelo WebSocket
                     await websocket.send_text(json.dumps({'error': 'Comando inválido'}))
                     continue
-                
+
                 if command == "emergency":
                     robot.emergency()
                     break
@@ -158,7 +186,7 @@ def ws_app(robot):
                 robot.state = command
 
                 # Enviar aviso de obstaculo
-                await websocket.send_text(json.dumps(robot.scan_callback()))
+                # await websocket.send_text(json.dumps(robot.scan_callback()))
 
                 # Verificar se o comando é de parada de emergência
                 #if command == 'emergency_stop':
@@ -173,6 +201,12 @@ def ws_app(robot):
             await websocket.close()
 
     return app
+
+async def _broadcast(message):
+    asyncio.gather(*[client.send_text(message) for client in clients])
+
+def broadcast(message):
+    asyncio.run(_broadcast(message))
 
 def main(args=None):
     rclpy.init(args=args)
