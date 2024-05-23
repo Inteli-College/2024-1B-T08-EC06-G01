@@ -8,6 +8,8 @@ import rclpy
 from std_srvs.srv import Empty
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
+from rclpy.qos import qos_profile_sensor_data, QoSProfile
+from sensor_msgs.msg import LaserScan
 import signal
 
 class Robot(Node):
@@ -21,6 +23,16 @@ class Robot(Node):
 
         self.state = 'stopped'
         self.ready = False
+
+        # Subscrever no tópico do Lidar
+        self.scan_sub = self.create_subscription(
+            LaserScan,
+            'scan',
+            self.scan_callback,
+            qos_profile=qos_profile_sensor_data
+        )
+
+        self.safe_distance = 0.2 # Distância de segurança em metros
 
         self.timer = self.create_timer(0.1, self.timer_callback)
         self.get_logger().info('Aguardando o estado de prontidão do robô...')
@@ -36,6 +48,36 @@ class Robot(Node):
         self.get_logger().info('PARADA DE EMERGÊNCIA ATIVADA')
         self.stop()
         return response
+    
+    def scan_callback(self, data):
+        # Obtém os dados do Lidar
+        ranges = data.ranges
+
+        # Verifica se há obstáculos dentro da distância de segurança e enviar o índice da array
+        if min(ranges) <= self.safe_distance:
+            min_index = ranges.index(min(ranges))
+            numero_indices = len(ranges)
+            # print('Número de índices:', numero_indices)
+
+            # Calcular os índices que representam a frente e as traseiras
+            valor_A = numero_indices // 4
+            valor_B = valor_A * 3
+
+            # print('Valor A:', valor_A)
+            # print('Valor B:', valor_B)
+            # print('Índice:', min_index)
+
+            # Dividir o array de distâncias em frente (de valor_A até valor_B) e trás (de valor_B até o final mais de 0 até valor_A)
+            if valor_A < min_index < valor_B:
+                print("Obstáculo átras")
+                return {'obstacle': 'back'}
+            else:
+                print("Obstáculo na frente")
+                return {'obstacle': 'front'}
+        else:
+            # Se não houver obstáculos próximos, continue em frente
+            print('Nenhum obstáculo detectado')
+            return {'obstacle': 'none'}
 
     def call_emergency_stop_service(self):
         self.get_logger().info('Chamando serviço de parada de emergência...')
@@ -52,7 +94,7 @@ class Robot(Node):
         if self.state == 'stopped':
             twist.linear.x = 0.0
             twist.angular.z = 0.0
-        elif self.state == 'forward':
+        elif self.state == 'forward' and self.scan_callback() == {'obstacle': 'none'}:
             twist.linear.x = 0.2
             twist.angular.z = 0.0
         elif self.state == 'left':
@@ -61,7 +103,7 @@ class Robot(Node):
         elif self.state == 'right':
             twist.linear.x = 0.0
             twist.angular.z = -1.0
-        elif self.state == 'backward':
+        elif self.state == 'backward' and self.scan_callback() == {'obstacle': 'none'}:
             twist.linear.x = -0.2
             twist.angular.z = 0.0
         else:
@@ -114,6 +156,9 @@ def ws_app(robot):
                     break
 
                 robot.state = command
+
+                # Enviar aviso de obstaculo
+                await websocket.send_text(json.dumps(robot.scan_callback()))
 
                 # Verificar se o comando é de parada de emergência
                 #if command == 'emergency_stop':
