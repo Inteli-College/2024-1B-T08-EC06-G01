@@ -84,13 +84,13 @@ description: Nessa secção iremos analisar quanto é necessário aportar para c
 
 &emsp;Como se trata de um projeto de pesquisa, podemos buscar apoio financeiro de empresas e até do próprio governo, que possui iniciativas de apoio ao desenvolvimento da Indústria 4.0 no Brasil, como o ["Programa Rumo à Indústria 4.0"](https://brazillab.org.br/noticias/programa-rumo-a-industria-4-0). Programas governamentais e patrocinadores que incentivam o desenvolvimento e a pesquisa são cada vez mais comuns. Aproveitar essas oportunidades é essencial para reduzir os custos do projeto.
 
-### Redução de Mão de Obra
-
-&emsp;Embora essa medida seja mais drástica, podemos considerar a redução da equipe, que atualmente conta com cinco pessoas. Em último caso, podemos cortar um engenheiro de software ou de robótica, conforme a necessidade do orçamento e do time. Esta estratégia pode reduzir os custos do projeto em cerca de 10%.
-
 ### Contratação de Profissionais Iniciantes
 
 &emsp;Contratar profissionais em início de carreira pode reduzir os custos de mão de obra em até 20%, considerando que eles geralmente começam no mercado ganhando menos do que a média salarial. Estudantes recém-formados ou profissionais de startups geralmente cobram menos, contribuindo para a redução dos custos do projeto. Além disso, essa prática pode ser benéfica para identificar novos talentos no mercado e ajudá-los a se desenvolver tecnicamente em um projeto de grande calibre como este.
+
+### Redução de Mão de Obra
+
+&emsp;Embora essa medida seja mais drástica, podemos considerar a redução da equipe, que atualmente conta com cinco pessoas. Em último caso, podemos cortar um engenheiro de software ou de robótica, conforme a necessidade do orçamento e do time. Esta estratégia pode reduzir os custos do projeto em cerca de 10%.
 
 &emsp;Essas estratégias combinadas podem ajudar a otimizar os custos do nosso projeto, permitindo que avancemos de forma mais eficiente e sustentável.
 
