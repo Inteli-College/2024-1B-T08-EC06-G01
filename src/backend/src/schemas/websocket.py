@@ -7,5 +7,5 @@ class ControlData(pydantic.BaseModel):
 	state: Literal["forward", "backward", "left", "right", "stopped", "emergency"]
 
 class ControlPacket(pydantic.BaseModel):
-	type: Literal["SPacketControl"]
+	type: Literal["CPacketControl"]
 	data: ControlData
