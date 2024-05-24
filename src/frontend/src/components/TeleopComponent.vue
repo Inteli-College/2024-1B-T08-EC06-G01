@@ -70,6 +70,12 @@
             state: "emergency"
           }
         }))
+
+        return this.$notify({
+            title: 'Emergência',
+            text:'A parada de emergência foi acionada, para continuar movimentando o robô, reinicie o serviço responsável pelo controle do robô',
+            type: 'error'
+        });
       },
       moveForward() {
         this.isForwardClicked = true;
@@ -173,10 +179,11 @@
     window.addEventListener('keyup', this.handleKeyup);
     this.websocket.onmessage = (event) => {
       console.log('Message:', event.data);
+      const json = JSON.parse(event.data);
 
 
-      if ("obstacle" in JSON.parse(event.data)) {
-        const obstacle = JSON.parse(event.data).obstacle;
+      if ("obstacle" in json) {
+        const obstacle = json.obstacle;
 
         if (obstacle != 'none')
           return this.$notify({
@@ -185,6 +192,25 @@
             type: 'warn'
           });
       }
+
+      if ("type" in json) {
+        switch (json.type) {
+          case "SPacketError":
+            return this.$notify({
+              title: 'Erro',
+              text: json.data.message,
+              type: 'error'
+            });
+          case "SPacketInfo":
+            return this.$notify({
+              title: 'Notificação',
+              text: json.data.message,
+              type: 'info'
+            });
+        }
+      }
+
+      console.log(event)
     };
   },
 
