@@ -8,7 +8,7 @@ description: Nessa seção, iremos abordar a teleoperação do robô Turtlebot 3
 
 ## Introdução
 
-Na sprint passada, nos fizemos uma interface de CLI para teleoperar o robô Turtlebot 3. Nesta sprint, nós implementamos uma interface gráfica através de uma aplicação web para teleoperar o robô. Nessa interface, o usuário pode controlar o robô, visualizar a câmera do robô e detectar obstáculos no ambiente. Além disso, um ponto importante é que nos isolamos tudo tinha ROS2 na Raspberry 4 do robô assim fazendo com que o sistema que executa o backend e o frontend da aplicação web seja independente do robô.
+Na sprint passada, foi feito  uma interface de CLI para teleoperar o robô Turtlebot 3. Nesta sprint, nós implementamos uma interface gráfica através de uma aplicação web para teleoperar o robô. Nessa interface, o usuário pode controlar o robô, visualizar a câmera do robô e detectar obstáculos no ambiente. Além disso, um ponto importante é que nos isolamos tudo tinha ROS2 na Raspberry 4 do robô assim fazendo com que o sistema que executa o backend e o frontend da aplicação web seja independente do robô.
 
 Para a comunicação entre o backend e o robô, nos implementamos no robô 2 websockets, um que recebe comandos de movimento do backend e outro que envia a imagem da câmera para o bakcend. Após isso, o backend envia a imagem para o frontend através de um websocket.
 
