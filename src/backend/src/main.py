@@ -2,10 +2,11 @@ import os
 from contextlib import asynccontextmanager
 
 import uvicorn
-from client.robot import robot
-from database.postgres import database
 from dotenv import load_dotenv
 from fastapi import FastAPI
+
+from client.robot import robot
+from database.postgres import database
 from routes.router import router
 
 load_dotenv('./.env')
@@ -34,7 +35,7 @@ async def lifespan(app: FastAPI):
 
 
         try:
-            await robot_.connect()
+            await robot_.reconnect()
             print("Robot connected")
         except Exception as e:
             print(f"Error connecting to robot, please check if the robot is online: {e}")

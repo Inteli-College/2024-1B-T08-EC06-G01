@@ -15,10 +15,12 @@ router = APIRouter(
 async def control_robot(websocket: WebSocket):
 	await websocket.accept()
 
-	if not robot.websocket:
-		await websocket.send_json({ "type": "SPacketError", "message": "Connection to robot has been lost" })
-		await websocket.close()
-		return
+	# if not robot.websocket:
+	# 	await websocket.send_json({ "type": "SPacketError", "data": {
+	# 		"message": "Connection to robot has been lost"
+	# 	}})
+	# 	await websocket.close()
+	# 	return
 
 	await robot.add_client(websocket)
 
@@ -27,18 +29,25 @@ async def control_robot(websocket: WebSocket):
 			raw = await websocket.receive_text()
 
 			if not robot.websocket:
-				await websocket.send_json({ "type": "SPacketError", "message": "Connection to robot has been lost" })
-				await websocket.close()
-				return
+				# await websocket.send_json({ "type": "SPacketError", "data": {
+				# 	"message": "Connection to robot has been lost"
+				# }})
+				# await websocket.close()
+				# return
+				continue
 
 			try: data = json.loads(raw)
 			except json.JSONDecodeError:
-				await websocket.send_json({ "type": "SPacketError", "message": "Invalid JSON" })
+				await websocket.send_json({ "type": "SPacketError", "data": {
+					"message": "JSON inválido"
+				}})
 				continue
 
 			try: packet = ControlPacket(**data)
 			except pydantic.ValidationError as e:
-				await websocket.send_json({ "type": "SPacketError", "message": str(e).replace('\n', '') })
+				await websocket.send_json({ "type": "SPacketError", "data": {
+					"message": str(e).replace('\n', '')
+				}})
 				continue
 
 			await robot.send(json.dumps({ 'control': packet.data.state }))
@@ -47,8 +56,9 @@ async def control_robot(websocket: WebSocket):
 		await robot.remove_client(websocket)
 		await websocket.close()
 	except ConnectionClosedError:
-		print("Connection to robot has been lost, shutting down websocket endpoint")
-		await robot.close()
-		await websocket.send_json({ "type": "SPacketError", "message": "Connection to robot has been lost" })
-		await websocket.close()
+		print("Connection to robot has been lost.")
+		await robot.reconnect()
+		await websocket.send_json({ "type": "SPacketError", "data": {
+			"message": "Conexão com o robô foi perdida"
+		}})
 		return

@@ -1,4 +1,5 @@
 import asyncio
+import json
 import os
 
 import websockets
@@ -24,8 +25,11 @@ class Robot:
 			async for message in self.websocket: # type: ignore
 				await self._broadcast(message)
 		except ConnectionClosedError:
-			print("Connection to robot has been lost, shutting down websocket endpoint")
-			await self.close()
+			print("Connection to robot has been lost, attempting to reconnect...")
+			await self._broadcast(json.dumps({ "type": "SPacketError", "data": {
+				"message": "Conexão com o robô foi perdida"
+			}}))
+			await self.reconnect()
 
 	async def add_client(self, client: WebSocket):
 		self.clients.add(client)
@@ -45,6 +49,27 @@ class Robot:
 	async def _broadcast(self, message):
 		if self.clients:
 			await asyncio.gather(*[client.send_text(message) for client in self.clients])
+
+	async def _reconnect(self):
+		if self.websocket:
+			try: await self.close()
+			except: pass
+
+		try: await self.connect()
+		except Exception as e:
+			print(f"Failed to reconnect to robot: {e}, retrying in 5 seconds...")
+			await asyncio.sleep(5)
+			return await self.reconnect()
+
+		await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+			"message": "Conexão com o robô estabelecida"
+		}}))
+		print("Connected to robot")
+
+	async def reconnect(self):
+		"""Close the current connection and reconnect to the robot WebSocket."""
+		# use _reconnect in a non-blocking way
+		asyncio.create_task(self._reconnect())
 
 	async def close(self):
 		if self.websocket:
