@@ -8,14 +8,16 @@ import websockets
 
 
 class WebSocketServer:
-    def __init__(self, host='localhost', port=8765):
+    def __init__(self, host='localhost', port=8765, framerate: int = 50):
         self.host = host
         self.port = port
         self.clients = set()
         self.loop = None
         self.thread = None
-        # self.capture = cv2.VideoCapture(0)
         self.capture = None
+        self.sleep_time = 1 / framerate
+        self.framerate = framerate
+        self.frame_count = 0
 
     async def register_client(self, websocket):
         self.clients.add(websocket)
@@ -57,14 +59,24 @@ class WebSocketServer:
             self.capture = cv2.VideoCapture(0)
 
         ret, frame = self.capture.read()
-        timestamp = datetime.datetime.now().timestamp() * 1000
+        self.frame_count += 1
+
+        timestamp = None
+        if self.frame_count > (self.framerate / 20): # send timestamp every 0.5 seconds
+            timestamp = datetime.datetime.now()
+            self.frame_count = 0
+
         if ret:
             _, buffer = cv2.imencode('.jpg', frame)
 
-            self.broadcast(json.dumps({
+            broadcast = {
                 "bytes": base64.b64encode(buffer).decode('utf-8'),
-                "timestamp": timestamp
-            }))
+            }
+
+            if timestamp:
+                broadcast["timestamp"] = str(timestamp)
+
+            self.broadcast(json.dumps(broadcast))
 
     async def broadcast_image_forever(self):
         while not self.loop:
@@ -80,7 +92,7 @@ class WebSocketServer:
                 continue
 
             self.loop.create_task(self.broadcast_image())
-            await asyncio.sleep(0.02) # 50Hz
+            await asyncio.sleep(self.sleep_time) # 50Hz
 
 if __name__ == "__main__":
     websocket_server = WebSocketServer(host='0.0.0.0')
