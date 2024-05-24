@@ -1,11 +1,11 @@
-from fastapi import APIRouter, HTTPException
-import ormar
-from fastapi.responses import JSONResponse
-from datetime import datetime
 import uuid
+from datetime import datetime
 
-from schemas.medias import Media
+import ormar
+from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 from models.medias import Media as MediaModel
+from schemas.medias import Media
 
 router = APIRouter(
     prefix="/medias",

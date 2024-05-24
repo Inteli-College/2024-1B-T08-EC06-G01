@@ -9,21 +9,21 @@
       </div>
     </div>
   </template>
-  
+
   <script setup lang="ts">
   import { defineProps, defineEmits } from 'vue';
-  
-  const props = defineProps({
+
+  defineProps({
     sidebarOpen: Boolean
   });
-  
-  const { emit } = defineEmits();
-  
-  const toggleSidebar = () => {
-    emit('toggle-sidebar');
-  }
+
+  defineEmits();
+
+  // const toggleSidebar = () => {
+  //   emit('toggle-sidebar');
+  // }
   </script>
-  
+
   <style scoped>
   .translate-x-0 {
     transform: translateX(0);
@@ -31,57 +31,56 @@
   .-translate-x-full {
     transform: translateX(-100%);
   }
-  
+
   .bg-gray-200 {
     background-color: #077336;
   }
-  
+
   .w-64 {
     width: 16rem;
   }
-  
+
   .h-full {
     height: 100%;
   }
-  
+
   .fixed {
     position: fixed;
   }
-  
+
   .top-0 {
     top: 0;
   }
-  
+
   .left-0 {
     left: 0;
   }
-  
+
   .p-4 {
     padding: 1rem;
   }
-  
+
   .transition-transform {
     transition-property: transform;
   }
-  
+
   .duration-300 {
     transition-duration: 300ms;
   }
-  
+
   .ease-in-out {
     transition-timing-function: ease-in-out;
   }
-  
+
   .transform {
     will-change: transform;
   }
-  
+
   .z-10 {
     z-index: 10;
   }
-  
+
   .fa {
     margin-right: 1rem;
   }
   </style>
-  

@@ -1,11 +1,11 @@
 import os
+from contextlib import asynccontextmanager
+
 import uvicorn
+from dotenv import load_dotenv
 from fastapi import FastAPI
 
-from dotenv import load_dotenv
-
-# from middleware.crypto import guard
-
+from client.robot import robot
 from database.postgres import database
 from routes.router import router
 
@@ -19,24 +19,38 @@ assert os.environ.get('BUCKET_SECRET_KEY') != ""
 assert os.environ.get('BUCKET_USE_SSL') != ""
 assert os.environ.get('JWT_SECRET') != ""
 assert os.environ.get('AES_SECRET') != ""
+assert os.environ.get('ROBOT_WEBSOCKET_URL') != ""
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    database_ = app.state.database
+    robot_ = app.state.robot
+    try:
+        try:
+            print("Connecting to database...")
+            await database_.connect()
+            print("Database connected")
+        except Exception as e:
+            print(f"Error connecting to database: {e}")
 
 
-app = FastAPI()
+        try:
+            await robot_.reconnect()
+            print("Robot connected")
+        except Exception as e:
+            print(f"Error connecting to robot, please check if the robot is online: {e}")
+
+        yield
+    finally:
+        if robot_.websocket: await robot_.close()
+
+        if database_.is_connected: await database_.disconnect()
+
+app = FastAPI(lifespan=lifespan)
 
 app.state.database = database
+app.state.robot = robot
 
-@app.on_event("startup")
-async def startup() -> None:
-    database_ = app.state.database
-    if not database_.is_connected:
-        await database_.connect()
-        print("Database connected")
-
-@app.on_event("shutdown")
-async def shutdown() -> None:
-    database_ = app.state.database
-    if database_.is_connected:
-        await database_.disconnect()
 
 app.include_router(router)
 

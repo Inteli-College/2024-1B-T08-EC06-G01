@@ -23,4 +23,4 @@ colcon build > /dev/null
 
 source install/setup.bash
 
-ROS_DOMAIN_ID=69 ros2 run websocket_robot websocket_robot
+ROS_DOMAIN_ID=69 ros2 run cannabot emergency_stop
