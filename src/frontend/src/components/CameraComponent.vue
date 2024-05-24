@@ -4,12 +4,15 @@
         <div class="flex-1 flex items-center justify-center bg-gray-200 w-full mb-4">
           <!-- <span>Imagem em tempo real</span> -->
           <img id="videoStream" alt="Imagem em tempo real" style="width: 640px; height: 480px;" />
+
         </div>
+          <span id="latency">Latência: 0ms</span>
         </div>
   </template>
 z
   <script>
   const websocket = new WebSocket(import.meta.env.VITE_VIDEO_WEBSOCKET);
+  let latencies = [];
 
   console.log(import.meta.env.VITE_VIDEO_WEBSOCKET)
 
@@ -27,7 +30,18 @@ z
 
   websocket.onmessage = (event) => {
     // console.log('Message:', event.data);
-    document.getElementById('videoStream').src = `data:image/jpeg;base64,${JSON.parse(event.data).bytes}`;
+    const json = JSON.parse(event.data);
+    document.getElementById('videoStream').src = `data:image/jpeg;base64,${json.bytes}`;
+
+    if ("timestamp" in json)
+      latencies.push(new Date() - new Date(json.timestamp));
+
+    if (latencies.length > 10) {
+      const sum = latencies.reduce((a, b) => a + b, 0);
+      const avg = sum / latencies.length;
+      document.getElementById('latency').innerText = `Latência: ${Math.round(avg)}ms`;
+      latencies = [];
+    }
   };
 
 
