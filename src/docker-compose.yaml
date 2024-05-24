@@ -1,5 +1,17 @@
-version: '3'
 services:
+  frontend:
+    build: ./frontend
+    image: cannabot/frontend
+    restart: unless-stopped
+    environment:
+      VITE_BACKEND: "http://localhost:8000"
+      VITE_CONTROL_WEBSOCKET: "ws://localhost:8000/websocket/control"
+      VITE_VIDEO_WEBSOCKET: "ws://10.128.0.8:8765"
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    container_name: cannabot-frontend
   postgres:
     build: ./database
     image: cannabot/postgres
@@ -13,24 +25,25 @@ services:
     ports:
       - "5432:5432"
     container_name: cannabot-postgres
-  # backend:
-  #   build: ./backend
-  #   image: cannabot/backend
-  #   restart: unless-stopped
-  #   environment:
-  #     DATABASE_URL: ""
-  #     JWT_SECRET: ""
-  #     AES_SECRET: ""
-  #     BUCKET_HOST: ""
-  #     BUCKET_PORT: "9000"
-  #     BUCKET_ACCESS_KEY: ""
-  #     BUCKET_SECRET_KEY: ""
-  #     BUCKET_USE_SSL: "false"
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - postgres
-  #   container_name: cannabot-backend
+  backend:
+    build: ./backend
+    image: cannabot/backend
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: "postgresql://cannabot:Cnh39pKWBV4mNpzcxMcBdLxud5nJxKzWsq6iXstdeLf2vZbCHKtAn36w8wqBmFHL@postgres:5432/cannabot"
+      JWT_SECRET: "f6013799590e9d59c6853253a2a7af2dc88a3b36f891ede916a82e02a87a8555"
+      AES_SECRET: "wAhXwSFyvh7i8hE0/DdqeJS490WFyAOImaE/yZACHzI="
+      BUCKET_HOST: "temp"
+      BUCKET_PORT: "9000"
+      BUCKET_ACCESS_KEY: "temp"
+      BUCKET_SECRET_KEY: "temp"
+      BUCKET_USE_SSL: "false"
+      ROBOT_WEBSOCKET_URL: "ws://10.128.0.8:3000/ws_control"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    container_name: cannabot-backend
  # bucket:
  #   image: bitnami/minio
  #   container_name: cannabot-bucket

@@ -1,12 +1,11 @@
-from fastapi import APIRouter, HTTPException
-import ormar
-from fastapi.responses import JSONResponse
 from datetime import datetime
 from uuid import UUID
-import logging
 
-from schemas.logs import Log
+import ormar
+from fastapi import APIRouter
+from fastapi.responses import JSONResponse
 from models.logs import Log as LogModel
+from schemas.logs import Log
 
 router = APIRouter(
     prefix="/logs",
@@ -41,18 +40,18 @@ async def list_logs():
                 "error": True,
                 "message": "Nenhum log encontrado"
             }, status_code=404)
-        
+
         log_dicts = []
         for log in logs:
             log_dict = log.dict()
             for key, value in log_dict.items():
-                if isinstance(value, dict):  
-                    if 'uuid' in value and isinstance(value['uuid'], UUID):  
-                        log_dict[key] = str(value['uuid'])  
+                if isinstance(value, dict):
+                    if 'uuid' in value and isinstance(value['uuid'], UUID):
+                        log_dict[key] = str(value['uuid'])
                 elif isinstance(value, datetime):
                     log_dict[key] = value.isoformat()
             log_dicts.append(log_dict)
-        
+
         return JSONResponse(content={
             "error": False,
             "message": "Logs encontrados com sucesso",
@@ -63,7 +62,7 @@ async def list_logs():
             "error": True,
             "message": f"Erro interno do servidor: {e}"
         }, status_code=500)
-    
+
 @router.get("/list/{log_id}")
 async def list(log_id: int):
     try:
@@ -72,12 +71,12 @@ async def list(log_id: int):
 
         log_dict = log.dict()
         for key, value in log_dict.items():
-            if isinstance(value, dict):  
-                if 'uuid' in value and isinstance(value['uuid'], UUID):  
-                    log_dict[key] = str(value['uuid'])  
+            if isinstance(value, dict):
+                if 'uuid' in value and isinstance(value['uuid'], UUID):
+                    log_dict[key] = str(value['uuid'])
             elif isinstance(value, datetime):
                 log_dict[key] = value.isoformat()
- 
+
         return JSONResponse(content={
             "error": False,
             "log": log_dict
@@ -110,7 +109,7 @@ async def update(log: Log):
             "error": True,
             "message": f"Erro interno do servidor: {e}"
         }, status_code=500)
-    
+
 @router.delete("/delete/{log_id}")
 async def delete(log_id: int):
     try:

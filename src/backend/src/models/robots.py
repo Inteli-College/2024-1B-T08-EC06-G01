@@ -1,8 +1,9 @@
-import ormar
-from database.postgres import base_ormar_config
-from ormar import Boolean, Integer, Model, String, ForeignKey
 from typing import Optional
+
+from database.postgres import base_ormar_config
 from models.users import User
+from ormar import ForeignKey, Integer, Model, String
+
 
 class Robot(Model):
 	ormar_config = base_ormar_config.copy(tablename="robot")

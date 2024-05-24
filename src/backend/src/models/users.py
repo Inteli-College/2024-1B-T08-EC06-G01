@@ -1,4 +1,3 @@
-import ormar
 from database.postgres import base_ormar_config
 from ormar import Boolean, Integer, Model, String
 
