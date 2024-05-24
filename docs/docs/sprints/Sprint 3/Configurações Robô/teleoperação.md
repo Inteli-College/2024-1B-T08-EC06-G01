@@ -1,20 +1,70 @@
-import asyncio
-from fastapi import FastAPI, WebSocket
-import time
-import json
-import threading
-import uvicorn
-from rclpy.node import Node
-import rclpy
-from std_srvs.srv import Empty
-from geometry_msgs.msg import Twist
-from nav_msgs.msg import Odometry
-from rclpy.qos import qos_profile_sensor_data, QoSProfile
-from sensor_msgs.msg import LaserScan
-import signal
+---
+title: "Teleoperação do Robô"
+sidebar_position: 1
+description: Nessa seção, iremos abordar a teleoperação do robô Turtlebot 3, que é um dos principais componentes do projeto.
+---
 
+# Teleoperação do Robô
 
-clients = set()
+## Introdução
+
+Na sprint passada, foi feito  uma interface de CLI para teleoperar o robô Turtlebot 3. Nesta sprint, nós implementamos uma interface gráfica através de uma aplicação web para teleoperar o robô. Nessa interface, o usuário pode controlar o robô, visualizar a câmera do robô e detectar obstáculos no ambiente. Além disso, um ponto importante é que nos isolamos tudo tinha ROS2 na Raspberry 4 do robô assim fazendo com que o sistema que executa o backend e o frontend da aplicação web seja independente do robô.
+
+Para a comunicação entre o backend e o robô, nos implementamos no robô 2 websockets, um que recebe comandos de movimento do backend e outro que envia a imagem da câmera para o bakcend. Após isso, o backend envia a imagem para o frontend através de um websocket.
+
+## Código
+
+### Websocket
+
+O websocket do robô foi feito em FastAPI junto a biblioteca `websockets`. Para que os serviços ROS e o websocket pudessem rodar juntos, foi necessário criar ambos em threads separadas. O código do websocket do robô pode ser encontrado.
+    
+   
+```python
+
+    app = FastAPI()
+
+    # Rota para receber comandos de movimento do robô
+    @app.websocket("/ws_control")
+    async def websocket_endpoint(websocket: WebSocket):
+        await websocket.accept()
+
+        clients.add(websocket)
+
+        try:
+            while True:
+                # Receber o comando de movimento do robô
+                data = await websocket.receive_text()
+
+                print(f"Recebido: {data}")
+
+                # Parse do JSON recebido
+                message_data = json.loads(data)
+                command = message_data['control']  # Comando de movimento
+                print(f"Comando: {command}")
+                # Atualizar o estado do robô
+
+                if command not in ['stopped', 'forward', 'left', 'right', 'backward', 'emergency']:
+                    # Enviar mensagem de erro pelo WebSocket
+                    await websocket.send_text(json.dumps({'error': 'Comando inválido'}))
+                    continue
+
+                if command == "emergency":
+                    robot.emergency()
+                    break
+
+                robot.state = command
+
+        except Exception as e:
+            print(f"Erro: {e}")
+            await websocket.close()
+    
+```
+
+### Classe de controle do robô
+
+Para controlar e ter acessos a todos serviços, tópicos e ações do robô, foi criado uma classe chamada `Robot`. Segue a implementação da classe:
+
+```python
 
 class Robot(Node):
     def __init__(self):
@@ -151,74 +201,5 @@ class Robot(Node):
         self.get_logger().info('Parando o robô...')
         rclpy.shutdown()
 
-def ws_app(robot):
-    app = FastAPI()
-
-    # Rota para receber comandos de movimento do robô
-    @app.websocket("/ws_control")
-    async def websocket_endpoint(websocket: WebSocket):
-        await websocket.accept()
-
-        clients.add(websocket)
-
-        try:
-            while True:
-                # Receber o comando de movimento do robô
-                data = await websocket.receive_text()
-
-                print(f"Recebido: {data}")
-
-                # Parse do JSON recebido
-                message_data = json.loads(data)
-                command = message_data['control']  # Comando de movimento
-                print(f"Comando: {command}")
-                # Atualizar o estado do robô
-
-                if command not in ['stopped', 'forward', 'left', 'right', 'backward', 'emergency']:
-                    # Enviar mensagem de erro pelo WebSocket
-                    await websocket.send_text(json.dumps({'error': 'Comando inválido'}))
-                    continue
-
-                if command == "emergency":
-                    robot.emergency()
-                    break
-
-                robot.state = command
-
-                # Enviar aviso de obstaculo
-                # await websocket.send_text(json.dumps(robot.scan_callback()))
-
-                # Verificar se o comando é de parada de emergência
-                #if command == 'emergency_stop':
-                 #   robot.call_emergency_stop_service()
-                #else:
-                    # Atualizar o estado do robô
-                  #  robot.state = command
-
-
-        except Exception as e:
-            print(f"Erro: {e}")
-            await websocket.close()
-
-    return app
-
-async def _broadcast(message):
-    asyncio.gather(*[client.send_text(message) for client in clients])
-
-def broadcast(message):
-    asyncio.run(_broadcast(message))
-
-def main(args=None):
-    rclpy.init(args=args)
-    robot = Robot()
-
-    # Iniciar o servidor WebSocket em uma thread separada
-    ws_thread = threading.Thread(target=lambda: uvicorn.run(ws_app(robot), host="0.0.0.0", port=3000))
-    ws_thread.start()
-
-    rclpy.spin(robot)
-    robot.destroy_node()
-    rclpy.shutdown()
-
-if __name__ == '__main__':
-    main()
+```
+Na proxima sprint, pretendemos otimizar esse sistema de teleoperação, para que a Raspberry Pi 4 do robô não fique sobrecarregada com a execução de vários serviços ao mesmo tempo. Além disso, pretendemos implementar um sistema de detecção de obstáculos mais robusto, utilizando técnicas de visão computacional.

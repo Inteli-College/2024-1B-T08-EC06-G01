@@ -1,10 +1,9 @@
-from fastapi import APIRouter
 import ormar
 import ormar.exceptions
+from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-
-from schemas.users import User
 from models.users import User as UserModel
+from schemas.users import User
 from utils.crypto import get_password_hash, verify_password
 
 router = APIRouter(
@@ -46,14 +45,14 @@ async def login(user: User):
 			"error": True,
 			"message": f"Erro interno do servidor: {e}"
 		}, status_code=500)
-	
+
 @router.get("/list")
 async def list():
     try:
         users_all = await UserModel.objects.all()
-        users_list = [user.dict() for user in users_all]  
+        users_list = [user.dict() for user in users_all]
         return JSONResponse(content={
-            "error": False, 
+            "error": False,
             "message": "Usuários encontrados com sucesso",
             "data": users_list
         }, status_code=200)
@@ -62,7 +61,7 @@ async def list():
             "error": True,
             "message": f"Erro interno do servidor: {e}"
         }, status_code=500)
-	
+
 @router.get("/get/{user_id}")
 async def get(user_id: int):
 	try:
@@ -83,7 +82,7 @@ async def get(user_id: int):
 			"error": True,
 			"message": f"Erro interno do servidor: {e}"
 		}, status_code=500)
-	
+
 @router.put("/update")
 async def update(user: User):
 	try:
@@ -106,7 +105,7 @@ async def update(user: User):
 			"error": True,
 			"message": f"Erro interno do servidor: {e}"
 		}, status_code=500)
-	
+
 @router.delete("/delete/{user_id}")
 async def delete(user_id: int):
 	try:

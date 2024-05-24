@@ -1,11 +1,10 @@
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Literal
 
-from jose import jwt, JWTError
 from dotenv import load_dotenv
 from fastapi import Cookie, HTTPException
-from pydantic import BaseModel
+from jose import jwt
 
 load_dotenv('./.env')
 
