@@ -26,6 +26,8 @@ description: Nessa secção iremos analisar quanto é necessário aportar para c
 
 ### Custos de Hardware
 
+<p align="center">
+
 | Descrição                                      | Quantidade | Importado | Valor Unitário | Valor Final   | Fonte |
 | ---------------------------------------------- | ---------- | --------- | -------------- | ------------- | ------------------- |
 | Bateria de Polímero de Lítio (Li-Po) de 1800mAh | 1          | Não       | R$ 26,34       | R$ 96,47      | [AliExpress](https://pt.aliexpress.com/item/1005006948637447.html) |
@@ -33,6 +35,8 @@ description: Nessa secção iremos analisar quanto é necessário aportar para c
 | Câmera de ação 4K Ultra HD WiFi 30 metros à prova d'água com controle remoto | 1 | Não       | R$ 89,99       | R$ 97,17      | [Shopee](https://shopee.com.br/C%C3%A2mera-de-a%C3%A7%C3%A3o-4K-Ultra-HD-WiFi-30-metros-%C3%A0-prova-d'%C3%A1gua-com-controle-remoto-i.696313634.18497659555) |
 | Robô Turtlebot 3 - Raspberry Pi 4 4GB          | 1          | Sim       | R$ 6.544,75    | R$ 12.616,41  | [AliExpress](https://pt.aliexpress.com/item/1005004405764315.html) |
 | **Total**                                      |            |           |                | **R$ 12.923,52** |                   |
+
+</p>
 
 :::warning
 
@@ -49,6 +53,8 @@ description: Nessa secção iremos analisar quanto é necessário aportar para c
 
 &emsp;Os custos de mão de obra foram estimados com base em dados de mercado obtidos de fontes confiáveis. Os valores salariais podem variar dependendo de fatores como localidade e experiência dos profissionais. A tabela abaixo apresenta uma média salarial para cada função envolvida no desenvolvimento da PoC do projeto Cannabot.
 
+<p align="center">
+
 | Função                 | Quantidade | Meses | Salário Mensal | Valor Final    | Fonte                |
 | ---------------------  | ---------- | ----- | -------------- | -------------- | -------------------- |
 | Engenheiro de Software | 2          | 2     | R$ 6.303,00    | R$ 25.212,00 | [VAGAS](https://www.vagas.com.br/cargo/engenheiro-de-software#:~:text=No%20cargo%20de%20Engenheiro%20de,de%20R%24%206.303%2C00.) |
@@ -56,17 +62,25 @@ description: Nessa secção iremos analisar quanto é necessário aportar para c
 | Gestor de Projetos     | 1          | 2     | R$ 4.742,00    | R$ 9.484,00   | [VAGAS](https://www.vagas.com.br/cargo/gestao-de-projetos) |
 | **Total**              |            |       |                | **R$ 60.295,68** |                    |
 
+</p>
+
 >Nota: Ao clicar no nome dos sites na coluna "**Fontes**", onde pesquisamos, você será redirecionado diretamente para visualizar os dados da média salarial de cada profissão em questão.
 
 >Data da pesquisa: 22/05/2024
 
 ### Custos totais
 
+&emsp;Ao considerer os custos de Hardware e mão de obra chegamos no seguinte valor:
+
+<p align="center">
+
 | Descrição                                  | Valor        |
 | ------------------------------------------ | ------------ |
 | Custos relacionados ao Hardware            | R$ 12.923,52 |
 | Custos relacionados à mão de obra          | R$ 60.295,68 |
-| Aporte final estimado para produzir a PoC  | R$ 73.219,20 |
+| Aporte final estimado para custear a PoC  | R$ 73.219,20 |
+
+</p>
 
 ## Otimização dos Custos
 
@@ -103,23 +117,37 @@ description: Nessa secção iremos analisar quanto é necessário aportar para c
 
 &emsp;Pensando que uma entre as estratégias discutidas acima de certo e que possa cobrir ao menos 10% do preço em que estabelecemos. O novo preço seria
 
+<p align="center">
+
 | Descrição | Valor Original (R$) | Redução (%) | Novo Valor (R$) |
 | --------- | ------------------- | ----------- | --------------- | 
 | Custos de Hardware | R$ 12.923,52 | 10% | R$ 11.631,16 |
 | Custos de Mão de Obra | R$ 60.295,68| 10% | R$ 54.266,11 |
 | Custo Total Reduzido |          |             | **R$ 65.897,28** |
 
-`Preço real = R$ 73.219,20 ----> Preço com o valor de 10% reduzido =` **R$ 65.897,28**
+`Preço real = R$ 73.219,20 --> Preço com o valor de 10% reduzido` = **R$ 65.897,28**
 
-### Margem de Lucro
+</p>
+
+### Valor final: Margem de Lucro + Imposto da Nota Fiscal
 
 &emsp;Ao calcular a margem de lucro, consideramos que ela pode variar um pouco, geralmente ficando entre 10% e 20%. Dado que o aporte para um projeto de robótica 4.0 no Brasil tende a ser caro, é prudente evitar a cobrança de um valor muito elevado. Portanto, calculamos a margem de lucro considerando uma taxa mínima de 10%.
 
-| Descrição | + lucro (10%) | Final |
-| --------- | ----- | --------------|  
-| Valor Original | R$ 7.321,92 | R$ 80.541,12  | 
-| Valor Reduzido | R$ 6.589,72 | R$ 72.487,00 |
+&emsp;Além disso, é importante considerar os impostos de emissão da nota fiscal, que no Brasil representam cerca de 18% do valor total do serviço ou produto. Esse imposto é obrigatório e deve ser incluído no cálculo do valor final para garantir a conformidade fiscal e evitar problemas legais futuros.
 
-&emsp;Com isso, é possível observar que ao combinar algumas estratégias de redução de custos e aplicá-las em nosso projeto, conseguimos viabilizar um projeto de alto valor, mantendo uma margem de lucro satisfatória.
+&emsp;Para calcular o imposto, utilizamos o método de cálculo "Por dentro". Esse método considera o imposto como parte integrante do valor do produto ou serviço. O resultado é um aumento na alíquota real e no preço final do produto. Por exemplo, se uma camisa custa R$ 100,00, o cálculo do imposto "Por dentro" seria feito da seguinte forma: 100,00 / (1-0,18) = R$ 121,95. Esse cálculo foi aplicado na adição do imposto em nosso projeto. Para mais informações, você pode conferir o artigo sobre [Cálculo "por dentro" X "por fora"](https://www.portaldaindustria.com.br/cni/canais/reforma-tributaria/infograficos/calculo-por-dentro-x-por-fora/)
+
+<p align="center">
+
+| Descrição | + lucro (10%) | Custos + Lucro | Impostos de emissão da NF (18%) | Valor final |
+| -------------- | ----------- | ------------ | --------------------------------------- | ---------- |
+| Valor Original | R$ 7.321,92 | R$ 80.541,12 | R$ 17.679,75 | R$ 98.220,87 | 
+| Valor Reduzido | R$ 6.589,72 | R$ 72.487,00 | R$ 15.911,78 | R$ 88.398,78 |
+
+</p>
+
+&emsp;Com isso, é possível observar que ao combinar algumas estratégias de redução de custos e aplicá-las em nosso projeto, conseguimos viabilizar um projeto de alto valor, mantendo uma margem de lucro satisfatória e cumprindo as obrigações fiscais.
+
+
 
 
