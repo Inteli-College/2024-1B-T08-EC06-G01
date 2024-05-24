@@ -1,4 +1,5 @@
 import asyncio
+import datetime
 import base64
 import json
 
@@ -13,7 +14,8 @@ class WebSocketServer:
         self.clients = set()
         self.loop = None
         self.thread = None
-        self.capture = cv2.VideoCapture(0)
+        # self.capture = cv2.VideoCapture(0)
+        self.capture = None
 
     async def register_client(self, websocket):
         self.clients.add(websocket)
@@ -51,11 +53,17 @@ class WebSocketServer:
     #     self.thread.start()
 
     async def broadcast_image(self):
+        if not self.capture:
+            self.capture = cv2.VideoCapture(0)
+
         ret, frame = self.capture.read()
+        timestamp = datetime.datetime.now().timestamp() * 1000
         if ret:
             _, buffer = cv2.imencode('.jpg', frame)
+
             self.broadcast(json.dumps({
-                "bytes": base64.b64encode(buffer).decode('utf-8')
+                "bytes": base64.b64encode(buffer).decode('utf-8'),
+                "timestamp": timestamp
             }))
 
     async def broadcast_image_forever(self):
@@ -63,6 +71,14 @@ class WebSocketServer:
             await asyncio.sleep(0.1)
 
         while True:
+            if len(self.clients) == 0:
+                if self.capture:
+                    self.capture.release()
+                    self.capture = None
+
+                await asyncio.sleep(0.1)
+                continue
+
             self.loop.create_task(self.broadcast_image())
             await asyncio.sleep(0.02) # 50Hz
 
