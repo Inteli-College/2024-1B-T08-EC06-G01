@@ -1,6 +1,6 @@
 ---
 title: "Análise Final do Projeto"
-siderbar_position: 1
+siderbar_position: 2
 ---
 
 # Análise Final do Projeto: Cannabot
