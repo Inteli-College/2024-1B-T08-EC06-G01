@@ -79,7 +79,7 @@ class Log(BaseModel):
 
 &emsp;As rotas para a tabela `logs` permitem a criação, listagem, consulta individual, atualização e exclusão de logs. Abaixo estão as rotas definidas no arquivo `routes/logs.py`:
 
-```python 
+```python
 from datetime import datetime
 from uuid import UUID
 import ormar
@@ -312,7 +312,7 @@ async def list():
                 "error": True,
                 "message": "Nenhuma mídia encontrada"
             }, status_code=404)
-        
+
         media_dicts = []
         for media in medias:
             media_dict = media.dict()
@@ -322,7 +322,7 @@ async def list():
                 elif isinstance(value, datetime):
                     media_dict[key] = value.isoformat()
             media_dicts.append(media_dict)
-        
+
         return JSONResponse(content={
             "error": False,
             "message": "Medias listadas com sucesso",
@@ -338,14 +338,14 @@ async def list():
 async def get(media_id: uuid.UUID):
     try:
         media = await MediaModel.objects.get(uuid=media_id)
-        
+
         media_dict = media.dict()
         for key, value in media_dict.items():
             if isinstance(value, uuid.UUID):
                 media_dict[key] = str(value)
             elif isinstance(value, datetime):
                 media_dict[key] = value.isoformat()
-                
+
         return JSONResponse(content={
             "error": False,
             "message": "Mídia encontrada",
@@ -759,4 +759,187 @@ async def delete(user_id: int):
     Deleta um usuário específico pelo ID.
     Retorna sucesso (200) ou erro (404/500).
 
-    
+## Rota de WebSocket
+
+&emsp;As rotas para o WebSocket permitem a comunicação em tempo real entre o frontend e o backend. Abaixo estão as rotas definidas no arquivo `routes/websocket.py`:
+
+```python
+import json
+
+import pydantic
+from client.robot import robot
+from fastapi import APIRouter, WebSocket, WebSocketDisconnect
+from schemas.websocket import ControlPacket
+from websockets.exceptions import ConnectionClosedError
+
+router = APIRouter(
+	prefix="/websocket",
+	tags=["websocket"],
+)
+
+@router.websocket("/control")
+async def control_robot(websocket: WebSocket):
+	await websocket.accept()
+
+	await robot.add_client(websocket)
+
+	try:
+		while True:
+			raw = await websocket.receive_text()
+
+			if not robot.websocket:
+				continue
+
+			try: data = json.loads(raw)
+			except json.JSONDecodeError:
+				await websocket.send_json({ "type": "SPacketError", "data": {
+					"message": "JSON inválido"
+				}})
+				continue
+
+			try: packet = ControlPacket(**data)
+			except pydantic.ValidationError as e:
+				await websocket.send_json({ "type": "SPacketError", "data": {
+					"message": str(e).replace('\n', '')
+				}})
+				continue
+
+			await robot.send(json.dumps({ 'control': packet.data.state }))
+
+	except WebSocketDisconnect:
+		await robot.remove_client(websocket)
+		await websocket.close()
+	except ConnectionClosedError:
+		print("Connection to robot has been lost.")
+		await robot.reconnect()
+		await websocket.send_json({ "type": "SPacketError", "data": {
+			"message": "Conexão com o robô foi perdida"
+		}})
+		return
+```
+
+&emsp;Explicação um pouco mais detalhada da rota:
+
+- `GET /control`:
+    Estabelece uma conexão WebSocket com o frontend.
+    Recebe e envia pacotes de controle para o robô.
+    Trata erros de conexão e validação de pacotes.
+
+&emsp;Essa rota é responsável por estabelecer uma conexão WebSocket com o frontend, permitindo a comunicação em tempo real entre o usuário e o robô. Ela recebe pacotes de controle do frontend, valida os dados recebidos e envia os comandos para o robô. Além disso, trata erros de conexão e validação de pacotes, garantindo uma comunicação eficiente e segura entre os sistemas.
+
+&emsp;Explicação do código:
+
+- `await websocket.accept()`: Aceita a conexão WebSocket com o frontend.
+- `await robot.add_client(websocket)`: Adiciona o cliente (frontend) à lista de clientes do robô. Isso garante que os pacotes enviados pelo robô sejam visualizados pelo frontend.
+- `while True:`: Loop infinito para receber e enviar pacotes de controle.
+- `raw = await websocket.receive_text()`: Recebe um pacote de controle do frontend.
+- `try: data = json.loads(raw)`: Converte o pacote de controle em um objeto JSON.
+- `try: packet = ControlPacket(**data)`: Valida o pacote de controle com o schema ControlPacket.
+- `await robot.send(json.dumps({ 'control': packet.data.state }))`: Envia o comando de controle para o robô.
+- `except WebSocketDisconnect:`: Trata a desconexão do frontend.
+- `await robot.remove_client(websocket)`: Remove o cliente (frontend) da lista de clientes do robô.
+- `await websocket.close()`: Fecha a conexão WebSocket.
+- `except ConnectionClosedError:`: Trata a perda de conexão com o robô.
+- `await robot.reconnect()`: Reconecta o backend ao robô.
+- `await websocket.send_json({ "type": "SPacketError", "data": { "message": "Conexão com o robô foi perdida" }})`: Envia uma mensagem de erro ao frontend.
+
+### Explicação da classe "robot":
+
+```python
+import asyncio
+import json
+import os
+
+import websockets
+from fastapi import WebSocket
+from websockets.exceptions import ConnectionClosedError
+
+ROBOT_WEBSOCKET_URL = os.environ.get('ROBOT_WEBSOCKET_URL') or ""
+
+class Robot:
+	def __init__(self):
+		self.websocket = None
+		self.clients = set()
+
+	async def connect(self):
+		"""Connect to the robot WebSocket and start listening for messages."""
+		print("Connecting to robot websocket...")
+		self.websocket = await websockets.connect(ROBOT_WEBSOCKET_URL)
+		asyncio.create_task(self._broadcast_forever())
+
+	async def _broadcast_forever(self):
+		"""Listen for messages from the WebSocket and broadcast them to all connected clients."""
+		try:
+			async for message in self.websocket: # type: ignore
+				await self._broadcast(message)
+		except ConnectionClosedError:
+			print("Connection to robot has been lost, attempting to reconnect...")
+			await self._broadcast(json.dumps({ "type": "SPacketError", "data": {
+				"message": "Conexão com o robô foi perdida"
+			}}))
+			await self.reconnect()
+
+	async def add_client(self, client: WebSocket):
+		self.clients.add(client)
+		print(f"Added client {client}")
+
+	async def remove_client(self, client: WebSocket):
+		self.clients.remove(client)
+		print(f"Removed client {client}")
+
+	async def send(self, data):
+		"""Send a message to the robot."""
+		if self.websocket is None:
+			raise Exception("Not connected to robot")
+
+		await self.websocket.send(data)
+
+	async def _broadcast(self, message):
+		if self.clients:
+			await asyncio.gather(*[client.send_text(message) for client in self.clients])
+
+	async def _reconnect(self):
+		if self.websocket:
+			try: await self.close()
+			except: pass
+
+		try: await self.connect()
+		except Exception as e:
+			print(f"Failed to reconnect to robot: {e}, retrying in 5 seconds...")
+			await asyncio.sleep(5)
+			return await self.reconnect()
+
+		await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+			"message": "Conexão com o robô estabelecida"
+		}}))
+		print("Connected to robot")
+
+	async def reconnect(self):
+		"""Close the current connection and reconnect to the robot WebSocket."""
+		# use _reconnect in a non-blocking way
+		asyncio.create_task(self._reconnect())
+
+	async def close(self):
+		if self.websocket:
+			await self.websocket.close()
+		self.websocket = None
+
+robot = Robot()
+```
+
+&emsp;Essa classe é responsável por gerenciar a conexão com o robô via WebSocket, permitindo a comunicação em tempo real entre o backend e o robô. Ela estabelece a conexão com o robô, envia e recebe mensagens, e trata erros de conexão e desconexão. Além disso, ela mantém uma lista de clientes (frontend) conectados, para que os pacotes de controle enviados pelo robô sejam visualizados pelo frontend.
+
+&emsp;Ela utiliza uma logica assíncrona para lidar com a conexão e desconexão do robô, garantindo que a comunicação seja eficiente e confiável. Além disso, ela envia mensagens de erro e informação para o frontend, permitindo que o usuário saiba o status da conexão com o robô. Com essa classe, é possível estabelecer uma comunicação bidirecional entre o frontend e o robô, facilitando o controle e monitoramento do robô durante a teleoperação e permitindo a futura adição de um sistema de autenticação e autorização para garantir a segurança da comunicação ao robô.
+
+### Formato do pacote de controle
+
+```json
+{
+    "type": "CPacketControl",
+    "data": {
+        "state": <"forward" | "backward" | "left" | "right" | "stopped" | "emergency">
+    }
+}
+```
+
+&emsp;O pacote de controle é um objeto JSON que contém um campo `type` indicando o tipo de pacote e um campo `data` com os dados do pacote. O campo `state` contém a ação de controle a ser enviada para o robô, podendo ser "forward", "backward", "left", "right", "stopped" ou "emergency". Este formato é utilizado para padronizar a comunicação entre o frontend e o backend, facilitando o desenvolvimento e a manutenção do sistema.
