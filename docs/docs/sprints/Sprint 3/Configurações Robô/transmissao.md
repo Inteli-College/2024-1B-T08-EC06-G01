@@ -50,7 +50,7 @@ Esta funcionalidade não só melhora a capacidade de supervisão do operador, ma
 
 ### Código
 
-&emsp;Para o funionamento da transmissão de imagens do robô, nós criamos um websocket, que está rodando no robô, que é responsável por enviar as imagens capturadas pela câmera do robô para o nosso frontend. O código do websocket pode ser encontrado no repositório do projeto, através desse caminho [código](2024-1B-T08-EC06-G01\src\package\camera\main.py).
+&emsp;Para o funionamento da transmissão de imagens do robô, nós criamos um websocket, que está rodando no robô, que é responsável por enviar as imagens capturadas pela câmera do robô para o nosso frontend. O código do websocket pode ser encontrado no repositório do projeto, através desse caminho`(src/package/camera/main.py)`
 
 A seguir é apresentado o código do websocket:
 
