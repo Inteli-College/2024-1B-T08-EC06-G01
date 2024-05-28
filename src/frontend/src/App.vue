@@ -4,7 +4,7 @@
 <template>
   <div>
     <nav>
-      <router-link to="/" class="mr-4">Home</router-link>
+      <router-link to="/home" class="mr-4">Home</router-link>
       <router-link to="/control"> Robô</router-link>
       <router-link to="/about">Registros</router-link>
       <notifications />

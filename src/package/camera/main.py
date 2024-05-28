@@ -2,10 +2,8 @@ import asyncio
 import datetime
 import base64
 import json
-
 import cv2
 import websockets
-
 
 class WebSocketServer:
     def __init__(self, host='localhost', port=8765, framerate: int = 50):
