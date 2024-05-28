@@ -20,9 +20,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-		"cannabot = cannabot.cannabot:main",
-        "lidar = cannabot.lidar:main",
-        "lidar_teste = cannabot.lidar_teste:main",
+            "cannabot = cannabot.cannabot:main",
+            "lidar = cannabot.lidar:main",
+            "lidar_teste = cannabot.lidar_teste:main",
+            "odometry = cannabot.odometry:main",
         ],
     },
 )
