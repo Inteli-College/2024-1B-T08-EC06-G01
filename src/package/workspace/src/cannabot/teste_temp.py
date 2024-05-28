@@ -5,7 +5,7 @@ from time import sleep
 port = 1
 address = 0x77 # Adafruit BME280 address. Other BME280s may be different
 bus = smbus2.SMBus(port)
-
+sleep(1)
 bme280.load_calibration_params(bus,address)
 
 while True:
