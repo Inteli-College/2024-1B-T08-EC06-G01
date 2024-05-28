@@ -1,26 +1,17 @@
-#!/usr/bin/env python
+import bme280
+import smbus2
+from time import sleep
 
-import time
-
-from smbus2 import SMBus
-
-from bme280 import BME280
-
-print(
-    """all-values.py - Read temperature, pressure, and humidity
-
-Press Ctrl+C to exit!
-
-"""
-)
-
-# Initialise the BME280
-bus = SMBus(1)
-bme280 = BME280(i2c_dev=bus)
+port = 1
+address = 0x77 # Adafruit BME280 address. Other BME280s may be different
+bus = smbus2.SMBus(port)
+sleep(1)
+bme280.load_calibration_params(bus,address)
 
 while True:
-    temperature = bme280.get_temperature()
-    pressure = bme280.get_pressure()
-    humidity = bme280.get_humidity()
-    print(f"{temperature:05.2f}°C {pressure:05.2f}hPa {humidity:05.2f}%")
-    time.sleep(1)
+    bme280_data = bme280.sample(bus,address)
+    humidity  = bme280_data.humidity
+    pressure  = bme280_data.pressure
+    ambient_temperature = bme280_data.temperature
+    print(humidity, pressure, ambient_temperature)
+    sleep(1)
