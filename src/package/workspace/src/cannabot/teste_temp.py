@@ -1,6 +1,6 @@
-# import bme280
-# import smbus2
-# from time import sleep
+import bme280
+import smbus2
+from time import sleep
 
 # port = 1
 # address = 0x77 # Adafruit BME280 address. Other BME280s may be different
