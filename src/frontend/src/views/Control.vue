@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="flex flex-col h-screen overflow-hidden p-4">
-    <h1 class="title text-3xl font-bold text-left mb-4">Central de Controle</h1>
+    <h1 class="title">Central de Controle</h1>
     <div class="container flex flex-1 overflow-hidden space-x-4">
       <div class="left-half flex-2 flex items-center justify-center bg-gray-200 p-4 border-4">
         <CameraComponent />
@@ -50,7 +50,9 @@ export default {
 }
 
 .title {
-  font-size: 36px;
+  font-family: 'Poppins';
+  text-align: left;
+  font-size: 2.3rem;
 }
 
 .container {

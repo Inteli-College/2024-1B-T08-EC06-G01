@@ -1,0 +1,139 @@
+<template>
+    <div class="container">
+        <div class="square">
+            <div class="column">
+                <h2 class="title">Fazer log-in</h2>
+                <p class="subtitle">Username:</p>
+                <div class="input-box">
+                    <input type="text" class="text-input" placeholder="Digite seu username" />
+                </div>
+                <p class="subtitle2">Senha:</p>
+                <div class="input-box">
+                    <input type="text" class="text-input" placeholder="Digite sua senha de acesso" />
+                </div>
+                <div class="button-container">
+                    <button class="cadastre-button" @click="goToCadastre">Cadastrar</button>
+                    <button class="enter-button"
+                    @click="goToHome">Entrar</button>
+                </div>
+            </div>
+        </div>
+        </div>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+function goToHome() {
+  router.push('/Home');
+}
+
+function goToCadastre() {
+  router.push('/');
+}
+
+</script>
+
+<style scoped>
+.container {
+  display: flex;
+
+}
+
+.square{
+    margin-top: 3rem;
+    margin-left: 12rem;
+    width: 80%;
+    height: 40rem;
+    background-color: #fff; 
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    border-radius: 1.25rem;
+}
+
+.column {
+  padding-left: 6.3rem;
+  padding-top: 5rem;
+}
+
+.title {
+  font-family: 'Poppins';
+  text-align: left;
+  font-size: 2.4rem;
+  color: #0C8541;
+}
+
+.subtitle {
+  font-family: 'Public sans';
+  color: #0C8541;
+  text-align: left;
+  font-size: 1.25rem;
+  padding-top: 3rem;
+}
+
+.subtitle2 {
+  font-family: 'Public sans';
+  color: #0C8541;
+  text-align: left;
+  font-size: 1.25rem;
+  padding-top: 2.5rem;
+}
+
+.input-box {
+  margin-top: 0.8rem;
+}
+
+.text-input {
+  width: 25%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #DBFFEB;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  background-color: #EDFFF5;
+}
+
+.text-input:focus {
+  border-color: #0C8541;
+  outline: none;
+  box-shadow: 0 0 5px rgba(12, 133, 65, 0.5);
+}
+
+.button-container {
+  margin-top: 2rem;
+}
+
+.cadastre-button { 
+  color: #0C8541;
+  padding: 0.75rem 1.5rem;
+  margin-right: 1rem;
+  font-size: 1.18rem;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.enter-button{
+  color: #0C8541;
+  background-color: #fff;
+  padding: 0.4rem 1.8rem;
+  font-size: 1.18rem;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid #0C8541;
+  border-radius: 0.25rem;
+  cursor: pointer;
+
+}
+
+.enter-button:hover {
+  background-color: #0a6b37;
+  color: #fff;
+}
+
+</style>

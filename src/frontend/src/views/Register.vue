@@ -73,7 +73,7 @@
   
 <script>
   export default {
-    name: 'About'
+    name: 'Register'
   }
 
   import { ref } from 'vue';

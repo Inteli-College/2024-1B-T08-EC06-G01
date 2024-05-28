@@ -6,7 +6,7 @@
     <nav>
       <router-link to="/home" class="mr-4">Home</router-link>
       <router-link to="/control"> Robô</router-link>
-      <router-link to="/about">Registros</router-link>
+      <router-link to="/register">Registros</router-link>
       <notifications />
     </nav>
     <router-view></router-view>
