@@ -1,6 +1,6 @@
-import bme280
-import smbus2
-from time import sleep
+# import bme280
+# import smbus2
+# from time import sleep
 
 # port = 1
 # address = 0x77 # Adafruit BME280 address. Other BME280s may be different
@@ -15,6 +15,22 @@ from time import sleep
 #     ambient_temperature = bme280_data.temperature
 #     print(humidity, pressure, ambient_temperature)
 #     sleep(1)
+
+import time
+import smbus2
+import bme280
+
+# BME280 sensor address (default address)
+address = 0x76
+
+# Initialize I2C bus
+bus = smbus2.SMBus(1)
+
+# Load calibration parameters
+calibration_params = bme280.load_calibration_params(bus, address)
+
+def celsius_to_fahrenheit(celsius):
+    return (celsius * 9/5) + 32
 
 while True:
     try:
