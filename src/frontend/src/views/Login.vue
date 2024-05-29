@@ -17,6 +17,9 @@
                     @click="goToHome">Entrar</button>
                 </div>
             </div>
+            <div class="column2">
+              <div class="square2"></div>
+            </div>
         </div>
         </div>
 </template>
@@ -53,11 +56,28 @@ function goToCadastre() {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     margin-bottom: 2rem;
     border-radius: 1.25rem;
+    position: relative;
+}
+
+.square2{
+  margin-left: 38rem;
+  width: 50%;
+  height: 40rem;
+  background-color: #D3FFE6;
+  border-radius: 0 1.25rem 1.25rem  0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .column {
   padding-left: 6.3rem;
   padding-top: 5rem;
+}
+
+.column2{
+  padding-left: 24rem;
 }
 
 .title {
