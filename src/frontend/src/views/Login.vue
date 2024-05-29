@@ -18,7 +18,11 @@
                 </div>
             </div>
             <div class="column2">
-              <div class="square2"></div>
+              <div class="square2">
+                <div class="bananeira">
+                  <Bananeira />
+                </div>
+              </div>
             </div>
         </div>
         </div>
@@ -38,6 +42,8 @@ function goToHome() {
 function goToCadastre() {
   router.push('/');
 }
+
+import Bananeira from '../assets/bananeira.svg'
 
 </script>
 
@@ -63,12 +69,17 @@ function goToCadastre() {
   margin-left: 38rem;
   width: 50%;
   height: 40rem;
-  background-color: #D3FFE6;
+  background: linear-gradient(180deg, #EDFFF5, #D3FFE6);
   border-radius: 0 1.25rem 1.25rem  0;
   position: absolute;
   top: 0;
   left: 0;
   z-index: 1;
+}
+
+.bananeira{
+  padding-top: 10rem;
+  padding-left: 9rem;
 }
 
 .column {
@@ -108,7 +119,7 @@ function goToCadastre() {
 }
 
 .text-input {
-  width: 25%;
+  width: 36.5%;
   padding: 0.5rem;
   font-size: 1rem;
   border: 1px solid #DBFFEB;
@@ -129,7 +140,7 @@ function goToCadastre() {
 
 .cadastre-button { 
   color: #0C8541;
-  padding: 0.75rem 1.5rem;
+  padding: 2.4rem 3.6rem;
   margin-right: 1rem;
   font-size: 1.18rem;
   font-family: 'Poppins', sans-serif;
