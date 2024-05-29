@@ -25,6 +25,7 @@
             <th>Hora</th>
             <th>Localização</th>
             <th>Temperatura</th>
+            <th>Uso de IA</th>
           </tr>
         </thead>
         <tbody>
@@ -33,60 +34,70 @@
             <td>12:00</td>
             <td>Local A</td>
             <td>25°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>02/06/2022</td>
             <td>13:00</td>
             <td>Local B</td>
             <td>26°C</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Não</td>
           </tr>
         </tbody>
       </table>

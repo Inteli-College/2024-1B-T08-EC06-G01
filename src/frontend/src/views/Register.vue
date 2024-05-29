@@ -12,6 +12,9 @@
             <th>Usuário</th>
             <th>Data</th>
             <th>Horário</th>
+            <th>Ação</th>
+            <th>Botão de emergência foi acionado</th>
+            <th>Requisição da IA</th>
           </tr>
         </thead>
         <tbody>
@@ -19,51 +22,81 @@
             <td>rodrigo</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Verificou a caldeira toda</td>
+            <td>Sim</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>rizzi</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Verificou o cano 404</td>
+            <td>Não</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>gustavo</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Fez um zerinho com o robô pela resenha</td>
+            <td>Sim</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>ana</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Foi dar um role</td>
+            <td>Não</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>luiz</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Verificou a caldeira toda</td>
+            <td>Sim</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>eduardo</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Verificou a caldeira toda</td>
+            <td>Não</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>laurA</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Verificou a caldeira toda</td>
+            <td>Sim</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>nicola</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Verificou a caldeira toda</td>
+            <td>Não</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>murilo</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Verificou a caldeira toda</td>
+            <td>Sim</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>rodrigo</td>
             <td>14/05/24</td>
             <td>14h46</td>
+            <td>Verificou a caldeira toda</td>
+            <td>Não</td>
+            <td>Sim</td>
           </tr>
         </tbody>
       </table>
