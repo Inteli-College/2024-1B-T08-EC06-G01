@@ -190,6 +190,7 @@ function selectOption(option: string) {
   text-align: left;
   padding-left: 0.9rem;
   border-radius: 0.2rem;
+  
 }
 
 .dropdown-menu {

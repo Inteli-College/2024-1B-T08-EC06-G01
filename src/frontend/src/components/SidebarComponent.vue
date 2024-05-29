@@ -1,86 +1,64 @@
 <template>
-    <div :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full' + ' bg-gray-200 w-64 h-full fixed top-0 left-0 transition-transform duration-300 ease-in-out transform z-10'">
-      <div class="p-4">
-        <ul v-show="sidebarOpen">
-          <li><i class="fa fa-home"></i></li>
-          <li><i class="fa fa-user"></i></li>
-          <li><i class="fa fa-cog"></i></li>
-        </ul>
-      </div>
-    </div>
-  </template>
+  <div class="sidebar" :style="{ width: sidebarWidth }">
+    <span
+      class="collapse-icon"
+      :class="{ 'rotate-180': collapsed }"
+      @click="toggleSidebar"
+    >
+      <i class="fas fa-angle-double-left"></i>
+    </span>
+  </div>
+</template>
 
-  <script setup lang="ts">
-  import { defineProps, defineEmits } from 'vue';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { collapsed, sidebarWidth, toggleSidebar } from '../state/state';
 
-  defineProps({
-    sidebarOpen: Boolean
-  });
-
-  defineEmits();
-
-  // const toggleSidebar = () => {
-  //   emit('toggle-sidebar');
-  // }
-  </script>
-
-  <style scoped>
-  .translate-x-0 {
-    transform: translateX(0);
+export default defineComponent({
+  name: 'SidebarComponent',
+  setup() {
+    return {
+      collapsed,
+      toggleSidebar,
+      sidebarWidth
+    };
   }
-  .-translate-x-full {
-    transform: translateX(-100%);
-  }
+});
+</script>
 
-  .bg-gray-200 {
-    background-color: #077336;
-  }
+<style>
+:root {
+  --sidebar-bg-color: #077336;
+  --sidebar-item-hover: #C3C1C1;
+}
+</style>
 
-  .w-64 {
-    width: 16rem;
-  }
+<style scoped>
+.sidebar {
+  color: #077336;
+  background-color: var(--sidebar-bg-color);
+  float: left;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  padding: 0.5em;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
 
-  .h-full {
-    height: 100%;
-  }
+.collapse-icon {
+  position: absolute;
+  bottom: 0;
+  padding: 0.75em;
+  color: aliceblue;
+  transition: 0.2s linear;
+}
 
-  .fixed {
-    position: fixed;
-  }
-
-  .top-0 {
-    top: 0;
-  }
-
-  .left-0 {
-    left: 0;
-  }
-
-  .p-4 {
-    padding: 1rem;
-  }
-
-  .transition-transform {
-    transition-property: transform;
-  }
-
-  .duration-300 {
-    transition-duration: 300ms;
-  }
-
-  .ease-in-out {
-    transition-timing-function: ease-in-out;
-  }
-
-  .transform {
-    will-change: transform;
-  }
-
-  .z-10 {
-    z-index: 10;
-  }
-
-  .fa {
-    margin-right: 1rem;
-  }
-  </style>
+.rotate-180 {
+  transform: rotate(180deg);
+  transition: 0.2s linear;
+}
+</style>

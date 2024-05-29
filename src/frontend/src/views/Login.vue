@@ -66,15 +66,13 @@ import Bananeira from '../assets/bananeira.svg'
 }
 
 .square2{
-  margin-left: 38rem;
-  width: 50%;
-  height: 40rem;
-  background: linear-gradient(180deg, #EDFFF5, #D3FFE6);
-  border-radius: 0 1.25rem 1.25rem  0;
   position: absolute;
   top: 0;
-  left: 0;
-  z-index: 1;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(180deg, #EDFFF5, #D3FFE6);
+  border-radius: 0 1.25rem 1.25rem  0;
 }
 
 .bananeira{
