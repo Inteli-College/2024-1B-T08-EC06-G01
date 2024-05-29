@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 </script>
 
 <template>
   <div>
-    <nav>
+    <nav v-if="!route.meta.hideSidebar">
       <router-link to="/home" class="mr-4">Home</router-link>
       <router-link to="/control"> Robô</router-link>
       <router-link to="/register">Registros</router-link>

@@ -9,13 +9,15 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'Cadastre',
-    component: Cadastre
+    component: Cadastre,
+    meta: { hideSidebar: true }
   },
 
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: { hideSidebar: true }
   },
 
   {
