@@ -23,7 +23,8 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/register',
     name: 'Register',
-    component: Register
+    component: Register,
+    
   },
   {
     path: '/control',

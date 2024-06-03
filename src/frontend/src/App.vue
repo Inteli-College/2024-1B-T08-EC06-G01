@@ -7,13 +7,7 @@ const route = useRoute();
 
 <template>
   <div>
-    <Sidebar />
-    <nav v-if="!route.meta.hideSidebar">
-      <router-link to="/home" class="mr-4">Home</router-link>
-      <router-link to="/control"> Robô</router-link>
-      <router-link to="/register">Registros</router-link>
-      <notifications />
-    </nav>
+    <Sidebar v-if="!route.meta.hideSidebar" />
     <router-view></router-view>
   </div>
 </template>

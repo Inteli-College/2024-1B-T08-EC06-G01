@@ -7,16 +7,17 @@
       <div class="heatmap"></div>
     </div>
     <div class="column2">
-      <div class="dropdown" @click="toggleDropdown">
-        <button class="dropdown-toggle">
+      <div class="dropdown">
+        <button class="dropdown-toggle" @click="toggleDropdown">
           {{ selectedOption || 'Ordenar por' }}
+          <i class="fas fa-chevron-down" :class="{ 'rotated': isOpen }"></i>
         </button>
-        <div v-if="isOpen" class="dropdown-menu">
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Data')">Data</a>
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Hora')">Hora</a>
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Localização')">Localização</a>
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Temperatura')">Temperatura</a>
-        </div>
+      <div v-if="isOpen" class="dropdown-menu">
+        <a href="#" class="dropdown-item" @click.prevent="selectOption('Data')">Data</a>
+        <a href="#" class="dropdown-item" @click.prevent="selectOption('Hora')">Hora</a>
+        <a href="#" class="dropdown-item" @click.prevent="selectOption('Localização')">Localização</a>
+        <a href="#" class="dropdown-item" @click.prevent="selectOption('Temperatura')">Temperatura</a>
+      </div>
       </div>
       <table class="table">
         <thead>
@@ -190,7 +191,20 @@ function selectOption(option: string) {
   text-align: left;
   padding-left: 0.9rem;
   border-radius: 0.2rem;
-  
+  position: relative;
+  padding-right: 2rem;
+}
+
+.dropdown-toggle i {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+  transition: transform 0.3s;
+}
+
+.rotated {
+  transform: translateY(-50%) rotate(180deg);
 }
 
 .dropdown-menu {

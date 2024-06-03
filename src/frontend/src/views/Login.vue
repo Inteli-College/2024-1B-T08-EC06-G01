@@ -50,19 +50,19 @@ import Bananeira from '../assets/bananeira.svg'
 <style scoped>
 .container {
   display: flex;
-
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .square{
-    margin-top: 3rem;
-    margin-left: 12rem;
     width: 80%;
     height: 40rem;
     background-color: #fff; 
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    margin-bottom: 2rem;
     border-radius: 1.25rem;
     position: relative;
+    
 }
 
 .square2{
