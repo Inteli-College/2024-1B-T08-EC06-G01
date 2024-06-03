@@ -11,7 +11,7 @@ class Log(Model):
 
     id = Integer(primary_key=True, autoincrement=True)
     media_uuid: Optional[Media] = ForeignKey(Media)
-    action = String(max_length=100)
     date = DateTime(default=datetime.now)
-    type = Boolean()
+    used_ia = Boolean()
+    reliability = Optional[float]
 

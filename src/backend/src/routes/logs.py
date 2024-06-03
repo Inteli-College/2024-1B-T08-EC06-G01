@@ -17,8 +17,8 @@ async def register(log: Log):
     try:
         await LogModel.objects.create(
             date=datetime.now(),
-            media_uuid=log.media_uuid,
-            action=log.action,
+            used_ia = log.used_ia,
+            reliability = log.reliability,
             type=log.type,
         )
         return JSONResponse(content={
