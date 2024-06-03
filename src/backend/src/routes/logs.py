@@ -1,5 +1,4 @@
 from datetime import datetime
-from uuid import UUID
 
 import ormar
 from fastapi import APIRouter
@@ -19,7 +18,8 @@ async def register(log: Log):
             date=datetime.now(),
             used_ia = log.used_ia,
             reliability = log.reliability,
-            type=log.type,
+            button_pressed = log.button_pressed,
+            user_id = log.user_id
         )
         return JSONResponse(content={
             "error": False,
@@ -40,22 +40,10 @@ async def list_logs():
                 "error": True,
                 "message": "Nenhum log encontrado"
             }, status_code=404)
-
-        log_dicts = []
-        for log in logs:
-            log_dict = log.dict()
-            for key, value in log_dict.items():
-                if isinstance(value, dict):
-                    if 'uuid' in value and isinstance(value['uuid'], UUID):
-                        log_dict[key] = str(value['uuid'])
-                elif isinstance(value, datetime):
-                    log_dict[key] = value.isoformat()
-            log_dicts.append(log_dict)
-
         return JSONResponse(content={
             "error": False,
             "message": "Logs encontrados com sucesso",
-            "data": log_dicts
+            "data": logs
         }, status_code=200)
     except Exception as e:
         return JSONResponse(content={
@@ -67,19 +55,10 @@ async def list_logs():
 async def list(log_id: int):
     try:
         log = await LogModel.objects.get(id=log_id)
-        print(log)
-
-        log_dict = log.dict()
-        for key, value in log_dict.items():
-            if isinstance(value, dict):
-                if 'uuid' in value and isinstance(value['uuid'], UUID):
-                    log_dict[key] = str(value['uuid'])
-            elif isinstance(value, datetime):
-                log_dict[key] = value.isoformat()
 
         return JSONResponse(content={
             "error": False,
-            "log": log_dict
+            "log": log
         }, status_code=200)
     except ormar.NoMatch:
         return JSONResponse(content={
@@ -96,9 +75,11 @@ async def list(log_id: int):
 async def update(log: Log):
     try:
         await LogModel.objects.filter(id=log.id).update(
-            media_uuid=log.media_uuid,
-            action=log.action,
-            type=log.type,
+            date=datetime.now(),
+            used_ia = log.used_ia,
+            reliability = log.reliability,
+            button_pressed = log.button_pressed,
+            user_id = log.user_id
         )
         return JSONResponse(content={
             "error": False,
