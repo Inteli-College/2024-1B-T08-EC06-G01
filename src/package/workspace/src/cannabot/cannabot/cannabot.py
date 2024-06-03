@@ -1,10 +1,11 @@
-import typer
+import time
+
 import rclpy
-from rclpy.node import Node
+import typer
+from geometry_msgs.msg import Twist, Vector3
 from InquirerPy.resolver import prompt
 from InquirerPy.utils import InquirerPyKeybindings
-from geometry_msgs.msg import Twist, Vector3
-import time
+from rclpy.node import Node
 
 # from classes.robot import TurtleBot
 

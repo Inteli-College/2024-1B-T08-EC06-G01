@@ -1,17 +1,18 @@
-import time
 import json
-import smbus2
+
 import bme280
 import rclpy
+import smbus2
 from rclpy.node import Node
 from std_msgs.msg import String
 
+
 class BME280Publisher(Node):
     def __init__(self):
-        super().__init__('bme280_publisher')
-        self.publisher_ = self.create_publisher(String, 'sensor_data', 10)
+        super().__init__('bme280_publisher') # type: ignore
+        self.publisher_ = self.create_publisher(String, '/sensor_data', 10)
         self.timer = self.create_timer(2.0, self.timer_callback)
-        
+
         # BME280 sensor address (default address)
         self.address = 0x76
         # Initialize I2C bus
@@ -63,7 +64,8 @@ def main(args=None):
         pass
     finally:
         node.destroy_node()
-        rclpy.shutdown()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
