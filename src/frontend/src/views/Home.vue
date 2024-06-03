@@ -27,6 +27,7 @@
             <th>Localização</th>
             <th>Temperatura</th>
             <th>Uso de IA</th>
+            <th>Precisão da IA</th>
           </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
             <td>Local A</td>
             <td>25°C</td>
             <td>Sim</td>
+            <td>89%</td>
           </tr>
           <tr>
             <td>02/06/2022</td>
@@ -43,6 +45,7 @@
             <td>Local B</td>
             <td>26°C</td>
             <td>Não</td>
+            <td>88%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -50,6 +53,7 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Sim</td>
+            <td>87%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -57,6 +61,7 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Não</td>
+            <td>86%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -64,6 +69,7 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Sim</td>
+            <td>85%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -71,6 +77,7 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Não</td>
+            <td>84%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -78,6 +85,7 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Sim</td>
+            <td>83%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -85,6 +93,7 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Não</td>
+            <td>82%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -92,6 +101,7 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Sim</td>
+            <td>81%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -99,6 +109,7 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Não</td>
+            <td>80%</td>
           </tr>
         </tbody>
       </table>
@@ -246,7 +257,7 @@ function selectOption(option: string) {
 
 .table {
   margin-left: 10.5rem;
-  width: 40rem;
+  width: 44rem;
   border-collapse: collapse;
   margin-top: 4rem;
   cursor: pointer;
