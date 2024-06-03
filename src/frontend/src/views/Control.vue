@@ -1,13 +1,12 @@
 <template>
   <div id="app" class="flex flex-col h-screen overflow-hidden p-4">
-    <h1 class="title">Central de Controle</h1>
-    <div class="container flex flex-1 overflow-hidden space-x-4">
-      <div class="left-half flex-2 flex items-center justify-center bg-gray-200 p-4 border-4">
+    <h1 class="title mb-8">Central de Controle</h1>
+    <div class="container flex flex-1 overflow-hidden space-x-4 pl-4"> <!-- Ajuste de padding-left aqui -->
+      <div class="left-half flex-2 flex items-center justify-center p-4">
         <CameraComponent />
       </div>
-      <!-- Separa os componentes um em cima do outro -->
       <div class="right-half flex-1 flex flex-col space-y-4">
-        <div class="top-half flex-1 flex items-center justify-center border-b border-gray-300 p-4">
+        <div class="top-half flex-1 flex items-center justify-center p-4">
           <TeleopComponent />
         </div>
         <div class="bottom-half flex-1 flex items-center justify-center p-4">
@@ -15,10 +14,11 @@
         </div>
       </div>
     </div>
-    <div class="flex justify-between p-4 bg-white border-t border-gray-300 mt-4">
-      <button class="bg-red-500 text-white py-2 px-4 rounded">
+    <div class="flex p-4 bg-white border-gray-300 mt-4 ml-40"> <!-- Removi a classe border-t -->
+      <button class="bg-red-500 text-white py-2 px-8 rounded">
         Modo de Emergência
       </button>
+      <div class="flex-grow"></div>
       <button class="bg-green-500 text-white py-2 px-4 rounded">
         Modo Manual
       </button>
@@ -53,11 +53,13 @@ export default {
   font-family: 'Poppins';
   text-align: left;
   font-size: 2.3rem;
+  padding-left: 11rem;
 }
 
 .container {
   display: flex;
   height: 100%;
+  padding-left: 9rem;
 }
 
 .left-half {
@@ -73,22 +75,11 @@ export default {
   flex-direction: column;
 }
 
-.top-half {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid #ccc;
-}
-
 .top-half, .bottom-half {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ccc;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 </style>
