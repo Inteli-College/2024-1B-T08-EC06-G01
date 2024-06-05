@@ -6,7 +6,7 @@ services:
     environment:
       VITE_BACKEND: "http://localhost:8000"
       VITE_CONTROL_WEBSOCKET: "ws://localhost:8000/websocket/control"
-      VITE_VIDEO_WEBSOCKET: "ws://10.128.0.8:8765"
+      VITE_VIDEO_WEBSOCKET: "ws://10.128.0.26:8765"
     ports:
       - "80:80"
     depends_on:
@@ -38,7 +38,7 @@ services:
       BUCKET_ACCESS_KEY: "temp"
       BUCKET_SECRET_KEY: "temp"
       BUCKET_USE_SSL: "false"
-      ROBOT_WEBSOCKET_URL: "ws://10.128.0.8:3000/ws_control"
+      ROBOT_WEBSOCKET_URL: "ws://10.128.0.26:3000/ws_control"
     ports:
       - "8000:8000"
     depends_on:

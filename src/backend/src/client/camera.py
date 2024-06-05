@@ -24,6 +24,7 @@ class Camera:
         """Listen for messages from the WebSocket of the camera and broadcast them to all connected clients."""
         try:
             async for message in self.websocket: # type: ignore
+                print(f"Received message from robot: {message}")
                 await self._broadcast(message)
         except ConnectionClosedError:
             print("Connection to camera has been lost, attempting to reconnect...")
