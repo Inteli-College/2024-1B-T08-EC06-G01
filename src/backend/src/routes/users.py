@@ -5,6 +5,8 @@ from fastapi.responses import JSONResponse
 from models.users import User as UserModel
 from schemas.users import User
 from utils.crypto import get_password_hash, verify_password
+from models.logs import Log as LogModel
+from schemas.logs import Log
 
 router = APIRouter(
 	prefix="/users",
@@ -35,6 +37,7 @@ async def login(user: User):
 		result = await UserModel.objects.get(username=user.username)
 
 		if verify_password(user.password, result.password):
+			create_log(user.id, user.username)
 			return result
 		else:
 			return {"error": "Invalid password"}
@@ -45,6 +48,21 @@ async def login(user: User):
 			"error": True,
 			"message": f"Erro interno do servidor: {e}"
 		}, status_code=500)
+	
+async def create_log(user_id, username):
+	try:
+		await LogModel.objects.create(
+			emergency_button=False,
+			ia_request=False,
+			user_id=user_id,
+			username=username
+		)
+	except Exception as e:
+		return JSONResponse(content={
+			"error": True,
+			"message": f"Erro interno do servidor: {e}"
+		}, status_code=500)
+
 
 @router.get("/list")
 async def list():

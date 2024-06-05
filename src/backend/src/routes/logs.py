@@ -12,24 +12,24 @@ router = APIRouter(
     tags=["logs"],
 )
 
-@router.post("/register")
-async def register(log: Log):
-    try:
-        await LogModel.objects.create(
-            date = log.date,
-            emergency_button = log.emergency_button,
-            ia_request = log.ia_request,
-            user_id = log.user_id
-        )
-        return JSONResponse(content={
-            "error": False,
-            "message": "Log criado com sucesso"
-        }, status_code=201)
-    except Exception as e:
-        return JSONResponse(content={
-            "error": True,
-            "message": f"Erro interno do servidor: {e}"
-        }, status_code=500)
+# @router.post("/register")
+# async def register(log: Log):
+#     try:
+#         await LogModel.objects.create(
+#             date = log.date,
+#             emergency_button = log.emergency_button,
+#             ia_request = log.ia_request,
+#             user_id = log.user_id
+#         )
+#         return JSONResponse(content={
+#             "error": False,
+#             "message": "Log criado com sucesso"
+#         }, status_code=201)
+#     except Exception as e:
+#         return JSONResponse(content={
+#             "error": True,
+#             "message": f"Erro interno do servidor: {e}"
+#         }, status_code=500)
 
 @router.get("/list")
 async def list_logs():
@@ -78,7 +78,8 @@ async def update(log: Log):
             date = log.date,
             emergency_button = log.emergency_button,
             ia_request = log.ia_request,
-            user_id = log.user_id
+            user_id = log.user_id,
+            username = log.username
         )
         return JSONResponse(content={
             "error": False,

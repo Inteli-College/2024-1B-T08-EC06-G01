@@ -11,6 +11,7 @@ class Log(Model):
     date = DateTime(default=datetime.now)
     emergency_button = Boolean()
     ia_request = Boolean()
+    username = String(max_length=100)
     user_id: Optional[User] = ForeignKey(User)
 
 

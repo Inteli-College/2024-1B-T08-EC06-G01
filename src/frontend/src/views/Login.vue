@@ -5,16 +5,15 @@
                 <h2 class="title">Fazer log-in</h2>
                 <p class="subtitle">Username:</p>
                 <div class="input-box">
-                    <input type="text" class="text-input" placeholder="Digite seu username" />
+                    <input id="username" type="text" class="text-input" placeholder="Digite seu username" />
                 </div>
                 <p class="subtitle2">Senha:</p>
                 <div class="input-box">
-                    <input type="text" class="text-input" placeholder="Digite sua senha de acesso" />
+                    <input id="senha" type="text" class="text-input" placeholder="Digite sua senha de acesso" />
                 </div>
                 <div class="button-container">
                     <button class="cadastre-button" @click="goToCadastre">Cadastrar</button>
-                    <button class="enter-button"
-                    @click="goToHome">Entrar</button>
+                    <button class="enter-button" @click="loginUser">Entrar</button>
                 </div>
             </div>
             <div class="column2">
@@ -30,21 +29,33 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 const router = useRouter();
+const username = ref('');
+const password = ref('');
 
-function goToHome() {
-  router.push('/Home');
+async function loginUser() {
+  const data = {
+    username: username.value,
+    password: password.value,
+  };
+
+  try {
+    const res = await axios.post('http://localhost:8000/users/login', data);
+    console.log(res.data);
+    router.push('/Home');
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function goToCadastre() {
   router.push('/');
 }
 
-import Bananeira from '../assets/bananeira.svg'
-
+import Bananeira from '../assets/bananeira.svg';
 </script>
 
 <style scoped>
