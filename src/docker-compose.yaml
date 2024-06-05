@@ -39,6 +39,7 @@ services:
       BUCKET_SECRET_KEY: "temp"
       BUCKET_USE_SSL: "false"
       ROBOT_WEBSOCKET_URL: "ws://10.128.0.26:3000/ws_control"
+      CAMERA_WEBSOCKET_URL: "ws://10.128.0.26:8765"
     ports:
       - "8000:8000"
     depends_on:

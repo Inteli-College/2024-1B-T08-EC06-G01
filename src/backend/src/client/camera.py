@@ -1,10 +1,14 @@
 import asyncio
 import json
 import os
+import base64
+import cv2
+import numpy as np
 
 import websockets
 from fastapi import WebSocket
 from websockets.exceptions import ConnectionClosedError
+from yolov5 import YOLOv5
 
 CAMERA_WEBSOCKET_URL = os.environ.get('CAMERA_WEBSOCKET_URL') or ""
 
@@ -13,9 +17,11 @@ class Camera:
         self.websocket = None
         self.clients = set()
 
+        self.yolo_model = YOLOv5("yolov5s.pt")
+
     async def connect(self):
         """Connect to the camera WebSocket and start listening for messages."""
-        print("Connecting to camera websocket...")
+        print("Connecting to camera websocket with URL: ", CAMERA_WEBSOCKET_URL)
         self.websocket = await websockets.connect(CAMERA_WEBSOCKET_URL)
         asyncio.create_task(self._broadcast_forever())
 
@@ -25,13 +31,38 @@ class Camera:
         try:
             async for message in self.websocket: # type: ignore
                 print(f"Received message from robot: {message}")
-                await self._broadcast(message)
+                await self.process_message(message)
         except ConnectionClosedError:
             print("Connection to camera has been lost, attempting to reconnect...")
             await self._broadcast(json.dumps({ "type": "SPacketError", "data": {
                 "message": "Conexão com a câmera foi perdida"
             }}))
             await self.reconnect()
+
+    async def process_message(self, message):
+        """Process the message received from the camera, run YOLO model and broadcast results."""
+        data = json.loads(message)
+        if "bytes" in data:
+            img_data = base64.b64decode(data["bytes"])
+            np_arr = np.frombuffer(img_data, np.uint8)
+            img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+            results = self.yolo_model.predict(img)  # Rodar o modelo YOLO
+
+            # Verificar se o objeto desejado está presente
+            object_detected = False
+            for result in results:
+                print(result['label'])
+                if result['label'] == 'desired_object':
+                    object_detected = True
+                    break
+
+            if object_detected:
+                await self._broadcast(json.dumps({
+                    "type": "ObjectDetection",
+                    "data": {
+                        "message": "Objeto desejado detectado"
+                    }
+                }))
 
     async def add_client(self, client: WebSocket):
         self.clients.add(client)
