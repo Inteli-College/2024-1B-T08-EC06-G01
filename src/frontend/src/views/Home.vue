@@ -12,12 +12,21 @@
           {{ selectedOption || 'Ordenar por' }}
           <i class="fas fa-chevron-down" :class="{ 'rotated': isOpen }"></i>
         </button>
-      <div v-if="isOpen" class="dropdown-menu">
-        <a href="#" class="dropdown-item" @click.prevent="selectOption('Data')">Data</a>
-        <a href="#" class="dropdown-item" @click.prevent="selectOption('Hora')">Hora</a>
-        <a href="#" class="dropdown-item" @click.prevent="selectOption('Localização')">Localização</a>
-        <a href="#" class="dropdown-item" @click.prevent="selectOption('Temperatura')">Temperatura</a>
-      </div>
+
+        <!-- A lógica dos filtros não está implementada -->
+        <div v-if="isOpen" class="dropdown-menu">
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Data')">
+            Data <i class="fas" :class="selectedOption === 'Data' ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+          </a>
+
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Hora')">Data <i class="fas" :class="selectedOption === 'Hora' ? 'fa-chevron-up' : 'fa-chevron-up'"></i></a>
+
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Localização')">Temperatura <i class="fas" :class="selectedOption === 'Temperatura' ? 'fa-chevron-up' : 'fa-chevron-down'"></i></a> 
+
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Temperatura')">
+            Temperatura <i class="fas" :class="selectedOption === 'Temperatura' ? 'fa-chevron-up' : 'fa-chevron-up'"></i>
+          </a>
+        </div>
       </div>
       <table class="table">
         <thead>
@@ -27,7 +36,6 @@
             <th>Localização</th>
             <th>Temperatura</th>
             <th>Uso de IA</th>
-            <th>Precisão da IA</th>
           </tr>
         </thead>
         <tbody>
@@ -37,7 +45,6 @@
             <td>Local A</td>
             <td>25°C</td>
             <td>Sim</td>
-            <td>89%</td>
           </tr>
           <tr>
             <td>02/06/2022</td>
@@ -45,7 +52,6 @@
             <td>Local B</td>
             <td>26°C</td>
             <td>Não</td>
-            <td>88%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -53,7 +59,6 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Sim</td>
-            <td>87%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -61,7 +66,6 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Não</td>
-            <td>86%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -69,7 +73,6 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Sim</td>
-            <td>85%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -77,7 +80,6 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Não</td>
-            <td>84%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -85,7 +87,6 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Sim</td>
-            <td>83%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -93,7 +94,6 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Não</td>
-            <td>82%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -101,7 +101,6 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Sim</td>
-            <td>81%</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
@@ -109,7 +108,6 @@
             <td>Local C</td>
             <td>27°C</td>
             <td>Não</td>
-            <td>80%</td>
           </tr>
         </tbody>
       </table>
@@ -187,7 +185,7 @@ function selectOption(option: string) {
   display: inline-block;
   padding-top: 6.5rem;
   padding-right: 0.6rem;
-  padding-left: 10.4rem;
+  padding-left: 8rem;
 }
 
 .dropdown-toggle {
@@ -256,7 +254,7 @@ function selectOption(option: string) {
 }
 
 .table {
-  margin-left: 10.5rem;
+  margin-left: 8rem;
   width: 44rem;
   border-collapse: collapse;
   margin-top: 4rem;

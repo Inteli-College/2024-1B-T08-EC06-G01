@@ -15,11 +15,14 @@
       </div>
     </div>
     <div class="flex p-4 bg-white border-gray-300 mt-4 ml-40"> <!-- Removi a classe border-t -->
-      <button class="bg-red-500 text-white py-2 px-8 rounded">
+      <button class="bg-red-500 text-white py-2 px-8 rounded hover:bg-red-700">
         Modo de Emergência
       </button>
       <div class="flex-grow"></div>
-      <button class="bg-green-500 text-white py-2 px-4 rounded">
+      <button class="bg-green-500 text-white py-2 px-8 rounded mr-12 hover:bg-green-600">
+        Verificação de Resíduos
+      </button>
+      <button class="bg-green-500 text-white py-2 px-4 rounded mr-12 hover:bg-green-600">
         Modo Manual
       </button>
     </div>

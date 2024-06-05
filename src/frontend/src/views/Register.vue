@@ -1,12 +1,14 @@
 <template>
-    <div class="container">
-        <div class="column">
-          <h2 class="title">Registros de Uso</h2>
-            <div class="checkbox-container">
-              <input type="checkbox" id="checkbox" v-model="isChecked">
-              <label for="checkbox">Agrupar por usuário</label>
-            </div>
-            <table class="table">
+  <div class="container">
+    <div class="column">
+      <h2 class="title">Registros de Uso</h2>
+
+      <!-- A lógica do filtro não está implementada -->
+      <div class="checkbox-container">
+        <input type="checkbox" id="checkbox" v-model="isChecked">
+        <label for="checkbox">Agrupar por usuário</label>
+      </div>
+      <table class="table">
         <thead>
           <tr>
             <th>Usuário</th>
@@ -89,32 +91,38 @@
           </tr>
         </tbody>
       </table>
-        </div>
     </div>
+  </div>
 </template>
-  
-<script>
-  export default {
-    name: 'Register'
-  }
 
+<script>
   import { ref } from 'vue';
+
+  export default {
+    name: 'Register',
+    setup() {
+      const isChecked = ref(false);
+      return {
+        isChecked,
+      };
+    }
+  };
 </script>
-  
+
 <style scoped>
   .container {
-  display: flex;
+    display: flex;
   }
 
   .column {
-  padding-left: 12rem;
-  padding-top: 1rem;
+    padding-left: 12rem;
+    padding-top: 1rem;
   }
 
   .title {
-  font-family: 'Poppins';
-  text-align: left;
-  font-size: 2.3rem;
+    font-family: 'Poppins';
+    text-align: left;
+    font-size: 2.3rem;
   }
 
   .checkbox-container {
@@ -132,48 +140,60 @@
     -moz-appearance: none;
     appearance: none;
     border: 1px solid black;
+    position: relative;
   }
 
-  .checkbox-container input[type="checkbox"]:checked {
-  background-color: #17CE67;
-  content: '';
-  display: inline-block;
+  .checkbox-container input[type="checkbox"]::before {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    background: #17CE67;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+  }
+
+  .checkbox-container input[type="checkbox"]:checked::before {
+    display: flex;
+    content: "\2713";
+    color: white;
   }
 
   .table {
-  width: 80rem;
-  border-collapse: collapse;
-  margin-top: 4rem;
-}
+    width: 80rem;
+    border-collapse: collapse;
+    margin-top: 4rem;
+  }
 
-.table th, .table td {
-  border: 0.06rem solid;
-  padding: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-align: center;
-  font-family: Poppins;
-  font-weight: normal;
-}
+  .table th, .table td {
+    border: 0.06rem solid;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+    font-family: Poppins;
+    font-weight: normal;
+  }
 
-.table th {
-  background-color: #ffffff;
-}
+  .table th {
+    background-color: #ffffff;
+  }
 
-.table tbody tr:nth-child(even) {
-  background-color: #ffffff;
-}
+  .table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+  }
 
-.table tbody tr:hover {
-  background-color: #E4FFF0;
-}
+  .table tbody tr:hover {
+    background-color: #E4FFF0;
+  }
 
-.table tbody tr:nth-child(odd) {
-  height: 1.8rem;
-}
+  .table tbody tr:nth-child(odd) {
+    height: 1.8rem;
+  }
 
-.table tbody tr:nth-child(even) {
-  height: 1.8rem;
-}
+  .table tbody tr:nth-child(even) {
+    height: 1.8rem;
+  }
 </style>
-  
