@@ -23,7 +23,7 @@
             <a href="/login" class="pt-10 pb-7">
               <h1 class="text-[1.25rem] underline text-[#F28705]">Já tenho cadastro</h1>
             </a>
-            <button class="hover:bg-[#F28705] text-[1.18rem] hover:text-white text-[#F28705] font-bold py-2 px-6 rounded-lg border border-[#F28705] mb-10">
+            <button @click="register_user" class="hover:bg-[#F28705] text-[1.18rem] hover:text-white text-[#F28705] font-bold py-2 px-6 rounded-lg border border-[#F28705] mb-10">
               Cadastrar
             </button>
           </div>
@@ -35,11 +35,33 @@
 
 <script setup>
 import Bananeira from '../assets/bananeira.svg'
+import axios from 'axios';
 </script>
 
 <script>
 export default {
-  name: 'Signup'
+  name: 'Signup',
+  methods: {
+    async register_user() {
+          const nome_completo = document.getElementById('nome_completo').value;
+          const username = document.getElementById('username').value;
+          const password = document.getElementById('senha').value;
+    
+          const data = {
+            username,
+            password
+          }
+    
+          await axios.post('http://localhost:8000/users/register', data)
+           .then(res => {
+              console.log(res.data);
+
+            })
+           .catch(error => {
+              console.log(error);
+            })
+        }
+  }
 }
 </script>
 

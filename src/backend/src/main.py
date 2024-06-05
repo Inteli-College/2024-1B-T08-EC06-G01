@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from client.robot import robot
 from database.postgres import database
@@ -53,6 +54,16 @@ app.state.robot = robot
 
 
 app.include_router(router)
+
+
+# Permitindo requisições do front 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # Allows CORS for this domain
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 
 if __name__ == "__main__":
