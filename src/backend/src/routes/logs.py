@@ -1,4 +1,5 @@
 from datetime import datetime
+from uuid import UUID
 
 import ormar
 from fastapi import APIRouter
@@ -15,10 +16,9 @@ router = APIRouter(
 async def register(log: Log):
     try:
         await LogModel.objects.create(
-            date=datetime.now(),
-            used_ia = log.used_ia,
-            reliability = log.reliability,
-            button_pressed = log.button_pressed,
+            date = log.date,
+            emergency_button = log.emergency_button,
+            ia_request = log.ia_request,
             user_id = log.user_id
         )
         return JSONResponse(content={
@@ -55,7 +55,7 @@ async def list_logs():
 async def list(log_id: int):
     try:
         log = await LogModel.objects.get(id=log_id)
-
+        print(log)
         return JSONResponse(content={
             "error": False,
             "log": log
@@ -75,10 +75,9 @@ async def list(log_id: int):
 async def update(log: Log):
     try:
         await LogModel.objects.filter(id=log.id).update(
-            date=datetime.now(),
-            used_ia = log.used_ia,
-            reliability = log.reliability,
-            button_pressed = log.button_pressed,
+            date = log.date,
+            emergency_button = log.emergency_button,
+            ia_request = log.ia_request,
             user_id = log.user_id
         )
         return JSONResponse(content={
