@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar" :style="{ width: sidebarWidth }">
     <div class="whitecanna">
-      <img :src="WhiteCanna" alt="WhiteCanna" class="logo"/>
+      <WhiteCanna />
     </div>
     <div :class="['line', { 'line-collapsed': collapsed }]"></div>
     <div class="nav">
@@ -160,7 +160,8 @@ export default defineComponent({
   margin: 0.75rem 0.25rem 0.5rem;
 }
 
-.logo {
-
+.whitecanna{
+  padding-top: 10;
 }
+
 </style>

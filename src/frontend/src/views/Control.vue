@@ -19,7 +19,10 @@
         Modo de Emergência
       </button>
       <div class="flex-grow"></div>
-      <button class="bg-green-500 text-white py-2 px-4 rounded">
+      <button class="bg-green-600 text-white py-2 px-8 rounded mr-12">
+        Verificação de Resíduos
+      </button>
+      <button class="bg-green-500 text-white py-2 px-4 rounded mr-12">
         Modo Manual
       </button>
     </div>

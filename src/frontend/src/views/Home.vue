@@ -187,7 +187,7 @@ function selectOption(option: string) {
   display: inline-block;
   padding-top: 6.5rem;
   padding-right: 0.6rem;
-  padding-left: 10.4rem;
+  padding-left: 8rem;
 }
 
 .dropdown-toggle {
@@ -256,7 +256,7 @@ function selectOption(option: string) {
 }
 
 .table {
-  margin-left: 10.5rem;
+  margin-left: 8rem;
   width: 44rem;
   border-collapse: collapse;
   margin-top: 4rem;
