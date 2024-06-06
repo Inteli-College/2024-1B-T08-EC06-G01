@@ -1,14 +1,13 @@
 <script setup lang="ts">
+import { useRoute } from 'vue-router';
+import Sidebar from './components/SidebarComponent.vue';
+
+const route = useRoute();
 </script>
 
 <template>
   <div>
-    <nav>
-      <router-link to="/" class="mr-4">Home</router-link>
-      <router-link to="/control"> Robô</router-link>
-      <router-link to="/about">Registros</router-link>
-      <notifications />
-    </nav>
+    <Sidebar v-if="!route.meta.hideSidebar" />
     <router-view></router-view>
   </div>
 </template>

@@ -3,8 +3,6 @@ FROM python:3.11-bullseye
 
 EXPOSE 8000
 
-ENV BANCO_DADOS_PROTHEUS=DBRECRUTAMENTOINTERNO
-
 # Keeps Python from generating .pyc files in the container
 ENV PYTHONDONTWRITEBYTECODE=1
 
