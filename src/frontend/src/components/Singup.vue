@@ -55,9 +55,9 @@ export default {
           await axios.post('http://localhost:8000/users/register', data)
            .then(res => {
               console.log(res.data);
-
             })
            .catch(error => {
+              alert('Erro ao cadastrar usuário, verifique se esse usuario ja nao existe');
               console.log(error);
             })
         }

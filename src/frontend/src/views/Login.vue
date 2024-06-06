@@ -1,30 +1,30 @@
 <template>
-    <div class="container">
-        <div class="square">
-            <div class="column">
-                <h2 class="title">Fazer log-in</h2>
-                <p class="subtitle">Username:</p>
-                <div class="input-box">
-                    <input id="username" type="text" class="text-input" placeholder="Digite seu username" />
-                </div>
-                <p class="subtitle2">Senha:</p>
-                <div class="input-box">
-                    <input id="senha" type="text" class="text-input" placeholder="Digite sua senha de acesso" />
-                </div>
-                <div class="button-container">
-                    <button class="cadastre-button" @click="goToCadastre">Cadastrar</button>
-                    <button class="enter-button" @click="loginUser">Entrar</button>
-                </div>
-            </div>
-            <div class="column2">
-              <div class="square2">
-                <div class="bananeira">
-                  <Bananeira />
-                </div>
+  <div class="container">
+      <div class="square">
+          <div class="column">
+              <h2 class="title">Fazer log-in</h2>
+              <p class="subtitle">Username:</p>
+              <div class="input-box">
+                  <input id="username" type="text" class="text-input" placeholder="Digite seu username" />
+              </div>
+              <p class="subtitle2">Senha:</p>
+              <div class="input-box">
+                  <input id="senha" type="password" class="text-input" placeholder="Digite sua senha de acesso" />
+              </div>
+              <div class="button-container">
+                  <button class="cadastre-button" @click="goToCadastre">Cadastrar</button>
+                  <button class="enter-button" @click="loginUser">Entrar</button>
+              </div>
+          </div>
+          <div class="column2">
+            <div class="square2">
+              <div class="bananeira">
+                <Bananeira />
               </div>
             </div>
-        </div>
-        </div>
+          </div>
+      </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -33,22 +33,30 @@ import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 const router = useRouter();
-const username = ref('');
-const password = ref('');
 
 async function loginUser() {
+  const username = (document.getElementById('username') as HTMLInputElement).value;
+  const password = (document.getElementById('senha') as HTMLInputElement).value;
+
+  console.log(username, password);  
+
   const data = {
-    username: username.value,
-    password: password.value,
+    username,
+    password
   };
 
-  try {
-    const res = await axios.post('http://localhost:8000/users/login', data);
-    console.log(res.data);
-    router.push('/Home');
-  } catch (error) {
-    console.log(error);
-  }
+  await axios.post('http://localhost:8000/users/login', data)
+    .then(res => {
+      console.log(res.data);
+      if (!("error" in res.data)){
+        router.push(`/home?id=${res.data.id}`);
+        return;
+      }
+      alert('Usuário ou senha inválidos');
+    })
+    .catch(error => {
+      console.log(error);
+    });
 }
 
 function goToCadastre() {
@@ -57,6 +65,7 @@ function goToCadastre() {
 
 import Bananeira from '../assets/bananeira.svg';
 </script>
+
 
 <style scoped>
 .container {

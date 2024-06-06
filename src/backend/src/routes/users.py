@@ -15,33 +15,45 @@ router = APIRouter(
 
 @router.post("/register")
 async def register(user: User):
-	try:
-		await UserModel.objects.create(
-			username=user.username,
-			password=get_password_hash(user.password),
-			admin=False
-		)
-		return JSONResponse(content={
-			"error": False,
-			"message": "Usuário criado com sucesso"
-		}, status_code=201)
-	except Exception as e:
-		return JSONResponse(content={
-			"error": True,
-			"message": f"Erro interno do servidor: {e}"
-		}, status_code=500)
+    try:
+        existing_user = await UserModel.objects.get_or_none(username=user.username)
+        if existing_user:
+            return JSONResponse(content={
+                "error": True,
+                "message": "Usuário já existe"
+            }, status_code=400)
+
+        await UserModel.objects.create(
+            username=user.username,
+            password=get_password_hash(user.password),
+            admin=False
+        )
+        return JSONResponse(content={
+            "error": False,
+            "message": "Usuário criado com sucesso"
+        }, status_code=201)
+    except Exception as e:
+        return JSONResponse(content={
+            "error": True,
+            "message": f"Erro interno do servidor: {e}"
+        }, status_code=500)
+
 
 @router.post("/login")
 async def login(user: User):
 	try:
 		result = await UserModel.objects.get(username=user.username)
-
+		print(result)
+		print(result.password)
 		if verify_password(user.password, result.password):
-			create_log(user.id, user.username)
+			print("Senha válida")	
+			print(result.id, result.username)
+			await create_log(result.id, result.username)
 			return result
 		else:
 			return {"error": "Invalid password"}
 	except ormar.exceptions.NoMatch:
+		print("Usuário não encontrado")
 		return {"error": "User not found"}
 	except Exception as e:
 		return JSONResponse(content={
@@ -50,6 +62,8 @@ async def login(user: User):
 		}, status_code=500)
 	
 async def create_log(user_id, username):
+	print("Criando log")
+	print(user_id, username)
 	try:
 		await LogModel.objects.create(
 			emergency_button=False,
@@ -57,6 +71,7 @@ async def create_log(user_id, username):
 			user_id=user_id,
 			username=username
 		)
+		print("Log criado com sucesso", user_id, username)
 	except Exception as e:
 		return JSONResponse(content={
 			"error": True,

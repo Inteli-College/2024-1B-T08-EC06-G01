@@ -69,17 +69,29 @@ export default defineComponent({
     const router = useRouter();
 
     function goToControl() {
-      router.push('/control');
+      var url = window.location.href;
+      var parsedUrl = new URL(url);
+      var id = parsedUrl.searchParams.get("id");
+
+      router.push('/control?id=' + id);
       toggleSidebar();
     }
 
     function goToRegister() {
-      router.push('/register');
+      var url = window.location.href;
+      var parsedUrl = new URL(url);
+      var id = parsedUrl.searchParams.get("id");
+
+      router.push('/register?id=' + id);
       toggleSidebar();
     }
 
     function goToHome() {
-      router.push('/home');
+      var url = window.location.href;
+      var parsedUrl = new URL(url);
+      var id = parsedUrl.searchParams.get("id");
+
+      router.push('/home?id=' + id);
       toggleSidebar();
     }
 
@@ -114,6 +126,7 @@ export default defineComponent({
     };
   }
 });
+
 </script>
 
 <style>
