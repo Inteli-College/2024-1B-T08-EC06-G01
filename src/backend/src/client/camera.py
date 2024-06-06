@@ -8,7 +8,7 @@ import numpy as np
 import websockets
 from fastapi import WebSocket
 from websockets.exceptions import ConnectionClosedError
-from yolov5 import YOLOv5
+# from ultralytics import YOLO
 
 CAMERA_WEBSOCKET_URL = os.environ.get('CAMERA_WEBSOCKET_URL') or ""
 
@@ -17,7 +17,7 @@ class Camera:
         self.websocket = None
         self.clients = set()
 
-        self.yolo_model = YOLOv5("yolov5s.pt")
+        # self.yolo_model = YOLO("best.pt")
 
     async def connect(self):
         """Connect to the camera WebSocket and start listening for messages."""
@@ -30,7 +30,7 @@ class Camera:
         """Listen for messages from the WebSocket of the camera and broadcast them to all connected clients."""
         try:
             async for message in self.websocket: # type: ignore
-                print(f"Received message from robot: {message}")
+                # print(f"Received message from robot: {message}")
                 await self.process_message(message)
         except ConnectionClosedError:
             print("Connection to camera has been lost, attempting to reconnect...")
@@ -46,23 +46,44 @@ class Camera:
             img_data = base64.b64decode(data["bytes"])
             np_arr = np.frombuffer(img_data, np.uint8)
             img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-            results = self.yolo_model.predict(img)  # Rodar o modelo YOLO
+            # results = self.yolo_model.predict(img)  # Rodar o modelo YOLO
 
-            # Verificar se o objeto desejado está presente
-            object_detected = False
-            for result in results:
-                print(result['label'])
-                if result['label'] == 'desired_object':
-                    object_detected = True
-                    break
+            # results = results[0]
 
-            if object_detected:
-                await self._broadcast(json.dumps({
-                    "type": "ObjectDetection",
-                    "data": {
-                        "message": "Objeto desejado detectado"
-                    }
-                }))
+            object_to_detect = "cell phone"
+
+            # for box in results.boxes:
+            #     class_id = results.names[box.cls[0].item()]
+            #     # cords = box.xyxy[0].tolist()
+            #     # cords = [round(x) for x in cords]
+            #     # conf = round(box.conf[0].item(), 2)
+            #     # print("Object type:", class_id)
+            #     # print("Coordinates:", cords)
+            #     # print("Probability:", conf)
+            #     # print("---")
+
+                # if class_id == object_to_detect:
+                #     # await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+                #     #     "message": "Pessoa detectada"
+                #     # }}))
+                    
+                #     print(f"{object_to_detect} detectada")
+
+            # Randomizar se detectou ou não
+            detected = np.random.choice([True, False], p=[0.1, 0.9])
+            if detected:
+                # print("Sujeira detectada")
+
+                await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+                    "message": "Sujeira detectada"
+                }}))
+            # else:
+                # print("Nenhuma sujeira detectada")
+
+                # await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+                #     "message": "Nenhuma sujeira detectada"
+                # }}))
+
 
     async def add_client(self, client: WebSocket):
         self.clients.add(client)
@@ -80,6 +101,7 @@ class Camera:
         await self.websocket.send(data)
     
     async def _broadcast(self, message):
+        # print(f"Broadcasting message to {len(self.clients)} clients: {message}")
         if self.clients:
             await asyncio.gather(*[client.send_text(message) for client in self.clients])
     

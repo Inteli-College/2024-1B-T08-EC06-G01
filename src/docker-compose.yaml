@@ -6,7 +6,7 @@ services:
     environment:
       VITE_BACKEND: "http://localhost:8000"
       VITE_CONTROL_WEBSOCKET: "ws://localhost:8000/websocket/control"
-      VITE_VIDEO_WEBSOCKET: "ws://10.128.0.26:8765"
+      VITE_VIDEO_WEBSOCKET: "ws://10.128.0.26:8765/"
     ports:
       - "80:80"
     depends_on:

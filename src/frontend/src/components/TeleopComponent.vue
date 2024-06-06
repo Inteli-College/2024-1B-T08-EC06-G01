@@ -232,7 +232,7 @@
       if ("dirty" in json) {
         const dirty = json.dirty;
 
-        if (dirty = true)
+        if (dirty == true)
           return this.$notify({
             title: 'Sujeira detectada',
             text:`A sujeira foi detectada pelo robô`,
