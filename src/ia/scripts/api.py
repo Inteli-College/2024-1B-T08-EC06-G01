@@ -16,6 +16,29 @@ def load_model():
     # model = torch.hub.load(model='../models/yolo_v8_n.pt', source='local') 
     return model
 
+def count_detections(output, threshold=0.5):
+    # Assuming the model's output format is [batch_size, num_detections, 85]
+    # where 85 = [x, y, w, h, confidence, class scores...]
+    
+    # Extract the confidence scores
+    confidences = output[..., 4]
+    
+    # Filter out detections with confidence below the threshold
+    mask = confidences > threshold
+    
+    # Extract class scores and get the index of the maximum score for each detection
+    class_scores = output[..., 5:]
+    class_ids = torch.argmax(class_scores, dim=-1)
+    
+    # Apply the mask to filter out low-confidence detections
+    class_ids = class_ids[mask]
+    
+    # Count occurrences of each class ID
+    unique, counts = torch.unique(class_ids, return_counts=True)
+    detection_counts = dict(zip(unique.cpu().numpy(), counts.cpu().numpy()))
+    
+    return detection_counts
+
 
 
 def main():
@@ -37,13 +60,18 @@ def main():
     input_batch = input_tensor.unsqueeze(0)  # Add batch dimension
 
     # Run inference
-    with torch.no_grad():
-        output = model(input_batch)
-        print("output 1", output)
-    # Reshape output tensor to match the expected shape
-    output = output.view(1, 84, 8400)
+    output = model(input_batch)
+    print("output 1", output)
 
-    print("output 2",output)
+    # Reshape output tensor to match the expected shape
+    # output = output.view(1, 84, 8400)
+
+    # print("output 2",output)
+
+    detection_counts = count_detections(output[0])  # Assuming batch size of 1
+
+    print("Detected objects:", detection_counts)
+
 
 
 if __name__ == "__main__":
