@@ -29,7 +29,7 @@
     console.error('Error:', error);
   };
 
-  this.websocket.onmessage = (event) => {
+  websocket.onmessage = (event) => {
     const json = JSON.parse(event.data);
 
     if ("temperature" in json) {
