@@ -17,9 +17,9 @@ CREATE TABLE media (
   type bool,
   date timestamp,
   robot_id integer REFERENCES robot (id)
-)
+);
 
-CREATE TABLE temp (
+CREATE TABLE temperature (
   id serial PRIMARY KEY,
   temp float,
   robot_id integer REFERENCES robot (id)

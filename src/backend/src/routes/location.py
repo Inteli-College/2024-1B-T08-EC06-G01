@@ -32,11 +32,25 @@ async def register(location: Location):
 async def list():
 	try:
 		location = await LocationModel.objects.all()
+		if not location:
+			return JSONResponse(content={
+				"error": True,
+				"message": "Nenhum location encontrado"
+			}, status_code=404)
+		location_dicts = []
+		for location in location:
+			location_dict = location.dict()
+			for key, value in location_dict.items():
+				if isinstance(value, float):
+					location_dict[key] = float(value)
+			location_dicts.append(location_dict)
+	
 		return JSONResponse(content={
 			"error": False,
 			"message": "Locations encontrados com sucesso",
-			"data": location
+			"data": location_dicts
 		}, status_code=200)
+
 
 	except Exception as e:
 		return JSONResponse(content={
@@ -48,16 +62,23 @@ async def list():
 async def get(location_id: int):
 	try:
 		location = await LocationModel.objects.get(id=location_id)
+
+		if not location:
+			return JSONResponse(content={
+				"error": True,
+				"message": "Location não encontrado"
+			}, status_code=404)
+		
+		location_dict = location.dict()
+		for key, value in location_dict.items():
+			if isinstance(value, float):
+				location_dict[key] = float(value)
+
 		return JSONResponse(content={
 			"error": False,
 			"message": "Location encontrado com sucesso",
-			"data": location
+			"data": location_dict
 		}, status_code=200)
-	except ormar.exceptions.NoMatch:
-		return JSONResponse(content={
-			"error": True,
-			"message": "Location não encontrado"
-		}, status_code=404)
 	except Exception as e:
 		return JSONResponse(content={
 			"error": True,
@@ -66,23 +87,29 @@ async def get(location_id: int):
 
 @router.put("/update/{location_id}")
 async def update(location_id: int, location: Location):
-	try:
-		await LocationModel.objects.update(location.dict(), id=location_id)
-		return JSONResponse(content={
-			"error": False,
-			"message": "Location atualizado com sucesso"
-		}, status_code=200)
-	except ormar.exceptions.NoMatch:
-		return JSONResponse(content={
-			"error": True,
-			"message": "Location não encontrado"
-		}, status_code=404)
-	except Exception as e:
-		return JSONResponse(content={
-			"error": True,
-			"message": f"Erro interno do servidor: {e}"
-		}, status_code=500)
-	
+    try:
+        existing_location = await LocationModel.objects.get(id=location_id)
+        
+        updated_fields = location.dict(exclude_unset=True)
+        for key, value in updated_fields.items():
+            setattr(existing_location, key, value)
+
+        await existing_location.update()
+
+        return JSONResponse(content={
+            "error": False,
+            "message": "Location atualizado com sucesso"
+        }, status_code=200)
+    except ormar.exceptions.NoMatch:
+        return JSONResponse(content={
+            "error": True,
+            "message": "Location não encontrado"
+        }, status_code=404)
+    except Exception as e:
+        return JSONResponse(content={
+            "error": True,
+            "message": f"Erro interno do servidor: {e}"
+        }, status_code=500)
 
 @router.delete("/delete/{location_id}")
 async def delete(location_id: int):

@@ -5,7 +5,7 @@ from models.robots import Robot
 from ormar import ForeignKey, Integer, Model, Float
 
 class Temp(Model):
-    ormar_config = base_ormar_config.copy(tablename="temp")
+    ormar_config = base_ormar_config.copy(tablename="temperature")
     
     id = Integer(primary_key=True, autoincrement=True)
     temp = Float()
