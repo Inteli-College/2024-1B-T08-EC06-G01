@@ -7,6 +7,8 @@ from schemas.users import User
 from utils.crypto import get_password_hash, verify_password
 from models.logs import Log as LogModel
 from schemas.logs import Log
+from pytz import timezone
+from datetime import datetime
 
 router = APIRouter(
 	prefix="/users",
@@ -62,21 +64,30 @@ async def login(user: User):
 		}, status_code=500)
 	
 async def create_log(user_id, username):
-	print("Criando log")
-	print(user_id, username)
-	try:
-		await LogModel.objects.create(
-			emergency_button=False,
-			ia_request=False,
-			user_id=user_id,
-			username=username
-		)
-		print("Log criado com sucesso", user_id, username)
-	except Exception as e:
-		return JSONResponse(content={
-			"error": True,
-			"message": f"Erro interno do servidor: {e}"
-		}, status_code=500)
+    print("Criando log")
+    print(user_id, username)
+    try:
+        print("ebtrei no try")
+        
+        current_time = datetime.now(tz=timezone('America/Sao_Paulo'))
+        print(current_time)
+        current_time_naive = current_time.replace(tzinfo=None)
+
+        await LogModel.objects.create(
+            date=current_time_naive,
+            emergency_button=False,
+            ia_request=False,
+            user_id=user_id,
+            username=username
+        )
+        print("Log criado com sucesso")
+    except Exception as e:
+        print(f"Erro ao criar log: {e}")
+        return JSONResponse(content={
+            "error": True,
+            "message": f"Erro interno do servidor: {e}"
+        }, status_code=500)
+
 
 
 @router.get("/list")

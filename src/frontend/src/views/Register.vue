@@ -19,95 +19,93 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>rodrigo</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Sim</td>
-            <td>Não</td>
+          <template v-if="!isChecked">
+            <!-- Exibição padrão sem agrupamento -->
+            <tr v-for="log in logs" :key="log.id">
+              <td>{{ log.username }}</td>
+              <td>{{ formatDate(log.date) }}</td>
+              <td>{{ formatTime(log.date) }}</td>
+              <td>{{ log.emergency_stop ? 'Sim' : 'Não' }}</td>
+              <td>{{ log.ia_request ? 'Sim' : 'Não' }}</td>
+            </tr>
+          </template>
+          <template v-else>
+          <!-- Exibição quando agrupado por usuário -->
+          <tr v-for="log in groupedLogs" :key="log.id">
+            <td>{{ log.username }}</td>
+            <td>{{ formatDate(log.date) }}</td>
+            <td>{{ formatTime(log.date) }}</td>
+            <td>{{ log.emergency_stop ? 'Sim' : 'Não' }}</td>
+            <td>{{ log.ia_request ? 'Sim' : 'Não' }}</td>
           </tr>
-          <tr>
-            <td>rizzi</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Não</td>
-            <td>Sim</td>
-          </tr>
-          <tr>
-            <td>gustavo</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Sim</td>
-            <td>Não</td>
-          </tr>
-          <tr>
-            <td>ana</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Não</td>
-            <td>Sim</td>
-          </tr>
-          <tr>
-            <td>luiz</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Sim</td>
-            <td>Não</td>
-          </tr>
-          <tr>
-            <td>eduardo</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Não</td>
-            <td>Sim</td>
-          </tr>
-          <tr>
-            <td>laurA</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Sim</td>
-            <td>Não</td>
-          </tr>
-          <tr>
-            <td>nicola</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Não</td>
-            <td>Sim</td>
-          </tr>
-          <tr>
-            <td>murilo</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Sim</td>
-            <td>Não</td>
-          </tr>
-          <tr>
-            <td>rodrigo</td>
-            <td>14/05/24</td>
-            <td>14h46</td>
-            <td>Não</td>
-            <td>Sim</td>
-          </tr>
+        </template>
         </tbody>
       </table>
     </div>
   </div>
 </template>
 
-<script>
-  import { ref } from 'vue';
 
-  export default {
-    name: 'Register',
-    setup() {
-      const isChecked = ref(false);
-      return {
-        isChecked,
-      };
-    }
-  };
+<script>
+import { ref, onMounted, computed } from 'vue';
+import axios from 'axios';
+import { format } from 'date-fns';
+
+export default {
+  name: 'Register',
+  setup() {
+    const isChecked = ref(false);
+    const logs = ref([]);
+    const groupedLogs = ref([]);
+
+    // Função para formatar a data
+    const formatDate = (dateString) => {
+      return format(new Date(dateString), 'dd/MM/yyyy');
+    };
+
+    // Função para formatar a hora
+    const formatTime = (dateString) => {
+      return format(new Date(dateString), 'HH:mm:ss');
+    };
+
+    // Chama a API quando o componente é montado
+    onMounted(async () => {
+      try {
+        const res = await axios.get('http://localhost:8000/logs/list');
+        logs.value = res.data.data;
+
+        const local_logs = logs.value.map(log => [log])
+
+        const users = logs.value.map(log => Number(log.user_id.id)).sort()
+        const uniqueUsers = [...new Set(users)]
+
+        let grouped = []
+
+        uniqueUsers.forEach(user => {
+          const userLogs = logs.value.filter(log => log.user_id.id === user)
+          userLogs.forEach(log => {
+            grouped.push(log)
+          })
+        })
+
+        groupedLogs.value = grouped
+      } catch (error) {
+        console.log(error);
+      }
+    });
+
+    return {
+      isChecked,
+      logs,
+      groupedLogs,
+      formatDate,
+      formatTime
+    };
+  }
+};
 </script>
+
+
 
 <style scoped>
   .container {

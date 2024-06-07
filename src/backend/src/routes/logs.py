@@ -9,6 +9,7 @@ from models.logs import Log as LogModel
 from schemas.logs import Log
 from ormar.exceptions import NoMatch
 
+
 router = APIRouter(
     prefix="/logs",
     tags=["logs"],
