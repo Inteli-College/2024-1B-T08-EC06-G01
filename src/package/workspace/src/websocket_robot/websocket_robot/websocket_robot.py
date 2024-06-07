@@ -154,9 +154,10 @@ class Robot(Node):
 
 
     def temp_callback(self, msg):
-        self.get_logger().info(f'Temperatura: {json.loads(msg.data)}')
+        jsonified = json.loads(msg.data)
+        self.get_logger().info(f'Temperatura: {jsonified}')
         broadcast(json.dumps({
-            'temperature': msg.data.temperature_celsius
+            'temperature': jsonified['temperature_celsius']
         }))
 
 
