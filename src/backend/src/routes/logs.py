@@ -2,10 +2,12 @@ from datetime import datetime
 from uuid import UUID
 
 import ormar
+from fastapi import HTTPException
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from models.logs import Log as LogModel
 from schemas.logs import Log
+from ormar.exceptions import NoMatch
 
 router = APIRouter(
     prefix="/logs",
@@ -16,10 +18,10 @@ router = APIRouter(
 async def register(log: Log):
     try:
         await LogModel.objects.create(
-            date=datetime.now(),
-            media_uuid=log.media_uuid,
-            action=log.action,
-            type=log.type,
+            date = log.date,
+            emergency_button = log.emergency_button,
+            ia_request = log.ia_request,
+            user_id = log.user_id
         )
         return JSONResponse(content={
             "error": False,
@@ -40,15 +42,12 @@ async def list_logs():
                 "error": True,
                 "message": "Nenhum log encontrado"
             }, status_code=404)
-
+        
         log_dicts = []
         for log in logs:
             log_dict = log.dict()
             for key, value in log_dict.items():
-                if isinstance(value, dict):
-                    if 'uuid' in value and isinstance(value['uuid'], UUID):
-                        log_dict[key] = str(value['uuid'])
-                elif isinstance(value, datetime):
+                if isinstance(value, datetime):
                     log_dict[key] = value.isoformat()
             log_dicts.append(log_dict)
 
@@ -68,18 +67,9 @@ async def list(log_id: int):
     try:
         log = await LogModel.objects.get(id=log_id)
         print(log)
-
-        log_dict = log.dict()
-        for key, value in log_dict.items():
-            if isinstance(value, dict):
-                if 'uuid' in value and isinstance(value['uuid'], UUID):
-                    log_dict[key] = str(value['uuid'])
-            elif isinstance(value, datetime):
-                log_dict[key] = value.isoformat()
-
         return JSONResponse(content={
             "error": False,
-            "log": log_dict
+            "log": log
         }, status_code=200)
     except ormar.NoMatch:
         return JSONResponse(content={
@@ -92,23 +82,25 @@ async def list(log_id: int):
             "message": f"Erro interno do servidor: {e}"
         }, status_code=500)
 
-@router.put("/update")
-async def update(log: Log):
+@router.put("/update/{log_id}")
+async def update(log_id: int, log_update: Log):
     try:
-        await LogModel.objects.filter(id=log.id).update(
-            media_uuid=log.media_uuid,
-            action=log.action,
-            type=log.type,
-        )
-        return JSONResponse(content={
-            "error": False,
-            "message": "Log atualizado com sucesso"
-        }, status_code=200)
+        existing_log = await LogModel.objects.get_or_none(id=log_id)
+        if existing_log is None:
+            raise HTTPException(status_code=404, detail="Log não encontrado")
+
+        log_update_data = log_update.dict(exclude_unset=True)
+        for field, value in log_update_data.items():
+            if isinstance(value, datetime):
+                log_update_data[field] = value.isoformat()
+
+        await existing_log.update(**log_update_data)
+
+        return {"error": False, "message": "Log atualizado com sucesso"}
     except Exception as e:
-        return JSONResponse(content={
-            "error": True,
-            "message": f"Erro interno do servidor: {e}"
-        }, status_code=500)
+        raise HTTPException(status_code=500, detail=f"Erro interno do servidor: {e}")
+
+
 
 @router.delete("/delete/{log_id}")
 async def delete(log_id: int):

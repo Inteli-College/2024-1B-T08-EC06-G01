@@ -1,13 +1,13 @@
 from datetime import datetime
 from typing import Optional
-from uuid import UUID
-
+from datetime import datetime
 from pydantic import BaseModel, Field
-
+from datetime import datetime
 
 class Log(BaseModel):
     id: int = Field(default=None, gt=0)
-    media_uuid: Optional[UUID] = Field(default=None)
-    action: str = Field(default=None, max_length=100)
     date: Optional[datetime] = Field(default=None)
-    type: bool = Field(default=False)
+    emergency_button: bool = Field(default=False)
+    ia_request: bool = Field(default=False)
+    username: str = Field(default=None)
+    user_id: int = Field(default=None)

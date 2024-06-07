@@ -2,10 +2,8 @@ import asyncio
 import datetime
 import base64
 import json
-
 import cv2
 import websockets
-
 
 class WebSocketServer:
     def __init__(self, host='localhost', port=8765, framerate: int = 50):
@@ -33,6 +31,7 @@ class WebSocketServer:
 
     def broadcast(self, message):
         """Synchronous wrapper for the asynchronous _broadcast function."""
+        print(f"Broadcasting message: {message}")
         if self.loop:
             asyncio.run_coroutine_threadsafe(self._broadcast(message), self.loop)
 

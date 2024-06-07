@@ -19,10 +19,24 @@ CREATE TABLE media (
   robot_id integer REFERENCES robot (id)
 );
 
+CREATE TABLE temperature (
+  id serial PRIMARY KEY,
+  temp float,
+  robot_id integer REFERENCES robot (id)
+);
+
+CREATE TABLE location (
+  id serial PRIMARY KEY,
+  location_x float,
+  location_y float,
+  robot_id integer REFERENCES robot (id)
+);
+
 CREATE TABLE log (
   id serial PRIMARY KEY,
-  media_uuid uuid REFERENCES media (uuid),
-  action text,
+  emergency_button bool,
+  ia_request bool,
+  username text,
   date timestamp,
-  type bool
+  user_id integer REFERENCES users (id)
 );

@@ -2,6 +2,7 @@ import json
 
 import pydantic
 from client.robot import robot
+from client.camera import camera
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from schemas.websocket import ControlPacket
 from websockets.exceptions import ConnectionClosedError
@@ -23,6 +24,7 @@ async def control_robot(websocket: WebSocket):
 	# 	return
 
 	await robot.add_client(websocket)
+	await camera.add_client(websocket)
 
 	try:
 		while True:
@@ -54,6 +56,7 @@ async def control_robot(websocket: WebSocket):
 
 	except WebSocketDisconnect:
 		await robot.remove_client(websocket)
+		await camera.remove_client(websocket)
 		await websocket.close()
 	except ConnectionClosedError:
 		print("Connection to robot has been lost.")
