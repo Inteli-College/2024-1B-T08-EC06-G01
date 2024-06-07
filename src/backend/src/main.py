@@ -42,7 +42,7 @@ async def lifespan(app: FastAPI):
             print("Robot connected")
         except Exception as e:
             print(f"Error connecting to robot, please check if the robot is online: {e}")
-        
+
         try:
             await camera.connect()
             print("Camera connected")
@@ -68,10 +68,10 @@ app.state.camera = camera
 app.include_router(router)
 
 
-# Permitindo requisições do front 
+# Permitindo requisições do front
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Allows CORS for this domain
+    allow_origins=["http://localhost:80", "http://127.0.0.1", "http://localhost", "http://localhost:5173", "http://127.0.0.1:5173", "http://127.0.0.1:80"],  # Allows CORS for this domain
     allow_credentials=True,
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers

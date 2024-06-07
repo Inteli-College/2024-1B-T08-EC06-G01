@@ -10,12 +10,14 @@ class OdometrySubscriber:
 		self.subscription: Subscription = self.node.create_subscription(
 			Odometry, '/odom', self.odometry_callback, 10
 		)
-		self.current_position: Pose = Pose()
+		self.odom_counter: int = 19
 
 	def odometry_callback(self, msg: Odometry):
-		if type(msg.pose.pose) == Pose:
-			self.current_position = msg.pose.pose
-			self.node.get_logger().info(f'Current position: {self.current_position}')
+		self.odom_counter += 1
+		if type(msg.pose.pose) == Pose and self.odom_counter % 20 == 0:
+			self.odom_counter = 0
+			current_position = msg.pose.pose.position
+			self.node.get_logger().info(f'Current position: {current_position}')
 
 
 def main():

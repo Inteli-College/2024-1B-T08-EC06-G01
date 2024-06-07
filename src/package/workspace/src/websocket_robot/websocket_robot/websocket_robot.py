@@ -7,6 +7,7 @@ import uvicorn
 from fastapi import FastAPI, WebSocket
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
+from geometry_msgs.msg import Pose
 from std_msgs.msg import String
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
@@ -22,6 +23,7 @@ class Robot(Node):
         self.publisher = self.create_publisher(Twist, '/cmd_vel', 10)
 
         self.create_subscription(Odometry, '/odom', self.odometry_callback, 10)
+        self.odom_counter: int = 19
         self.create_subscription(String, '/sensor_data', self.temp_callback, 10)
         self.create_service(Empty, '/emergency_stop_teleop', self.emergency_stop_external)
         self.reported_speed = Twist()
@@ -137,15 +139,25 @@ class Robot(Node):
 
         self.publisher.publish(twist)
 
-    def odometry_callback(self, msg):
+    def odometry_callback(self, msg: Odometry):
+        self.odom_counter += 1
         self.reported_speed = msg.twist.twist
+
+        if type(msg.pose.pose) == Pose and self.odom_counter % 20 == 0:
+            self.odom_counter = 0
+            current_position = msg.pose.pose.position
+            broadcast(json.dumps({'position': {'x': current_position.x, 'y': current_position.y}}))
+
         if not self.ready:
             self.ready = True
             self.get_logger().info('Robô disponível! Iniciando teleoperação...')
 
+
     def temp_callback(self, msg):
         self.get_logger().info(f'Temperatura: {json.loads(msg.data)}')
-        broadcast(msg.data)
+        broadcast(json.dumps({
+            'temperature': msg.data.temperature_celsius
+        }))
 
 
     def emergency(self):
