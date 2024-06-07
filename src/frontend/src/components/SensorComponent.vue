@@ -11,20 +11,6 @@
   <script>
   export default {
     name: 'SensorComponent',
-
-    methods: {
-      mounted() {
-        console.log('SensorComponent mounted');
-        this.websocket.onmessage = (event) => {
-          const json = JSON.parse(event.data);
-
-          if ("temperature" in json) {
-            console.log('Temperature:', json.temperature);
-            document.getElementById('temperature-data').innerText = `${Number(json.temperature).toFixed(2)}º`;
-          }
-        }
-      }
-    }
   }
 
   const websocket = new WebSocket(import.meta.env.VITE_CONTROL_WEBSOCKET);
@@ -42,6 +28,15 @@
   websocket.onerror = (error) => {
     console.error('Error:', error);
   };
+
+  this.websocket.onmessage = (event) => {
+    const json = JSON.parse(event.data);
+
+    if ("temperature" in json) {
+      console.log('Temperature:', json.temperature);
+      document.getElementById('temperature-data').innerText = `${Number(json.temperature).toFixed(2)}º`;
+    }
+  }
 
   </script>
 
