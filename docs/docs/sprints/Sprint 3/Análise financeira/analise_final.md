@@ -1,6 +1,6 @@
 ---
 title: "Análise Final do Projeto"
-siderbar_position: 1
+siderbar_position: 2
 ---
 
 # Análise Final do Projeto: Cannabot
@@ -13,6 +13,9 @@ siderbar_position: 1
 
 
 ## Fase de Implementação
+
+&emsp;Antes de iniciar a análise, é importante considerar que a escolha do modelo de robô foi baseada nas informações obtidas ao longo do projeto. No entanto, existe a possibilidade de que o robô escolhido não atenda às necessidades do projeto, o que poderia requerer o desenvolvimento de um modelo próprio.
+
 ### Fase 01: Pesquisa e Desenvolvimento Inicial (01 Ano)
 
 - Objetivos:
@@ -27,11 +30,22 @@ siderbar_position: 1
     - 01 engenheiro mecatrônico
     - 01 especialista em visão computacional (último 03 meses dessa fase)
 
-- Custos Estimados:
-    - Salários: (7000 + 7000 + 7000 + 7000) * 12 + 5000 * 3 = R$ 351.000,00
-    - Materiais e Equipamentos: 10 robôs a R$ 60.000,00 cada = R$ 600.000,00
+- Materiais e Equipamentos:
+    - 10 robôs (Modelo:)
 
-Total da Fase 01: R$ 951.000,00
+- Custos Estimados:
+    ```
+    Salários: (7000 + 7000 + 7000 + 7000) * 12 + 5000 * 3
+    Salários: R$ 351.000,00
+    ```
+
+    ```
+    Materiais e Equipamentos: 10 * 382.930,00
+    Materiais e Equipamentos: R$ 3.829.300,00
+    ```
+    ###### Obs: O modelo de robô escolhido foi o Spot Robot, cotado em U$74,500 dólares e convertido pelo preço do real no dia da pesquisa (U$ 1,00 = R$5,14)
+
+    Total da Fase 01: R$ 4.180.300,00
 
 
 ### Fase 02: Piloto de Escala (06 meses)
@@ -48,10 +62,15 @@ Total da Fase 01: R$ 951.000,00
     - 01 Engenheiro Mecatrônico
 
 - Custos Estimados:
-    - Produção de 10 robôs: 10 * R$ 60.000,00 = R$ 600.000,00
-    - Salários: (2 * 7000 + 7000 + 7000 + 7000) * 6 = R$ 210.000,00
-
-Total da Fase 2: R$ 810.000,00
+    ```
+    Implementação de mais 10 robôs: 10 * 382.930,00
+    Implementação de mais 10 robôs: R$ 3.829.300,00
+    ```
+    ```
+    Salários: (2 * 7000 + 7000 + 7000 + 7000) * 6
+    Salários: R$ 210.000,00
+    ```
+    Total da Fase 02: R$ 4.039.300,00
 
 
 ## Fase 03: Implementação Total (06 meses)
@@ -67,38 +86,138 @@ Total da Fase 2: R$ 810.000,00
     - 01 Engenheiro de Software
 
 - Custos Estimados:
-    - Produção de 12 robôs: 12 * R$ 60.000,00 = R$ 720.000,00
-    - Salários: (2 * 7000 + 7000 + 7000) * 6 = R$ 168.000,00
+    ```
+    Implementação de mais 12 robôs: 12 * 382.930,00
+    Implementação de mais 12 robôs: R$ 4.595.160
+    ```
+    ```
+    Salários: (2 * 7000 + 7000 + 7000) * 6
+    Salários: R$ 168.000,00
+    ```
 
-Total da Fase 3: R$ 888.000,00
+    Total da Fase 03: R$ 4.763.160,00
 
 
 ## Manutenção e Suporte
 ### Primeiro Ano de Manutenção:
 
-- Técnicos de Manutenção: 2 Técnicos a R$10,00/hora, 1,5 horas por robô, manutenção trimestral.
-    - Custos de Manutenção: 2 * 8 robôs * 1,5 horas * R$ 10,00 * 4 trimestres = R$ 960,00
-- Materiais de Reposição: R$5.000,00
+- Técnicos de Manutenção: 2 Técnicos a R$10,00/hora, supondo que cada robô demande 1 hora e meia e a manutenção seja trimestral.
+    ```
+    Manutenção: 2 * 10 robôs * 1,5 horas * R$ 10,00 * 4 trimestres
+    Manutenção: R$ 1200,00
+    ```
+    ```
+    Materiais de Manutenção: 10 robôs * 2570
+    Materiais de Manutenção: R$ 25.700,00
+    ```
+    ###### Obs: A média de custo de manutenção foi cotada em U$500 dólares e convertido pelo preço do real no dia da pesquisa (U$ 1,00 = R$5,14)
 
-Total de Manutenção: R$5.960,00
+Total de Manutenção: R$25.900,00
+
+## Otimização de Custos
+
+&emsp;Afim de baratear a solução, uma alternativa é utilizar outro modelo de robô, sendo assim, ao invés de utilizar o Spot Robot, outra possibilidade é usar o Ghost Minitaur, sendo assim, de forma resumida:
+
+### Fase 01:
+- Custos Estimados:
+    ```
+    Salários: (7000 + 7000 + 7000 + 7000) * 12 + 5000 * 3
+    Salários: R$ 351.000,00
+    ```
+
+    ```
+    Materiais e Equipamentos: 10 * 51.400,00
+    Materiais e Equipamentos: R$ 514.000,00
+    ```
+    ###### Obs: O modelo de robô escolhido foi o Ghost Minitaur, cotado em U$10.000,00 dólares e convertido pelo preço do real no dia da pesquisa (U$ 1,00 = R$5,14)
+
+    Total da Fase 01: R$ 865.000,00
+
+### Fase 02:
+
+- Custos Estimados:
+    ```
+    Implementação de mais 10 robôs: 10 * 51.400,00
+    Implementação de mais 10 robôs: R$ 514.000,00
+    ```
+    ```
+    Salários: (2 * 7000 + 7000 + 7000 + 7000) * 6
+    Salários: R$ 210.000,00
+    ```
+    Total da Fase 02: R$ 724.000,00
+
+### Fase 03:
+
+- Custos Estimados:
+    ```
+    Implementação de mais 12 robôs: 12 * 51.400,00
+    Implementação de mais 12 robôs: R$ 616.800,00
+    ```
+    ```
+    Salários: (2 * 7000 + 7000 + 7000) * 6
+    Salários: R$ 168.000,00
+    ```
+
+    Total da Fase 03: R$ 784.800,00
+
+## Manutenção e Suporte
+### Primeiro Ano de Manutenção:
+
+- Técnicos de Manutenção: 2 Técnicos a R$10,00/hora, supondo que cada robô demanda 1 hora e meia e a manutenção seja trimestral.
+    ```
+    Manutenção: 2 * 10 robôs * 1,5 horas * R$ 10,00 * 4 trimestres
+    Manutenção: R$ 1200,00
+    ```
+    ```
+    Materiais de Manutenção: 10 robôs * 2570
+    Materiais de Manutenção: R$ 25.700,00
+    ```
+    ###### Obs: A média de custo de manutenção foi cotada em U$500 dólares e convertido pelo preço do real no dia da pesquisa (U$ 1,00 = R$5,14)
+
+Total de Manutenção: R$25.900,00
+
+## Valor Mínimo Aceitável para a realização do Projeto Final
+
+&emsp;Afim de chegar em um valor mínimo viavel para realizar a venda do projeto, o grupo considerou alguns fatores, sendo eles: cobrir os gastos fixos apresentados posteriomente e, ainda sim, garantir um percentual de lucro mínimo para a equipe.
 
 
-## Resumo e Preço Final
+### Resumo e Preço Final
 
 - Custos Totais:
-    - Fase 01: R$ 951.000,00
-    - Fase 02: R$ 810.000,00
-    - Fase 03: R$ 888.000,00
-    - Manutenção: R$ 5.960,00
+    - Fase 01: R$ 4.180.300,00
+    - Fase 02: R$ 4.039.300,00
+    - Fase 03: R$ 4.763.160,00
+    - Manutenção: R$ 25.900,00
+
+        - Total: R$ 13.008.660,00
+
+- Custo total da Implementação Otimizada:
+    - Fase 01: R$ 865.000,00
+    - Fase 02: R$ 724.000,00
+    - Fase 03: R$ 784.800,00
+    - Manutenção: R$ 25.900,00
+
+        - Total: R$ 2.399.700,00
 
 - Lucros e Impostos:
-    - Lucro: 15%
-    - Impostos: 10%
 
-- Total Final:
-    - (951.000,00 + 810.000,00 + 888.000,00 + 5.960) * 1.15 * 1.10 = R$ 3.358.524,4
+    &emsp;A equipe considerou que a margem de lucro pode variar entre 10% e 20%. Visto que os investimentos em projetos de robótica 4.0 no Brasil são elevados, foi decidido evitar a aplicação de valores excessivos. Por isso, optamos por uma margem de lucro mínima de 10%.
 
+    
+    &emsp;Também é crucial levar em conta os impostos sobre a emissão da nota fiscal, que geralmente correspondem a aproximadamente 18% do valor total do serviço ou produto no Brasil. Sendo essa taxa é obrigatória, ela deve ser considerada no cálculo do valor final para garantir a aprovação fiscal e evitar possíveis problemas judiciais no futuro.
 
+    &emsp;Ademais, foi utilizado o método de cálculo ["Por dentro"](https://www.portaldaindustria.com.br/cni/canais/reforma-tributaria/infograficos/calculo-por-dentro-x-por-fora/) para determinar o imposto. Esse método considera o imposto como parte do valor total do produto ou serviço, resultando em um aumento da alíquota efetiva e, consequentemente, do preço final.
+
+    <p align="center">
+
+    | Descrição | + Lucro (10%) | Custos + Lucro | Impostos de emissão da NF (18%) | Valor final |
+    | -------------- | ----------- | ------------ | --------------------------------------- | ---------- |
+    | Valor Original | R$ 1.300.866 | R$ 14.309.526 | R$ 2.575.714,68 | R$ 18.186.106,68 | 
+    | Valor Otimizado | R$ 239.970  | R$ 2.639.670 | R$ 475.140,6 | R$ 3.354.780,6 |
+
+    </p>
+
+    
 ## Conclusão 
 
 &emsp;Este projeto de monitoramento de reboilers com robôs equipados com sensores de temperatura e câmeras integrados a um sistema de controle central e dashboard oferece uma solução eficiente e escalável. A implementação em fases permite um desenvolvimento controlado e adaptável, garantindo que os requisitos de funcionalidade e resistência sejam atendidos. A análise financeira detalhada garante uma visão clara dos custos e do retorno esperado sobre o investimento, promovendo confiança na viabilidade e eficácia do projeto.
@@ -111,3 +230,9 @@ Total de Manutenção: R$5.960,00
 [Glassdoor](https://www.glassdoor.com.br/Sal%C3%A1rios/brasil-pesquisador-i-de-visao-computacional-sal%C3%A1rio-SRCH_IL.0,6_IN36_KO7,43.htm#:~:text=A%20m%C3%A9dia%20salarial%20do%20cargo,de%20R%24%204.997%20por%20m%C3%AAs.)
 
 [Salário](https://www.salario.com.br/profissao/tecnico-de-manutencao-industrial-cbo-313120/)
+
+[Spot Robot - Preço](https://robotsguide.com/robots/spot)
+
+[Ghost Minitaur - Preço](https://spectrum.ieee.org/ghost-robotics-minitaur-demonstrates-impressive-new-skills)
+
+[Média de valor para a Manutenção de Peças](https://roboticsimulationservices.com/maintenance-and-repair-of-industrial-robots-what-you-should-know/)
