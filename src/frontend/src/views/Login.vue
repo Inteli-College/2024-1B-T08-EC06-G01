@@ -28,7 +28,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
@@ -38,7 +37,7 @@ async function loginUser() {
   const username = (document.getElementById('username') as HTMLInputElement).value;
   const password = (document.getElementById('senha') as HTMLInputElement).value;
 
-  console.log(username, password);  
+  console.log(username, password);
 
   const data = {
     username,
@@ -78,11 +77,11 @@ import Bananeira from '../assets/bananeira.svg';
 .square{
     width: 80%;
     height: 40rem;
-    background-color: #fff; 
+    background-color: #fff;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
     border-radius: 1.25rem;
     position: relative;
-    
+
 }
 
 .square2{
@@ -156,7 +155,7 @@ import Bananeira from '../assets/bananeira.svg';
   margin-top: 2rem;
 }
 
-.cadastre-button { 
+.cadastre-button {
   color: #0C8541;
   padding: 2.4rem 3.6rem;
   margin-right: 1rem;

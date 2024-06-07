@@ -15,7 +15,7 @@ def load_assets(path):
     paths = []
 
     for asset in assets_folder:
-        file_path = os.path.join('..', 'assets', asset)
+        file_path = os.path.join('..', 'dirt', asset)
         paths.append(file_path)
 
     return paths
@@ -28,16 +28,16 @@ def detect(predictions_output):
         im_rgb = Image.fromarray(im_bgr[..., ::-1])  # RGB-order PIL image
 
         # Save results to disk
-        r.save(filename=f"../predictions/results{i}.jpg")
+        r.save(filename=f"../predictions_dirt/results{i}.jpg")
 
 
 
 def main():
     # Carregando o modelo
-    model = load_model('../models/yolo_v8_n.pt')
+    model = load_model('../models/yolo_v8_n_dirt_detection.pt')
 
     # Carregando as imagens
-    load_imgs = load_assets('../assets')
+    load_imgs = load_assets('../dirt')
 
     # Realizando as predições
     results = model(load_imgs)

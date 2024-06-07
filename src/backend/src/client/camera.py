@@ -8,7 +8,7 @@ import numpy as np
 import websockets
 from fastapi import WebSocket
 from websockets.exceptions import ConnectionClosedError
-# from ultralytics import YOLO
+from ultralytics import YOLO
 
 CAMERA_WEBSOCKET_URL = os.environ.get('CAMERA_WEBSOCKET_URL') or ""
 
@@ -17,7 +17,9 @@ class Camera:
         self.websocket = None
         self.clients = set()
 
-        # self.yolo_model = YOLO("best.pt")
+        # with open("yolo_v8_n_dirt_detection.pt", "wb") as f:
+        #     print('oi eu sou o gustavo')
+        self.yolo_model = YOLO("/app/client/yolo_v8_n_dirt_detection.pt")
 
     async def connect(self):
         """Connect to the camera WebSocket and start listening for messages."""
@@ -46,9 +48,17 @@ class Camera:
             img_data = base64.b64decode(data["bytes"])
             np_arr = np.frombuffer(img_data, np.uint8)
             img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-            # results = self.yolo_model.predict(img)  # Rodar o modelo YOLO
+            results = self.yolo_model.predict(img)  # Rodar o modelo YOLO
 
-            # results = results[0]
+            # print("Results:", results)
+
+            results = await asyncio.to_thread(self.yolo_model.predict, img)
+            results = results[0]
+
+            # print("Results:", results)
+
+            # Printar o probs
+            print("Probs:", results.probs)
 
             object_to_detect = "cell phone"
 
@@ -62,27 +72,31 @@ class Camera:
             #     # print("Probability:", conf)
             #     # print("---")
 
-                # if class_id == object_to_detect:
-                #     # await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
-                #     #     "message": "Pessoa detectada"
-                #     # }}))
+            #     if class_id == object_to_detect:
+            #         # await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+            #         #     "message": "Pessoa detectada"
+            #         # }}))
                     
-                #     print(f"{object_to_detect} detectada")
+            #         print(f"{object_to_detect} detectada")
 
-            # Randomizar se detectou ou não
-            detected = np.random.choice([True, False], p=[0.1, 0.9])
-            if detected:
-                # print("Sujeira detectada")
+            #         await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+            #             "message": f"{object_to_detect} detectada"
+            #         }}))
 
-                await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
-                    "message": "Sujeira detectada"
-                }}))
-            # else:
-                # print("Nenhuma sujeira detectada")
+            # # Randomizar se detectou ou não
+            # detected = np.random.choice([True, False], p=[0.1, 0.9])
+            # if detected:
+            #     # print("Sujeira detectada")
 
-                # await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
-                #     "message": "Nenhuma sujeira detectada"
-                # }}))
+            #     await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+            #         "message": "Sujeira detectada"
+            #     }}))
+            # # else:
+            #     # print("Nenhuma sujeira detectada")
+
+            #     # await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+            #     #     "message": "Nenhuma sujeira detectada"
+            #     # }}))
 
 
     async def add_client(self, client: WebSocket):
