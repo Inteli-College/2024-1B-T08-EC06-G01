@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 COPY src/ /app
 
+# COPY ../ia/models/yolo_v8_n_dirt_detection.pt /app/client/
+
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
