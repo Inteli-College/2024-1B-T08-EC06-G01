@@ -1,27 +1,28 @@
 import asyncio
-from fastapi import FastAPI, WebSocket
-import time
 import json
 import threading
-import uvicorn
-from rclpy.node import Node
+
 import rclpy
-from std_srvs.srv import Empty
+import uvicorn
+from fastapi import FastAPI, WebSocket
 from geometry_msgs.msg import Twist
 from nav_msgs.msg import Odometry
-from rclpy.qos import qos_profile_sensor_data, QoSProfile
+from std_msgs.msg import String
+from rclpy.node import Node
+from rclpy.qos import qos_profile_sensor_data
 from sensor_msgs.msg import LaserScan
-import signal
-
+from std_srvs.srv import Empty
 
 clients = set()
 
 class Robot(Node):
     def __init__(self):
-        super().__init__('ros_turtlebot_teleop')
+        super().__init__('ros_turtlebot_teleop') # type: ignore
 
         self.publisher = self.create_publisher(Twist, '/cmd_vel', 10)
+
         self.create_subscription(Odometry, '/odom', self.odometry_callback, 10)
+        self.create_subscription(String, '/sensor_data', self.temp_callback, 10)
         self.create_service(Empty, '/emergency_stop_teleop', self.emergency_stop_external)
         self.reported_speed = Twist()
 
@@ -141,6 +142,11 @@ class Robot(Node):
         if not self.ready:
             self.ready = True
             self.get_logger().info('Robô disponível! Iniciando teleoperação...')
+
+    def temp_callback(self, msg):
+        self.get_logger().info(f'Temperatura: {json.loads(msg.data)}')
+        broadcast(msg.data)
+
 
     def emergency(self):
         self.get_logger().info('PARADA DE EMERGÊNCIA ATIVADA')
