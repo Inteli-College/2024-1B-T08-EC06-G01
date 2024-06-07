@@ -31,6 +31,7 @@ class WebSocketServer:
 
     def broadcast(self, message):
         """Synchronous wrapper for the asynchronous _broadcast function."""
+        print(f"Broadcasting message: {message}")
         if self.loop:
             asyncio.run_coroutine_threadsafe(self._broadcast(message), self.loop)
 

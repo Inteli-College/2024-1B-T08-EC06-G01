@@ -47,6 +47,7 @@ class Robot:
 		await self.websocket.send(data)
 
 	async def _broadcast(self, message):
+		print(f"Broadcasting message to {len(self.clients)} clients: {message}")
 		if self.clients:
 			await asyncio.gather(*[client.send_text(message) for client in self.clients])
 
