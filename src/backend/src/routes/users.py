@@ -67,7 +67,7 @@ async def create_log(user_id, username):
     print("Criando log")
     print(user_id, username)
     try:
-        print("ebtrei no try")
+        print("entrei no try")
         
         current_time = datetime.now(tz=timezone('America/Sao_Paulo'))
         print(current_time)
