@@ -3,7 +3,7 @@ title: "Teste de funcionalidade"
 position: 1
 ---
 
-Esta seção visa documentar os testes realizados em conformidade com o RF3 (Requisito Funcional 3), relacionado à interface gráfica.
+&emsp;Esta seção visa documentar os testes realizados em conformidade com o RF3 (Requisito Funcional 3), relacionado à interface gráfica.
 
 O requisito em questão foi definido da seguinte maneira:
 
@@ -106,4 +106,4 @@ Embora o não acionamento do pop-up seja um problema para o feedback do usuário
 
 Em dois casos foi mencionado que a posição do botão de emergência não era evidente na interface, o que pode ser um problema. No entanto, se sua função principal for garantida, essa melhoria possui baixo grau de prioridade. Ainda assim, o local do botão pode ser ajustado para ficar mais confortável para o usuário.
 
-A análise dos testes e o feedback dos usuários revelaram pontos críticos que precisam ser abordados para melhorar a usabilidade e a segurança do sistema. A latência na transmissão de dados e o funcionamento do botão de emergência são as prioridades mais altas e necessitam de atenção imediata. Melhorias de médio e baixo impacto, como o acionamento do pop-up de aviso e a posição do botão de emergência, também devem ser consideradas para aprimorar a experiência do usuário. Implementar essas melhorias garantirá um sistema mais eficiente, seguro e intuitivo.
+&emsp;A análise dos testes e o feedback dos usuários revelaram pontos críticos que precisam ser abordados para melhorar a usabilidade e a segurança do sistema. A latência na transmissão de dados e o funcionamento do botão de emergência são as prioridades mais altas e necessitam de atenção imediata. Melhorias de médio e baixo impacto, como o acionamento do pop-up de aviso e a posição do botão de emergência, também devem ser consideradas para aprimorar a experiência do usuário. Implementar essas melhorias garantirá um sistema mais eficiente, seguro e intuitivo.
