@@ -59,45 +59,12 @@ class Camera:
 
             # Printar o probs
             print("Probs:", results.probs)
-
-            object_to_detect = "cell phone"
-
-            # for box in results.boxes:
-            #     class_id = results.names[box.cls[0].item()]
-            #     # cords = box.xyxy[0].tolist()
-            #     # cords = [round(x) for x in cords]
-            #     # conf = round(box.conf[0].item(), 2)
-            #     # print("Object type:", class_id)
-            #     # print("Coordinates:", cords)
-            #     # print("Probability:", conf)
-            #     # print("---")
-
-            #     if class_id == object_to_detect:
-            #         # await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
-            #         #     "message": "Pessoa detectada"
-            #         # }}))
-                    
-            #         print(f"{object_to_detect} detectada")
-
-            #         await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
-            #             "message": f"{object_to_detect} detectada"
-            #         }}))
-
-            # # Randomizar se detectou ou não
-            # detected = np.random.choice([True, False], p=[0.1, 0.9])
-            # if detected:
-            #     # print("Sujeira detectada")
-
-            #     await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
-            #         "message": "Sujeira detectada"
-            #     }}))
-            # # else:
-            #     # print("Nenhuma sujeira detectada")
-
-            #     # await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
-            #     #     "message": "Nenhuma sujeira detectada"
-            #     # }}))
-
+            
+            # Detectar se foi detectado sujeira ou não
+            if results.names[0] is not None:
+                await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+                    "message": "Sujeira detectada"
+                }}))
 
     async def add_client(self, client: WebSocket):
         self.clients.add(client)
