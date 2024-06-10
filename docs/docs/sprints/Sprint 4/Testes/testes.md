@@ -5,7 +5,7 @@ position: 1
 
 &emsp;Esta seção visa documentar os testes realizados em conformidade com o RF3 (Requisito Funcional 3), relacionado à interface gráfica.
 
-O requisito em questão foi definido da seguinte maneira:
+&emsp;O requisito em questão foi definido da seguinte maneira:
 
 **RF3 - Interface Gráfica**
 
@@ -13,7 +13,7 @@ O requisito em questão foi definido da seguinte maneira:
 
 - **Visualização em Tempo Real:** A interface deve oferecer uma visualização em tempo real das imagens capturadas pela câmera do robô, permitindo que os operadores acompanhem a operação de forma contínua. Essa visualização deve ser clara e detalhada, garantindo que os operadores possam movimentar o robô com precisão por meio da interface gráfica.
 
-Com o propósito de testar a funcionalidade mencionada anteriormente, foram elaborados os seguintes casos de teste, que têm o objetivo de destacar os pontos que devem ser observados para localizar possíveis melhorias, a fim de cumprir o requisito com sucesso. Esses casos de teste servem como base para a elaboração do roteiro de testes, que definirá os desafios que os usuários devem enfrentar para garantir que passem por todos os casos.
+&emsp;Com o propósito de testar a funcionalidade mencionada anteriormente, foram elaborados os seguintes casos de teste, que têm o objetivo de destacar os pontos que devem ser observados para localizar possíveis melhorias, a fim de cumprir o requisito com sucesso. Esses casos de teste servem como base para a elaboração do roteiro de testes, que definirá os desafios que os usuários devem enfrentar para garantir que passem por todos os casos.
 
 ## Casos de teste
 
@@ -42,17 +42,17 @@ Com o propósito de testar a funcionalidade mencionada anteriormente, foram elab
 | **Resultados Esperados**| Espera-se que o usuário consiga visualizar claramente a parte frontal do ambiente em que o robô está operando, além de acompanhar sua movimentação sem atrasos significativos. |
 
 
-Para garantir a verificação dos casos de teste delineados anteriormente, elaborou-se o seguinte roteiro de teste, aplicado a 4 usuários distintos, e os resultados foram registrados em cada caso.
+&emsp;Para garantir a verificação dos casos de teste delineados anteriormente, elaborou-se o seguinte roteiro de teste, aplicado a 4 usuários distintos, e os resultados foram registrados em cada caso.
 
 ## Roteiro de Teste
 
 Olá, usuário!
 
-Este documento apresenta uma série de desafios elaborados para testar o funcionamento de uma das funcionalidades fundamentais de nossa solução, que envolve a operação de um robô por meio de uma interface gráfica e a detecção de dados como temperatura e localização.
+&emsp;Este documento apresenta uma série de desafios elaborados para testar o funcionamento de uma das funcionalidades fundamentais de nossa solução, que envolve a operação de um robô por meio de uma interface gráfica e a detecção de dados como temperatura e localização.
 
-Abaixo, listamos cada desafio relacionado à funcionalidade básica que desejamos testar. Espera-se que os desafios sejam realizados na ordem apresentada. Caso encontre dificuldades em completar algum deles, sinta-se à vontade para prosseguir para o próximo.
+&emsp;Abaixo, listamos cada desafio relacionado à funcionalidade básica que desejamos testar. Espera-se que os desafios sejam realizados na ordem apresentada. Caso encontre dificuldades em completar algum deles, sinta-se à vontade para prosseguir para o próximo.
 
-Durante o teste, duas pessoas estarão acompanhando você: uma com quem você interagirá e que explicará os desafios, e outra que registrará os resultados apresentados.
+&emsp;Durante o teste, duas pessoas estarão acompanhando você: uma com quem você interagirá e que explicará os desafios, e outra que registrará os resultados apresentados.
 
 **Desafios**
 
@@ -66,7 +66,7 @@ Durante o teste, duas pessoas estarão acompanhando você: uma com quem você in
 
 ## Resultado dos testes
 
-A seguir, é possível visualizar a tabela com os resultados
+&emsp;A seguir, é possível visualizar a tabela com os resultados
 
 | Usuário          | Ocupação                          | Número do Desafio | Foi possível completar o desafio | Observação                                                                                                                                  | Sugestão do Usuário                                                                                         |
 |------------------|-----------------------------------|-------------------|----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
@@ -88,22 +88,22 @@ A seguir, é possível visualizar a tabela com os resultados
 |                  |                                   | 04                | Não                              | O botão, mesmo após pressionado, não interrompeu a movimentação do robô                                                                      |                                                                                                                                      
  ## Melhorias e Pontos de Observação
 
-Com base nos testes realizados com os usuários e no feedback obtido, tanto por meio de sugestões quanto por observações dos comportamentos dos usuários durante a interação com a interface, é importante ressaltar as seguintes melhorias:
+&emsp;Com base nos testes realizados com os usuários e no feedback obtido, tanto por meio de sugestões quanto por observações dos comportamentos dos usuários durante a interação com a interface, é importante ressaltar as seguintes melhorias:
 
 **Melhoria na Latência** - Alto Grau de Prioridade
 
-A latência da transmissão dos dados da câmera é um ponto crítico, sendo apresentada como um problema recorrente durante os testes. Isso impacta diretamente a funcionalidade do sistema, impedindo a conclusão bem-sucedida do terceiro caso de teste e a operação eficiente do robô de forma teleoperada.
+&emsp;A latência da transmissão dos dados da câmera é um ponto crítico, sendo apresentada como um problema recorrente durante os testes. Isso impacta diretamente a funcionalidade do sistema, impedindo a conclusão bem-sucedida do terceiro caso de teste e a operação eficiente do robô de forma teleoperada.
 
 **Funcionamento do Botão de Emergência** - Alto Grau de Prioridade
 
-O botão de emergência apresentou problemas de funcionamento de forma recorrente nos testes, demonstrando que o segundo caso de teste não foi concluído com êxito. Se não for corrigido, isso impedirá a parada total do robô em situações de emergência.
+&emsp;O botão de emergência apresentou problemas de funcionamento de forma recorrente nos testes, demonstrando que o segundo caso de teste não foi concluído com êxito. Se não for corrigido, isso impedirá a parada total do robô em situações de emergência.
 
 **Pop-up de Aviso ao Encontrar Impedimento** - Médio Grau de Prioridade
 
-Embora o não acionamento do pop-up seja um problema para o feedback do usuário, pois pode ser interpretado como um erro de funcionamento ao invés de uma parada proposital para evitar colisões, a funcionalidade principal foi concluída com sucesso.
+&emsp;Embora o não acionamento do pop-up seja um problema para o feedback do usuário, pois pode ser interpretado como um erro de funcionamento ao invés de uma parada proposital para evitar colisões, a funcionalidade principal foi concluída com sucesso.
 
 **Posição do Botão de Emergência** - Baixo Grau de Prioridade
 
-Em dois casos foi mencionado que a posição do botão de emergência não era evidente na interface, o que pode ser um problema. No entanto, se sua função principal for garantida, essa melhoria possui baixo grau de prioridade. Ainda assim, o local do botão pode ser ajustado para ficar mais confortável para o usuário.
+&emsp;Em dois casos foi mencionado que a posição do botão de emergência não era evidente na interface, o que pode ser um problema. No entanto, se sua função principal for garantida, essa melhoria possui baixo grau de prioridade. Ainda assim, o local do botão pode ser ajustado para ficar mais confortável para o usuário.
 
 &emsp;A análise dos testes e o feedback dos usuários revelaram pontos críticos que precisam ser abordados para melhorar a usabilidade e a segurança do sistema. A latência na transmissão de dados e o funcionamento do botão de emergência são as prioridades mais altas e necessitam de atenção imediata. Melhorias de médio e baixo impacto, como o acionamento do pop-up de aviso e a posição do botão de emergência, também devem ser consideradas para aprimorar a experiência do usuário. Implementar essas melhorias garantirá um sistema mais eficiente, seguro e intuitivo.
