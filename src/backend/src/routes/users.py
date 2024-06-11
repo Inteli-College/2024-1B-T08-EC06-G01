@@ -5,6 +5,10 @@ from fastapi.responses import JSONResponse
 from models.users import User as UserModel
 from schemas.users import User
 from utils.crypto import get_password_hash, verify_password
+from models.logs import Log as LogModel
+from schemas.logs import Log
+from pytz import timezone
+from datetime import datetime
 
 router = APIRouter(
 	prefix="/users",
@@ -13,38 +17,78 @@ router = APIRouter(
 
 @router.post("/register")
 async def register(user: User):
-	try:
-		await UserModel.objects.create(
-			username=user.username,
-			password=get_password_hash(user.password),
-			admin=False
-		)
-		return JSONResponse(content={
-			"error": False,
-			"message": "Usuário criado com sucesso"
-		}, status_code=201)
-	except Exception as e:
-		return JSONResponse(content={
-			"error": True,
-			"message": f"Erro interno do servidor: {e}"
-		}, status_code=500)
+    try:
+        existing_user = await UserModel.objects.get_or_none(username=user.username)
+        if existing_user:
+            return JSONResponse(content={
+                "error": True,
+                "message": "Usuário já existe"
+            }, status_code=400)
+
+        await UserModel.objects.create(
+            username=user.username,
+            password=get_password_hash(user.password),
+            admin=False
+        )
+        return JSONResponse(content={
+            "error": False,
+            "message": "Usuário criado com sucesso"
+        }, status_code=201)
+    except Exception as e:
+        return JSONResponse(content={
+            "error": True,
+            "message": f"Erro interno do servidor: {e}"
+        }, status_code=500)
+
 
 @router.post("/login")
 async def login(user: User):
 	try:
 		result = await UserModel.objects.get(username=user.username)
-
+		print(result)
+		print(result.password)
 		if verify_password(user.password, result.password):
+			print("Senha válida")	
+			print(result.id, result.username)
+			await create_log(result.id, result.username)
 			return result
 		else:
 			return {"error": "Invalid password"}
 	except ormar.exceptions.NoMatch:
+		print("Usuário não encontrado")
 		return {"error": "User not found"}
 	except Exception as e:
 		return JSONResponse(content={
 			"error": True,
 			"message": f"Erro interno do servidor: {e}"
 		}, status_code=500)
+	
+async def create_log(user_id, username):
+    print("Criando log")
+    print(user_id, username)
+    try:
+        print("entrei no try")
+        
+        current_time = datetime.now(tz=timezone('America/Sao_Paulo'))
+        print(current_time)
+        current_time_naive = current_time.replace(tzinfo=None)
+
+        await LogModel.objects.create(
+            date=current_time_naive,
+            emergency_button=False,
+            ia_request=False,
+            user_id=user_id,
+            username=username
+        )
+        print("Log criado com sucesso")
+    except Exception as e:
+        print(f"Erro ao criar log: {e}")
+        return JSONResponse(content={
+            "error": True,
+            "message": f"Erro interno do servidor: {e}"
+        }, status_code=500)
+
+
 
 @router.get("/list")
 async def list():

@@ -2,6 +2,11 @@ import asyncio
 import json
 import os
 
+from utils.crypto import get_password_hash
+from models.temp import Temp as TempModel
+from models.robots import Robot as RobotModel
+from models.users import User as UserModel
+from models.location import Location as LocationModel
 import websockets
 from fastapi import WebSocket
 from websockets.exceptions import ConnectionClosedError
@@ -22,8 +27,53 @@ class Robot:
 	async def _broadcast_forever(self):
 		"""Listen for messages from the WebSocket and broadcast them to all connected clients."""
 		try:
+			if not await UserModel.objects.get(id=1):
+				await UserModel.objects.create(
+					id = 1,
+					username="admin",
+					password=get_password_hash('admin'),
+					admin = True
+				)
+		except:
+			await UserModel.objects.create(
+				id = 1,
+				username="admin",
+				password=get_password_hash('admin'),
+				admin = True
+			)
+
+		try:
+			if not await RobotModel.objects.get(id=1):
+				await RobotModel.objects.create(
+					id = 1,
+					name="Default Robot",
+					user_id=1
+				)
+		except:
+			await RobotModel.objects.create(
+				id = 1,
+				name="Default Robot",
+				user_id=1
+			)
+
+		try:
 			async for message in self.websocket: # type: ignore
 				await self._broadcast(message)
+
+				jsonified = json.loads(message)
+				if 'temperature' in jsonified:
+					await TempModel.objects.create(
+						temp=float(jsonified['temperature']),
+						robot_id=1 # todo change
+					)
+
+				if 'position' in jsonified:
+					await LocationModel.objects.create(
+						location_x = jsonified['position']['x'],
+						location_y = jsonified['position']['y'],
+						robot_id = 1 # todo change
+					)
+
 		except ConnectionClosedError:
 			print("Connection to robot has been lost, attempting to reconnect...")
 			await self._broadcast(json.dumps({ "type": "SPacketError", "data": {
@@ -47,6 +97,7 @@ class Robot:
 		await self.websocket.send(data)
 
 	async def _broadcast(self, message):
+		print(f"Broadcasting message to {len(self.clients)} clients: {message}")
 		if self.clients:
 			await asyncio.gather(*[client.send_text(message) for client in self.clients])
 

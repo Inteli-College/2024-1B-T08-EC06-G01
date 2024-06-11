@@ -5,3 +5,6 @@ passlib[bcrypt]==1.7.4
 ormar==0.20.0
 asyncpg==0.29.0
 gunicorn==22.0.0
+opencv-python
+pytz==2021.3
+ultralytics

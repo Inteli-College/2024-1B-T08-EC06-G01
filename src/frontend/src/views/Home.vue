@@ -7,15 +7,25 @@
       <div class="heatmap"></div>
     </div>
     <div class="column2">
-      <div class="dropdown" @click="toggleDropdown">
-        <button class="dropdown-toggle">
+      <div class="dropdown">
+        <button class="dropdown-toggle" @click="toggleDropdown">
           {{ selectedOption || 'Ordenar por' }}
+          <i class="fas fa-chevron-down" :class="{ 'rotated': isOpen }"></i>
         </button>
+
+        <!-- A lógica dos filtros não está implementada -->
         <div v-if="isOpen" class="dropdown-menu">
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Data')">Data</a>
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Hora')">Hora</a>
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Localização')">Localização</a>
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Temperatura')">Temperatura</a>
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Data')">
+            Data <i class="fas" :class="selectedOption === 'Data' ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+          </a>
+
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Hora')">Data <i class="fas" :class="selectedOption === 'Hora' ? 'fa-chevron-up' : 'fa-chevron-up'"></i></a>
+
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Localização')">Temperatura <i class="fas" :class="selectedOption === 'Temperatura' ? 'fa-chevron-up' : 'fa-chevron-down'"></i></a> 
+
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Temperatura')">
+            Temperatura <i class="fas" :class="selectedOption === 'Temperatura' ? 'fa-chevron-up' : 'fa-chevron-up'"></i>
+          </a>
         </div>
       </div>
       <table class="table">
@@ -25,6 +35,7 @@
             <th>Hora</th>
             <th>Localização</th>
             <th>Temperatura</th>
+            <th>Uso de IA</th>
           </tr>
         </thead>
         <tbody>
@@ -33,60 +44,70 @@
             <td>12:00</td>
             <td>Local A</td>
             <td>25°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>02/06/2022</td>
             <td>13:00</td>
             <td>Local B</td>
             <td>26°C</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Não</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Sim</td>
           </tr>
           <tr>
             <td>03/06/2022</td>
             <td>14:00</td>
             <td>Local C</td>
             <td>27°C</td>
+            <td>Não</td>
           </tr>
         </tbody>
       </table>
@@ -164,7 +185,7 @@ function selectOption(option: string) {
   display: inline-block;
   padding-top: 6.5rem;
   padding-right: 0.6rem;
-  padding-left: 10.4rem;
+  padding-left: 8rem;
 }
 
 .dropdown-toggle {
@@ -179,6 +200,20 @@ function selectOption(option: string) {
   text-align: left;
   padding-left: 0.9rem;
   border-radius: 0.2rem;
+  position: relative;
+  padding-right: 2rem;
+}
+
+.dropdown-toggle i {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+  transition: transform 0.3s;
+}
+
+.rotated {
+  transform: translateY(-50%) rotate(180deg);
 }
 
 .dropdown-menu {
@@ -219,8 +254,8 @@ function selectOption(option: string) {
 }
 
 .table {
-  margin-left: 10.5rem;
-  width: 40rem;
+  margin-left: 8rem;
+  width: 44rem;
   border-collapse: collapse;
   margin-top: 4rem;
   cursor: pointer;

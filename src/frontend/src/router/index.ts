@@ -1,24 +1,41 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
-import About from '../views/About.vue';
+import Register from '../views/Register.vue';
 import Control from '../views/Control.vue';
+import Cadastre from '../views/Cadastre.vue';
+import Login from '../views/Login.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Cadastre',
+    component: Cadastre,
+    meta: { hideSidebar: true }
+  },
+
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: { hideSidebar: true }
+  },
+
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+    
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
+    path: '/control',
+    name: 'Control',
+    component: Control
   },
-    {
-        path: '/control',
-        name: 'Control',
-        component: Control
-    }
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
+  }
 ];
 
 const router = createRouter({

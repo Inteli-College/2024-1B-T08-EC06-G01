@@ -77,6 +77,23 @@
             type: 'error'
         });
       },
+
+      dirtyInfo() {
+        console.log('Dirty Info')
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "dirty"
+          }
+        }))
+
+        return this.$notify({
+            title: 'Dirty',
+            text:'O botão que notifica se a imagem apresenta sujeira ou não foi ativado',
+            type: 'error'
+        });
+      },
+
       moveForward() {
         this.isForwardClicked = true;
         console.log('Moving Forward');
@@ -131,6 +148,8 @@
         this.moveRight();
       } else if (event.key === 'q' || event.key === 'Q') {
         this.emergencyStop();
+      } else if (event.key === 'm' || event.key === 'M') {
+        this.dirtyInfo();
       }
     },
 
@@ -210,6 +229,17 @@
         }
       }
 
+      if ("dirty" in json) {
+        const dirty = json.dirty;
+
+        if (dirty == true)
+          return this.$notify({
+            title: 'Sujeira detectada',
+            text:`A sujeira foi detectada pelo robô`,
+            type: 'warn'
+          });
+      }
+
       console.log(event)
     };
   },
@@ -238,7 +268,7 @@
   }
 
   .clicked {
-    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+    filter: invert(48%) sepia(79%) saturate(276%) hue-rotate(86deg) brightness(118%) contrast(119%);
   }
 
 
