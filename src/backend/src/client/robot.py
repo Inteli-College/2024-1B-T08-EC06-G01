@@ -62,7 +62,7 @@ class Robot:
 				await self._broadcast(message)
 
 				jsonified = json.loads(message)
-				if 'temperature' and 'position' in jsonified:
+				if 'temperature' in jsonified and 'position' in jsonified:
 
 					current_time = datetime.now(tz=timezone('America/Sao_Paulo'))
 					current_time_naive = current_time.replace(tzinfo=None)
