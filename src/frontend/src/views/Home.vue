@@ -33,26 +33,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>01/06/2022</td>
-            <td>12:00</td>
-            <td>Local A</td>
-            <td>25°C</td>
-            <td>Sim</td>
-          </tr>
-          <tr>
-            <td>02/06/2022</td>
-            <td>13:00</td>
-            <td>Local B</td>
-            <td>26°C</td>
-            <td>Não</td>
-          </tr>
-          <tr>
-            <td>03/06/2022</td>
-            <td>14:00</td>
-            <td>Local C</td>
-            <td>27°C</td>
-            <td>Sim</td>
+          <tr v-for="item in items" :key="item.id">
+            <td>{{ item.date }}</td>
+            <td>{{ item.time }}</td>
+            <td>{{ item.location }}</td>
+            <td>{{ item.temp }}°C</td>
+            <td>{{ item.ia_usage }}</td>
           </tr>
         </tbody>
       </table>
@@ -67,6 +53,7 @@ import axios from 'axios';
 const isOpen = ref(false);
 const selectedOption = ref(null);
 const heatmapImage = ref(null);
+const items = ref([]);
 
 function toggleDropdown() {
   isOpen.value = !isOpen.value;
@@ -77,17 +64,22 @@ function selectOption(option) {
   isOpen.value = false;
 }
 
-async function fetchHeatmap() {
+async function fetchData() {
   try {
-    const response = await axios.get('http://localhost:8000/heatmap');
-    heatmapImage.value = response.data.image;
+    const response = await axios.get('http://localhost:8000/temp/list');
+    if (response.data.error) {
+      console.error('Erro ao buscar dados:', response.data.message);
+    } else {
+      items.value = response.data.data;
+      heatmapImage.value = response.data.heatmap;
+    }
   } catch (error) {
-    console.error('Erro ao buscar o heatmap:', error);
+    console.error('Erro ao buscar dados:', error);
   }
 }
 
 onMounted(() => {
-  fetchHeatmap();
+  fetchData();
 });
 </script>
 
