@@ -10,5 +10,7 @@ class Temp(Model):
     
     id = Integer(primary_key=True, autoincrement=True)
     temp = Float()
+    location_x = Float()
+    location_y = Float()
     robot_id: Optional[Robot] = ForeignKey(Robot)
     date = DateTime(default=datetime.now)

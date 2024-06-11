@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 from models.temp import Temp as TempModel
 from schemas.temp import Temp
 from datetime import datetime
-from pytz import timezone	
+from pytz import timezone
 
 router = APIRouter(
 	prefix="/temp",
@@ -21,6 +21,8 @@ async def register(temp: Temp):
 		await TempModel.objects.create(
 			temp=temp.temp,
 			robot_id=temp.robot_id,
+			location_x=temp.location_x,
+			location_y=temp.location_y,
 			date=current_time_naive,
 		)
 		return JSONResponse(content={
@@ -63,7 +65,7 @@ async def list():
 			"error": True,
 			"message": f"Erro interno do servidor: {e}"
 		}, status_code=500)
-
+	
 @router.get("/get/{temp_id}")
 async def get(temp_id : int):
 	try: 
@@ -107,7 +109,7 @@ async def update(temp_id: int, temp: Temp):
 
 		if 'date' in update_data:
 			del update_data['date']
-			
+
 		for key, value in update_data.items():
 			setattr(existing_temp, key, value)
 
@@ -147,7 +149,3 @@ async def delete(temp_id: int):
 			"error": True,
 			"message": f"Erro interno do servidor: {e}"
 		}, status_code=500)
-
-
-
-
