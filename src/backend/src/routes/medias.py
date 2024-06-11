@@ -74,16 +74,26 @@ async def list():
 @router.get("/get/{media_id}")
 async def get(media_id: uuid.UUID):
     try:
-        await MediaModel.objects.get(uuid=media_id)
+        media = await MediaModel.objects.get(uuid=media_id)
+
+        if not media:
+            return JSONResponse(content={
+                "error": True,
+                "message": "Mídia não encontrada"
+            }, status_code=404)
+        
+        media_dict = media.dict()
+        for key, value in media_dict.items():
+            if isinstance(value, uuid.UUID):
+                media_dict[key] = str(value)
+            if isinstance(value, datetime):
+                media_dict[key] = value.isoformat()
+
         return JSONResponse(content={
             "error": False,
-            "message": "Mídia encontrada"
+            "message": "Mídia encontrada",
+            "data": media_dict
         }, status_code=200)
-    except ormar.NoMatch:
-        return JSONResponse(content={
-            "error": True,
-            "message": "Mídia não encontrada"
-        }, status_code=404)
     except Exception as e:
         return JSONResponse(content={
             "error": True,

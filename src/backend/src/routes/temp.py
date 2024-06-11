@@ -4,6 +4,8 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from models.temp import Temp as TempModel
 from schemas.temp import Temp
+from datetime import datetime
+from pytz import timezone	
 
 router = APIRouter(
 	prefix="/temp",
@@ -13,9 +15,13 @@ router = APIRouter(
 @router.post("/register")
 async def register(temp: Temp):
 	try:
+		current_time = datetime.now(tz=timezone('America/Sao_Paulo'))
+		current_time_naive = current_time.replace(tzinfo=None)
+
 		await TempModel.objects.create(
 			temp=temp.temp,
-			robot_id=temp.robot_id
+			robot_id=temp.robot_id,
+			date=current_time_naive,
 		)
 		return JSONResponse(content={
 			"error": False,
@@ -43,6 +49,8 @@ async def list():
 			for key, value in temp_dict.items():
 				if isinstance(value, float):
 					temp_dict[key] = float(value)
+				if isinstance(value, datetime):
+					temp_dict[key] = value.isoformat()
 			temp_dicts.append(temp_dict)
 
 		return JSONResponse(content={
@@ -71,6 +79,8 @@ async def get(temp_id : int):
 		for key, value in temp_dict.items():
 			if isinstance(value, float):
 				temp_dict[key] = float(value)
+			if isinstance(value, datetime):
+				temp_dict[key] = value.isoformat()
 		
 		return JSONResponse(content={
 			"error": False,
@@ -94,6 +104,10 @@ async def update(temp_id: int, temp: Temp):
 		existing_temp = await TempModel.objects.get(id=temp_id)
 
 		update_data = temp.dict(exclude_unset=True)
+
+		if 'date' in update_data:
+			del update_data['date']
+			
 		for key, value in update_data.items():
 			setattr(existing_temp, key, value)
 

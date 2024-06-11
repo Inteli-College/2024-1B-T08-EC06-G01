@@ -1,7 +1,7 @@
+from datetime import datetime
 from typing import Optional
-
 from database.postgres import base_ormar_config
-from ormar import ForeignKey, Integer, Model, Float
+from ormar import ForeignKey, Integer, Model, Float, DateTime
 from models.robots import Robot
 
 class Location(Model):
@@ -11,3 +11,4 @@ class Location(Model):
     location_x = Float()
     location_y = Float()
     robot_id: Optional[Robot] = ForeignKey(Robot)
+    date = DateTime(default=datetime.now)

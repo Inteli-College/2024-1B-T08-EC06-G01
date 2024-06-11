@@ -4,6 +4,8 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from models.location import Location as LocationModel
 from schemas.location import Location
+from pytz import timezone
+from datetime import datetime
 
 router = APIRouter(
 	prefix="/location",
@@ -13,10 +15,14 @@ router = APIRouter(
 @router.post("/register")
 async def register(location: Location):
 	try:
+		current_time = datetime.now(tz=timezone('America/Sao_Paulo'))
+		current_time_naive = current_time.replace(tzinfo=None)
+
 		await LocationModel.objects.create(
-			location_x = location.location_x,
-			location_y = location.location_y,
-			robot_id = location.robot_id
+			location_x=location.location_x,
+			location_y=location.location_y,
+			robot_id=location.robot_id,
+			date=current_time_naive,
 		)
 		return JSONResponse(content={
 			"error": False,
@@ -43,6 +49,8 @@ async def list():
 			for key, value in location_dict.items():
 				if isinstance(value, float):
 					location_dict[key] = float(value)
+				if isinstance(value, datetime):
+					location_dict[key] = value.isoformat()
 			location_dicts.append(location_dict)
 	
 		return JSONResponse(content={
@@ -73,6 +81,8 @@ async def get(location_id: int):
 		for key, value in location_dict.items():
 			if isinstance(value, float):
 				location_dict[key] = float(value)
+			if isinstance(value, datetime):
+				location_dict[key] = value.isoformat()
 
 		return JSONResponse(content={
 			"error": False,
@@ -86,11 +96,15 @@ async def get(location_id: int):
 		}, status_code=500)
 
 @router.put("/update/{location_id}")
-async def update(location_id: int, location: Location):
+async def update(location_id: int, location_update: Location):
     try:
         existing_location = await LocationModel.objects.get(id=location_id)
         
-        updated_fields = location.dict(exclude_unset=True)
+        updated_fields = location_update.dict(exclude_unset=True)
+
+        if 'date' in updated_fields:
+            del updated_fields['date']
+
         for key, value in updated_fields.items():
             setattr(existing_location, key, value)
 
@@ -110,6 +124,7 @@ async def update(location_id: int, location: Location):
             "error": True,
             "message": f"Erro interno do servidor: {e}"
         }, status_code=500)
+
 
 @router.delete("/delete/{location_id}")
 async def delete(location_id: int):
