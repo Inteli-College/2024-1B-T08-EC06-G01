@@ -27,57 +27,8 @@
           <tr>
             <th>Data</th>
             <th>Hora</th>
-            <th>Localização</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item in items" :key="item.id">
-            <td>{{ item.date }}</td>
-            <td>{{ item.time }}</td>
-            <td>{{ item.location }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <nav class="pagination">
-        <ul class="flex items-center -space-x-px h-10 text-base">
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">
-              <span class="sr-only">Previous</span>
-              <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-300 border border-green-200 hover:bg-green-100 hover:text-gray-700">1</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">2</a>
-          </li>
-          <li>
-            <a href="#" aria-current="page" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">3</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">4</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">5</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">
-              <span class="sr-only">Next</span>
-              <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-              </svg>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <table class="table2">
-        <thead>
-          <tr>
-            <th>Data</th>
-            <th>Hora</th>
+            <th>Localização no eixo X</th>
+            <th>Localização no eixo Y</th>
             <th>Temperatura</th>
           </tr>
         </thead>
@@ -85,11 +36,83 @@
           <tr v-for="item in items" :key="item.id">
             <td>{{ item.date }}</td>
             <td>{{ item.time }}</td>
-            <td>{{ item.temp }}°C</td>
+            <td>{{ item.xlocation }}</td>
+            <td>{{ item.ylocation }}</td>
+            <td>{{ item.temperature }}</td>
+          </tr>
+          <tr>
+            <td>01/06/2022</td>
+            <td>12:00</td>
+            <td>Ponto X</td>
+            <td>Ponto Y</td>
+            <td>25°C</td>
+          </tr>
+          <tr>
+            <td>02/06/2022</td>
+            <td>13:00</td>
+            <td>Ponto 2X</td>
+            <td>Ponto 2Y</td>
+            <td>26°C</td>
+          </tr>
+          <tr>
+            <td>03/06/2022</td>
+            <td>14:00</td>
+            <td>Ponto 3X</td>
+            <td>Ponto 3Y</td>
+            <td>27°C</td>
+          </tr>
+          <tr>
+            <td>03/06/2022</td>
+            <td>14:00</td>
+            <td>Ponto 3X</td>
+            <td>Ponto 3Y</td>
+            <td>27°C</td>
+          </tr>
+          <tr>
+            <td>03/06/2022</td>
+            <td>14:00</td>
+            <td>Ponto 3X</td>
+            <td>Ponto 3Y</td>
+            <td>27°C</td>
+          </tr>
+          <tr>
+            <td>03/06/2022</td>
+            <td>14:00</td>
+            <td>Ponto 3X</td>
+            <td>Ponto 3Y</td>
+            <td>27°C</td>
+          </tr>
+          <tr>
+            <td>03/06/2022</td>
+            <td>14:00</td>
+            <td>Ponto 3X</td>
+            <td>Ponto 3Y</td>
+            <td>27°C</td>
+          </tr>
+          <tr>
+            <td>03/06/2022</td>
+            <td>14:00</td>
+            <td>Ponto 3X</td>
+            <td>Ponto 3Y</td>
+            <td>27°C</td>
+          </tr>
+          <tr>
+            <td>03/06/2022</td>
+            <td>14:00</td>
+            <td>Ponto 3X</td>
+            <td>Ponto 3Y</td>
+            <td>27°C</td>
+          </tr>
+          <tr>
+            <td>03/06/2022</td>
+            <td>14:00</td>
+            <td>Ponto 3X</td>
+            <td>Ponto 3Y</td>
+            <td>27°C</td>
           </tr>
         </tbody>
       </table>
-      <nav class="pagination2">
+      <nav class="pagination">
         <ul class="flex items-center -space-x-px h-10 text-base">
           <li>
             <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">
@@ -320,54 +343,9 @@ onMounted(() => {
   height: 1.8rem;
 }
 
-.table2 {
-  margin-left: 55rem;
-  width: 44rem;
-  border-collapse: collapse;
-  margin-top: -7.1rem;
-  cursor: pointer;
-}
-
-.table2 th, .table2 td {
-  border: 0.06rem solid;
-  padding: 0.5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  text-align: center;
-  font-family: Poppins;
-  font-weight: normal;
-}
-
-.table2 th {
-  background-color: #ffffff;
-}
-
-.table2 tbody tr:nth-child(even) {
-  background-color: #ffffff;
-}
-
-.table2 tbody tr:hover {
-  background-color: #E4FFF0;
-}
-
-.table2 tbody tr:nth-child(odd) {
-  height: 1.8rem;
-}
-
-.table2 tbody tr:nth-child(even) {
-  height: 1.8rem;
-}
-
 .pagination {
   margin-top: 2rem;
   margin-left: 3rem;
-  display: flex;
-  justify-content: center;
-}
-
-.pagination2 {
-  margin-top: 2rem;
-  margin-left: 65rem;
   display: flex;
   justify-content: center;
 }
