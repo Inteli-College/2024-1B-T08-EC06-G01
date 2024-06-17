@@ -33,112 +33,30 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in items" :key="item.id">
+          <tr v-for="item in paginatedItems" :key="item.id">
             <td>{{ item.date }}</td>
             <td>{{ item.time }}</td>
             <td>{{ item.xlocation }}</td>
             <td>{{ item.ylocation }}</td>
             <td>{{ item.temperature }}</td>
           </tr>
-          <tr>
-            <td>01/06/2022</td>
-            <td>12:00</td>
-            <td>Ponto X</td>
-            <td>Ponto Y</td>
-            <td>25°C</td>
-          </tr>
-          <tr>
-            <td>02/06/2022</td>
-            <td>13:00</td>
-            <td>Ponto 2X</td>
-            <td>Ponto 2Y</td>
-            <td>26°C</td>
-          </tr>
-          <tr>
-            <td>03/06/2022</td>
-            <td>14:00</td>
-            <td>Ponto 3X</td>
-            <td>Ponto 3Y</td>
-            <td>27°C</td>
-          </tr>
-          <tr>
-            <td>03/06/2022</td>
-            <td>14:00</td>
-            <td>Ponto 3X</td>
-            <td>Ponto 3Y</td>
-            <td>27°C</td>
-          </tr>
-          <tr>
-            <td>03/06/2022</td>
-            <td>14:00</td>
-            <td>Ponto 3X</td>
-            <td>Ponto 3Y</td>
-            <td>27°C</td>
-          </tr>
-          <tr>
-            <td>03/06/2022</td>
-            <td>14:00</td>
-            <td>Ponto 3X</td>
-            <td>Ponto 3Y</td>
-            <td>27°C</td>
-          </tr>
-          <tr>
-            <td>03/06/2022</td>
-            <td>14:00</td>
-            <td>Ponto 3X</td>
-            <td>Ponto 3Y</td>
-            <td>27°C</td>
-          </tr>
-          <tr>
-            <td>03/06/2022</td>
-            <td>14:00</td>
-            <td>Ponto 3X</td>
-            <td>Ponto 3Y</td>
-            <td>27°C</td>
-          </tr>
-          <tr>
-            <td>03/06/2022</td>
-            <td>14:00</td>
-            <td>Ponto 3X</td>
-            <td>Ponto 3Y</td>
-            <td>27°C</td>
-          </tr>
-          <tr>
-            <td>03/06/2022</td>
-            <td>14:00</td>
-            <td>Ponto 3X</td>
-            <td>Ponto 3Y</td>
-            <td>27°C</td>
-          </tr>
         </tbody>
       </table>
       <nav class="pagination">
         <ul class="flex items-center -space-x-px h-10 text-base">
           <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">
+            <a href="#" @click.prevent="changePage(currentPage - 1)" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700" :class="{ 'disabled': currentPage === 1 }">
               <span class="sr-only">Previous</span>
               <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
               </svg>
             </a>
           </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-300 border border-green-200 hover:bg-green-100 hover:text-gray-700">1</a>
+          <li v-for="page in totalPages" :key="page">
+            <a href="#" @click.prevent="changePage(page)" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-300 border border-green-200 hover:bg-green-100 hover:text-gray-700" :class="{ 'active': currentPage === page }">{{ page }}</a>
           </li>
           <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">2</a>
-          </li>
-          <li>
-            <a href="#" aria-current="page" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">3</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">4</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">5</a>
-          </li>
-          <li>
-            <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700">
+            <a href="#" @click.prevent="changePage(currentPage + 1)" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-green-400 border border-green-300 hover:bg-green-100 hover:text-gray-700" :class="{ 'disabled': currentPage === totalPages }">
               <span class="sr-only">Next</span>
               <svg class="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
@@ -152,13 +70,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 
 const isOpen = ref(false);
 const selectedOption = ref(null);
 const heatmapImage = ref(null);
 const items = ref([]);
+const currentPage = ref(1);
+const itemsPerPage = ref(5); // Quantidade de itens por página
 
 function toggleDropdown() {
   isOpen.value = !isOpen.value;
@@ -169,22 +89,41 @@ function selectOption(option) {
   isOpen.value = false;
 }
 
-async function fetchData() {
-  try {
-    const response = await axios.get('http://localhost:8000/temp/list');
-    if (response.data.error) {
-      console.error('Erro ao buscar dados:', response.data.message);
-    } else {
-      items.value = response.data.data;
-      heatmapImage.value = response.data.heatmap;
-    }
-  } catch (error) {
-    console.error('Erro ao buscar dados:', error);
-  }
+// Dados de exemplo para testar paginação
+const exampleData = [
+  { id: 1, date: '01/06/2022', time: '12:00', xlocation: 'Ponto X', ylocation: 'Ponto Y', temperature: '25°C' },
+  { id: 2, date: '02/06/2022', time: '13:00', xlocation: 'Ponto 2X', ylocation: 'Ponto 2Y', temperature: '26°C' },
+  { id: 3, date: '03/06/2022', time: '14:00', xlocation: 'Ponto 3X', ylocation: 'Ponto 3Y', temperature: '27°C' },
+  { id: 4, date: '04/06/2022', time: '15:00', xlocation: 'Ponto 4X', ylocation: 'Ponto 4Y', temperature: '28°C' },
+  { id: 5, date: '05/06/2022', time: '16:00', xlocation: 'Ponto 5X', ylocation: 'Ponto 5Y', temperature: '29°C' },
+  { id: 6, date: '06/06/2022', time: '17:00', xlocation: 'Ponto 6X', ylocation: 'Ponto 6Y', temperature: '30°C' },
+  { id: 7, date: '07/06/2022', time: '18:00', xlocation: 'Ponto 7X', ylocation: 'Ponto 7Y', temperature: '31°C' },
+  { id: 8, date: '08/06/2022', time: '19:00', xlocation: 'Ponto 8X', ylocation: 'Ponto 8Y', temperature: '32°C' },
+  { id: 9, date: '09/06/2022', time: '20:00', xlocation: 'Ponto 9X', ylocation: 'Ponto 9Y', temperature: '33°C' },
+  { id: 10, date: '10/06/2022', time: '21:00', xlocation: 'Ponto 10X', ylocation: 'Ponto 10Y', temperature: '34°C' },
+];
+
+// Use exampleData para preencher items para testar paginação
+items.value = exampleData;
+
+// Computed properties para paginação
+const paginatedItems = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return items.value.slice(start, end);
+});
+
+const totalPages = computed(() => {
+  return Math.ceil(items.value.length / itemsPerPage.value);
+});
+
+function changePage(page) {
+  if (page < 1 || page > totalPages.value) return;
+  currentPage.value = page;
 }
 
 onMounted(() => {
-  fetchData();
+  // fetchData(); Descomente isto e remova a linha items.value = exampleData; se quiser usar dados reais da API.
 });
 </script>
 
@@ -350,4 +289,13 @@ onMounted(() => {
   justify-content: center;
 }
 
+.pagination a.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.pagination a.active {
+  background-color: #4CDD8B;
+  color: white;
+}
 </style>
