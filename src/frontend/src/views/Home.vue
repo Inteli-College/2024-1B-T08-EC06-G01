@@ -16,10 +16,8 @@
           <i class="fas fa-chevron-down" :class="{ 'rotated': isOpen }"></i>
         </button>
         <div v-if="isOpen" class="dropdown-menu">
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Data')">Data</a>
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Hora')">Hora</a>
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Localização')">Localização</a>
-          <a href="#" class="dropdown-item" @click.prevent="selectOption('Temperatura')">Temperatura</a>
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Data Crescente')">Data Crescente</a>
+          <a href="#" class="dropdown-item" @click.prevent="selectOption('Data Decrescente')">Data Decrescente</a>
         </div>
       </div>
       <table class="table">
@@ -83,10 +81,33 @@ const itemsPerPage = ref(5); // Quantidade de itens por página
 function toggleDropdown() {
   isOpen.value = !isOpen.value;
 }
+// Isto foi comentado para testar a paginação com dados de exemplo 
+
+// async function fetchData() {
+//   try {
+//     const response = await axios.get('http://localhost:8000/temp/list');
+//     if (response.data.error) {
+//       console.error('Erro ao buscar dados:', response.data.message);
+//     } else {
+//       items.value = response.data.data;
+//       heatmapImage.value = response.data.heatmap;
+//     }
+//   } catch (error) {
+//     console.error('Erro ao buscar dados:', error);
+//   }
 
 function selectOption(option) {
   selectedOption.value = option;
   isOpen.value = false;
+  sortItems()
+}
+
+function sortItems() {
+  if (selectedOption.value === 'Data Crescente') {
+    items.value.sort((a, b) => new Date(a.date) - new Date(b.date));
+  } else if (selectedOption.value === 'Data Decrescente') {
+    items.value.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
 }
 
 // Dados de exemplo para testar paginação
@@ -284,7 +305,7 @@ onMounted(() => {
 
 .pagination {
   margin-top: 2rem;
-  margin-left: 3rem;
+  margin-left: -5rem;
   display: flex;
   justify-content: center;
 }
