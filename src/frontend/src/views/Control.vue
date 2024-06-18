@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="flex p-4 bg-white border-gray-300 mt-4 ml-40"> <!-- Removi a classe border-t -->
-    <EmergencyButton/>
+      <EmergencyButton />
       <div class="flex-grow"></div>
       <button @click="logIa" class="bg-green-500 text-white py-2 px-8 rounded mr-12 hover:bg-green-600">
         Verificação de Resíduos
@@ -56,24 +56,10 @@ export default {
   components: {
     CameraComponent,
     TeleopComponent,
-    SensorComponent
+    SensorComponent,
+    EmergencyButton
   },
   methods: {
-    EmergencyStop() {
-        console.log('Emergency Stop')
-        this.websocket.send(JSON.stringify({
-          type: "CPacketControl",
-          data: {
-            state: "emergency"
-          }
-        }))
-
-        return this.$notify({
-            title: 'Emergência',
-            text:'A parada de emergência foi acionada, para continuar movimentando o robô, reinicie o serviço responsável pelo controle do robô',
-            type: 'error'
-        });
-      },
     async logEmergencyStop() {
       console.log('Emergency Stop');
       await this.searchIdLog();
