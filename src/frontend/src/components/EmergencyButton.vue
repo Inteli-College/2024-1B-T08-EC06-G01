@@ -7,27 +7,28 @@
 </template>
 
 <script>
+import { useNotification } from '@kyvg/vue3-notification';
+
 export default {
   name: 'EmergencyButton',
   data() {
-    const websocket = new WebSocket(import.meta.env.VITE_CONTROL_WEBSOCKET);
+    return {
+      websocket: null,
+    };
+  },
+  created() {
+    this.websocket = new WebSocket(import.meta.env.VITE_CONTROL_WEBSOCKET);
 
-    console.log(import.meta.env.VITE_CONTROL_WEBSOCKET);
-
-    websocket.onopen = () => {
+    this.websocket.onopen = () => {
       console.log('Connected to the control websocket');
     };
 
-    websocket.onclose = () => {
+    this.websocket.onclose = () => {
       console.log('Disconnected from the control websocket');
     };
 
-    websocket.onerror = (error) => {
+    this.websocket.onerror = (error) => {
       console.error('Error:', error);
-    };
-
-    return {
-      websocket: websocket,
     };
   },
   methods: {
@@ -40,16 +41,21 @@ export default {
         }
       }));
 
-      if (this.$notify) {
-        console.log('notificação enviada');
-        return this.$notify({
-          title: 'Emergência',
-          text: 'A parada de emergência foi acionada, para continuar movimentando o robô, reinicie o serviço responsável pelo controle do robô',
-          type: 'error'
-        });
-        
-      } else {
-        console.error('Notification plugin is not available');
+      try {
+        const { notify } = useNotification();
+        console.log('Trying to send notification');
+        if (notify) {
+          console.log('notificação enviada');
+          notify({
+            title: 'Emergência',
+            text: 'A parada de emergência foi acionada, para continuar movimentando o robô, reinicie o serviço responsável pelo controle do robô',
+            type: 'error'
+          });
+        } else {
+          console.error('Notification plugin is not available');
+        }
+      } catch (error) {
+        console.error('Error while sending notification:', error);
       }
     },
   },
