@@ -41,12 +41,13 @@ export default {
       }));
 
       if (this.$notify) {
-        this.$notify({
+        console.log('notificação enviada');
+        return this.$notify({
           title: 'Emergência',
           text: 'A parada de emergência foi acionada, para continuar movimentando o robô, reinicie o serviço responsável pelo controle do robô',
           type: 'error'
         });
-        console.log('notificação enviada');
+        
       } else {
         console.error('Notification plugin is not available');
       }
