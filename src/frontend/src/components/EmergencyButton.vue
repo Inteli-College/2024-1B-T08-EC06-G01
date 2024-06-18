@@ -33,31 +33,36 @@ export default {
   },
   methods: {
     emergencyStop() {
+      const { notify } = useNotification();
       console.log('Emergency Stop');
-      this.websocket.send(JSON.stringify({
-        type: "CPacketControl",
-        data: {
-          state: "emergency"
-        }
-      }));
 
-      try {
-        const { notify } = useNotification();
-        console.log('Trying to send notification');
-        if (notify) {
-          console.log('notificação enviada');
-          notify({
-            title: 'Emergência',
-            text: 'A parada de emergência foi acionada, para continuar movimentando o robô, reinicie o serviço responsável pelo controle do robô',
-            type: 'error'
-          });
-        } else {
-          console.error('Notification plugin is not available');
-        }
-      } catch (error) {
-        console.error('Error while sending notification:', error);
+      if (this.websocket.readyState === WebSocket.OPEN) {
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "emergency"
+          }
+        }));
+        notify({
+          group: 'foo',
+          type: 'error',
+          title: 'Emergência',
+          text: 'A parada de emergência foi acionada. Para continuar movimentando o robô, reinicie o serviço responsável pelo controle do robô.'
+        });
+      } else {
+        console.error('WebSocket is not open.');
+        notify({
+          group: 'foo',
+          type: 'error',
+          title: 'Erro',
+          text: 'Não foi possível enviar a parada de emergência. O WebSocket não está conectado.'
+        });
       }
-    },
-  },
+    }
+  }
 };
 </script>
+
+<style scoped>
+/* Adicione seu estilo aqui, se necessário */
+</style>
