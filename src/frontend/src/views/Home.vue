@@ -74,32 +74,31 @@ import axios from 'axios';
 const isOpen = ref(false);
 const selectedOption = ref(null);
 const heatmapImage = ref(null);
-const items = ref([]);
 const currentPage = ref(1);
-const itemsPerPage = ref(5); // Quantidade de itens por página
+const itemsPerPage = ref(5);
 
 function toggleDropdown() {
   isOpen.value = !isOpen.value;
 }
-// Isto foi comentado para testar a paginação com dados de exemplo 
 
-// async function fetchData() {
-//   try {
-//     const response = await axios.get('http://localhost:8000/temp/list');
-//     if (response.data.error) {
-//       console.error('Erro ao buscar dados:', response.data.message);
-//     } else {
-//       items.value = response.data.data;
-//       heatmapImage.value = response.data.heatmap;
-//     }
-//   } catch (error) {
-//     console.error('Erro ao buscar dados:', error);
-//   }
+async function fetchData() {
+  try {
+    const response = await axios.get('http://localhost:8000/temp/list');
+    if (response.data.error) {
+      console.error('Erro ao buscar dados:', response.data.message);
+    } else {
+      items.value = response.data.data;
+      heatmapImage.value = response.data.heatmap;
+    }
+  } catch (error) {
+    console.error('Erro ao buscar dados:', error);
+  }
+}
 
 function selectOption(option) {
   selectedOption.value = option;
   isOpen.value = false;
-  sortItems()
+  sortItems();
 }
 
 function sortItems() {
@@ -110,25 +109,8 @@ function sortItems() {
   }
 }
 
-// Dados de exemplo para testar paginação
-const exampleData = [
-  { id: 1, date: '01/06/2022', time: '12:00', xlocation: 'Ponto X', ylocation: 'Ponto Y', temperature: '25°C' },
-  { id: 2, date: '02/06/2022', time: '13:00', xlocation: 'Ponto 2X', ylocation: 'Ponto 2Y', temperature: '26°C' },
-  { id: 3, date: '03/06/2022', time: '14:00', xlocation: 'Ponto 3X', ylocation: 'Ponto 3Y', temperature: '27°C' },
-  { id: 4, date: '04/06/2022', time: '15:00', xlocation: 'Ponto 4X', ylocation: 'Ponto 4Y', temperature: '28°C' },
-  { id: 5, date: '05/06/2022', time: '16:00', xlocation: 'Ponto 5X', ylocation: 'Ponto 5Y', temperature: '29°C' },
-  { id: 6, date: '06/06/2022', time: '17:00', xlocation: 'Ponto 6X', ylocation: 'Ponto 6Y', temperature: '30°C' },
-  { id: 7, date: '07/06/2022', time: '18:00', xlocation: 'Ponto 7X', ylocation: 'Ponto 7Y', temperature: '31°C' },
-  { id: 8, date: '08/06/2022', time: '19:00', xlocation: 'Ponto 8X', ylocation: 'Ponto 8Y', temperature: '32°C' },
-  { id: 9, date: '09/06/2022', time: '20:00', xlocation: 'Ponto 9X', ylocation: 'Ponto 9Y', temperature: '33°C' },
-  { id: 10, date: '10/06/2022', time: '21:00', xlocation: 'Ponto 10X', ylocation: 'Ponto 10Y', temperature: '34°C' },
-];
-
-// Use exampleData para preencher items para testar paginação
-items.value = exampleData;
-
 // Computed properties para paginação
-const paginatedItems = computed(() => {
+const items = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
   return items.value.slice(start, end);
@@ -144,9 +126,10 @@ function changePage(page) {
 }
 
 onMounted(() => {
-  // fetchData(); Descomente isto e remova a linha items.value = exampleData; se quiser usar dados reais da API.
+  fetchData();
 });
 </script>
+
 
 <style scoped>
 .container {
