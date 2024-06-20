@@ -88,6 +88,7 @@ async function fetchData() {
       return;
     }
     items.value = response.data.data; // Atualiza os dados recebidos da API
+    heatmapImage.value = response.data.heatmap;
     console.log(response.data.data); // Exibe os dados recebidos no console (opcional)
   } catch (error) {
     console.error('Erro ao buscar dados:', error);
