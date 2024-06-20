@@ -8,7 +8,7 @@ import numpy as np
 import websockets
 from fastapi import WebSocket
 from websockets.exceptions import ConnectionClosedError
-from ultralytics import YOLO
+# from ultralytics import YOLO
 
 CAMERA_WEBSOCKET_URL = os.environ.get('CAMERA_WEBSOCKET_URL') or ""
 
@@ -19,7 +19,7 @@ class Camera:
 
         # with open("yolo_v8_n_dirt_detection.pt", "wb") as f:
         #     print('oi eu sou o gustavo')
-        self.yolo_model = YOLO("/app/client/yolo_v8_n_dirt_detection.pt")
+        # self.yolo_model = YOLO("/app/client/yolo_v8_n_dirt_detection.pt")
 
     async def connect(self):
         """Connect to the camera WebSocket and start listening for messages."""
