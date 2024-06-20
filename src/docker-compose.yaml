@@ -42,6 +42,8 @@ services:
       CAMERA_WEBSOCKET_URL: "ws://10.128.0.26:8765"
     ports:
       - "8000:8000"
+    volumes:
+      - ./backend/.venv:/host_data
     depends_on:
       - postgres
     container_name: cannabot-backend
@@ -58,3 +60,9 @@ services:
  #   ports:
  #     - "9000:9000"
  #     - "9001:9001"
+# volumes:
+#   ./backend/.venv:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
