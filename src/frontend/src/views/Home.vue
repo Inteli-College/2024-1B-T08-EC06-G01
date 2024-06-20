@@ -74,7 +74,7 @@ const selectedOption = ref(null);
 const heatmapImage = ref(null);
 const currentPage = ref(1);
 const itemsPerPage = ref(5);
-const items = ref([]); // Defina items como uma variável reativa
+const items = ref([]); // Defina items como uma variável reativa aaaaaa
 
 function toggleDropdown() {
   isOpen.value = !isOpen.value;
