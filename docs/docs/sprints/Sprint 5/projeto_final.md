@@ -40,12 +40,12 @@ Na quinta sprint o objetivo é finalizar o projeto e ajeitar alguns detalhes que
 Na lista abaixo é possível clicar e ter acesso a versão final do projeto de cada uma das partes que o compõem. 
 
 - [Arquitetura](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/arquitetura)
+- [Como utilizar](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/como_util)
 - [Frontend](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/frontend)
 - [Backend](https://inteli-college.github.io/2024-1B-T08-EC06-G01/category/backend-2)
 - [Inteligência Artificial](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/ia)
-- [Operação do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/teleoperacao)
-- [Medição de temperatura](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/sensor_temperatura)
-- [Como utilizar](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/como_util)
+- [Operação do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G01/category/opera%C3%A7%C3%A3o-do-rob%C3%B4)
+
 
 
 Portanto, é possível perceber que ao longo das sprints muitas coisas foram mudando e se adaptando para que, no final, a entrega do projeto esteja funcionando de acordo com as especificações do parceiro.
