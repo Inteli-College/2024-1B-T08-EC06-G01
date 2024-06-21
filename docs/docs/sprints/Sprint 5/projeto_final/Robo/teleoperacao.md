@@ -1,6 +1,6 @@
 ---
 title: "Teleoperação"
-sidebar_position: 6
+sidebar_position: 1
 description: Essa secção detalha o sistema da teleoperação presente no projeto, indicando suas características e mudanças feitas ao longo do projeto.
 ---
 

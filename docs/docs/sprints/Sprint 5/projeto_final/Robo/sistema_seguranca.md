@@ -1,6 +1,6 @@
 ---
 title: "Sistema de segurança"
-position: 5
+position: 2
 ---
 
 &emsp;Este documento descreve o Sistema de Segurança desenvolvido para o projeto Cannabot, com o objetivo de garantir operações seguras do robô e a proteção dos operadores envolvidos. As principais medidas implementadas incluem um botão de parada de emergência e um sistema de detecção de obstáculos com parada automática do robô, visando proporcionar maior controle operacional e prevenir acidentes. A seguir, apresentamos uma análise detalhada do funcionamento de cada uma dessas medidas de segurança.
@@ -13,7 +13,7 @@ position: 5
 
 <p align="center"><b> Figura da Central de Controle</b></p>
 <div align="center">
-  ![](../../../../static/img/sprint5/central_de_controle.png)
+  ![](../../../../../static/img/sprint5/central_de_controle.png)
   <p><b>Fonte:</b> Elaborado por Cannabot</p>
 </div>
 

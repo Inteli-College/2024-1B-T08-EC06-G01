@@ -1,6 +1,6 @@
 ---
-title: "Frontend Finalizado"
-sidebar_position: 2
+title: "Frontend"
+sidebar_position: 3
 description: Essa secção detalha o frontend finalizado, indicando as mudanças feitras ao decorrer do projeto.
 ---
 
