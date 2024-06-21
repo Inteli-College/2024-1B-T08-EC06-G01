@@ -155,8 +155,6 @@ export default {
         ia_request: true
       };
 
-      console.log("Verificação de resíduos ativada");
-
       await axios.put(`http://localhost:8000/logs/update/${id}`, data)
         .then(res => {
           console.log(res.data);

@@ -8,7 +8,6 @@ from sqlalchemy.sql.schema import MetaData
 load_dotenv("./.env")
 
 DATABASE_URL = os.environ.get("DATABASE_URL")
-print(f'DATABASE_URL: {DATABASE_URL}')
 assert DATABASE_URL is not None, "DATABASE_URL is not set"
 
 metadata = MetaData()

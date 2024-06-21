@@ -95,21 +95,20 @@
       },
 
       dirtyInfo() {
-      console.log('Dirty Info')
-      this.websocket.send(JSON.stringify({
-        type: "CPacketControl",
-        data: {
-          state: "dirty"
-        }
-      }))
+        console.log('Dirty Info')
+        this.websocket.send(JSON.stringify({
+          type: "CPacketControl",
+          data: {
+            state: "dirty"
+          }
+        }))
 
-      return this.$notify({
-          title: 'Dirty',
-          text:'O botão que notifica se a imagem apresenta sujeira ou não foi ativado',
-          type: 'info'
-      });
-    },
-
+        return this.$notify({
+            title: 'Dirty',
+            text:'O botão que notifica se a imagem apresenta sujeira ou não foi ativado',
+            type: 'error'
+        });
+      },
 
       moveForward() {
         this.isForwardClicked = true;
@@ -215,7 +214,6 @@
     window.addEventListener('keyup', this.handleKeyup);
     this.websocket.onmessage = (event) => {
       console.log('Message:', event.data);
-      console.log('Parsed:', JSON.parse(event.data));
       const json = JSON.parse(event.data);
 
 
