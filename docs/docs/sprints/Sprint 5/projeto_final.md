@@ -45,7 +45,7 @@ Na lista abaixo é possível clicar e ter acesso a versão final do projeto de c
 - [Inteligência Artificial](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/ia)
 - [Operação do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/teleoperacao)
 - [Medição de temperatura](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/sensor_temperatura)
-- [Como utilizar](www.google.com)
+- [Como utilizar](https://www.inteli.edu.br/quem-somos/)
 
 
 Portanto, é possível perceber que ao longo das sprints muitas coisas foram mudando e se adaptando para que, no final, a entrega do projeto esteja funcionando de acordo com as especificações do parceiro.
