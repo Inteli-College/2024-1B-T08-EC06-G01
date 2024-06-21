@@ -21,11 +21,11 @@ A arquitetura do sistema foi dividida em quartro partes principais, sendo elas: 
 
 ### Robô
 
-O robô é Turtlebot 3, que possui uma Raspberry Pi 4, que é responsável por controlar o robô e processar as imagens capturadas pela câmera. No robô, roda dois websockets, um deles é responsável por enviar as imagens capturadas pela câmera para o frontend e o outro é responsável por receber os comandos de movimentação e enviar os dados do LiDAR para o backend. 
+O robô é Turtlebot 3, que possui uma Raspberry Pi 4, que é responsável por controlar o robô e processar as imagens capturadas pela câmera. No robô, roda dois websockets, um deles é responsável por enviar as imagens capturadas pela câmera para o frontend e o outro é responsável por receber os comandos de movimentação e enviar os dados do LiDAR para o backend. Além disso, instalamos um sensor de temperatura e humidade BME280. O robô também envia os dados da temperatura e humidade para o backend através do websocket.
 
 ### Backend
 
-O nosso backend é feito em Pythom, utilizando o framework FastAPI. O backend está constituído por tanto por um websocket quanto por uma API REST. O websocket é responsável por receber os dados do robô, do LiDAR, enviar os comandos de movimentação para o robô e enviar e receber os comandos do frontend. Já a API REST é responsável por armazenar dados no banco de dados e fornecer esses dados para o frontend. 
+O nosso backend é feito em Pythom, utilizando o framework FastAPI. O backend está constituído por tanto por um websocket quanto por uma API REST. O websocket é responsável por receber os dados do robô, sensor de temperatura e do LiDAR, enviar os comandos de movimentação para o robô e enviar e receber os comandos do frontend. Já a API REST é responsável por armazenar dados no banco de dados e fornecer esses dados para o frontend. 
 
 Além disso, temos nosso banco em PostgreSQL, que é responsável por armazenar os dados do usuário, dados do robô e log de execução. Também temos um bucket MinIO que é responsável por armazenar as imagens capturadas pelo robô.
 
