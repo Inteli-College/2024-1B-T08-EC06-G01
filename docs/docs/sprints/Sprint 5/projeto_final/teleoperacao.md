@@ -1,6 +1,6 @@
 ---
 title: "Teleoperação"
-sidebar_position: 3
+sidebar_position: 6
 description: Essa secção detalha o sistema da teleoperação presente no projeto, indicando suas características e mudanças feitas ao longo do projeto.
 ---
 
@@ -262,6 +262,6 @@ class Robot(Node):
 
 ## Conclusão
 
-&emsp;Dessa forma, é possível comcluir que a implementação do controle de robôs via teleoperação, utilizando tecnologias como WebSocket e FastAPI, permite uma comunicação eficiente e em tempo real entre o operador e o robô. A utilização do WebSocket facilita a comunicação bidirecional entre o cliente e o servidor, permitindo o envio e recebimento de comandos em tempo real. 
+&emsp;Dessa forma, é possível concluir que a implementação do controle de robôs via teleoperação, utilizando tecnologias como WebSocket e FastAPI, permite uma comunicação eficiente e em tempo real entre o operador e o robô. A utilização do WebSocket facilita a comunicação bidirecional entre o cliente e o servidor, permitindo o envio e recebimento de comandos em tempo real. 
 
 &emsp;Para melhorar ainda mais a teleoperação do robô, é possível considerar alguns próximos passos, como por exemplo a redução da latência existente na comunicação, pois quanto mais rápido for a resposta do robô em relação aos comandos do usuário, melhor será a operação do robô. A partir desta melhoria, será possível melhorar a funcionalidade e a segurança do sistema de teleoperação do robô.
