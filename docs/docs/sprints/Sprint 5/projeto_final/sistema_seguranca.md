@@ -3,13 +3,13 @@ title: "Sistema de segurança"
 position: 4
 ---
 
-Este documento descreve o Sistema de Segurança desenvolvido para o projeto Cannabot, com o objetivo de garantir operações seguras do robô e a proteção dos operadores envolvidos. As principais medidas implementadas incluem um botão de parada de emergência e um sistema de detecção de obstáculos com parada automática do robô, visando proporcionar maior controle operacional e prevenir acidentes. A seguir, apresentamos uma análise detalhada do funcionamento de cada uma dessas medidas de segurança.
+&emsp;Este documento descreve o Sistema de Segurança desenvolvido para o projeto Cannabot, com o objetivo de garantir operações seguras do robô e a proteção dos operadores envolvidos. As principais medidas implementadas incluem um botão de parada de emergência e um sistema de detecção de obstáculos com parada automática do robô, visando proporcionar maior controle operacional e prevenir acidentes. A seguir, apresentamos uma análise detalhada do funcionamento de cada uma dessas medidas de segurança.
 
 ## Botão de Parada de Emergência
 
 ### Funcionamento
 
-Durante a Sprint 2, a equipe Cannabot apresentou a primeira versão da funcionalidade de parada de emergência do robô, inicialmente implementada através da interface de linha de comando (CLI). Na Sprint 3, com a introdução da interface de usuário mostrada a seguir, foram realizadas alterações significativas na forma de ativação dessa função.
+&emsp;Durante a Sprint 2, a equipe Cannabot apresentou a primeira versão da funcionalidade de parada de emergência do robô, inicialmente implementada através da interface de linha de comando (CLI). Na Sprint 3, com a introdução da interface de usuário mostrada a seguir, foram realizadas alterações significativas na forma de ativação dessa função.
 
 <p align="center"><b> Figura da Central de Controle</b></p>
 <div align="center">
@@ -17,11 +17,11 @@ Durante a Sprint 2, a equipe Cannabot apresentou a primeira versão da funcional
   <p><b>Fonte:</b> Elaborado por Cannabot</p>
 </div>
 
-No projeto final (sprint 5), mantivemos a ativação da parada de emergência por meio da interface gráfica, conforme a imagem acima. Ao clicar no botão "Modo de Emergência" na tela "Central de Controle" do frontend, o usuário aciona o serviço de emergência. Este serviço Ros, ao ser requisitado, executa a função de parada do robô, fechando a conexão. Dessa forma, mesmo que haja tentativas de movimentar o robô através dos comandos do frontend, ele permanecerá imóvel. A única forma de restabelecer o funcionamento normal é reiniciando o robô manualmente.
+&emsp;No projeto final (sprint 5), mantivemos a ativação da parada de emergência por meio da interface gráfica, conforme a imagem acima. Ao clicar no botão "Modo de Emergência" na tela "Central de Controle" do frontend, o usuário aciona o serviço de emergência. Este serviço Ros, ao ser requisitado, executa a função de parada do robô, fechando a conexão. Dessa forma, mesmo que haja tentativas de movimentar o robô através dos comandos do frontend, ele permanecerá imóvel. A única forma de restabelecer o funcionamento normal é reiniciando o robô manualmente.
 
 ### Implementação do código
  
-Como explicado no documento de teleoperação do robô, foi criado uma classe ("Robot") que tem por objetivo gerenciar os serviços, tópicos e ações relacionadas a ele. Dentro da classe é implementada as seguintes funções:
+&emsp;Como explicado no documento de teleoperação do robô, foi criado uma classe ("Robot") que tem por objetivo gerenciar os serviços, tópicos e ações relacionadas a ele. Dentro da classe é implementada as seguintes funções:
 
 ```Python
     def emergency(self):
@@ -33,9 +33,9 @@ Como explicado no documento de teleoperação do robô, foi criado uma classe ("
         self.get_logger().info('Parando o robô...')
         rclpy.shutdown()
 ```
-A partir da lógica do websocket, quando o botão é pressionado na interface, é enviado uma mensagem de "emergency", responsável por chamar a função explicitada acima e fechando a conexão com o robô.
+&emsp;A partir da lógica do websocket, quando o botão é pressionado na interface, é enviado uma mensagem de "emergency", responsável por chamar a função explicitada acima e fechando a conexão com o robô.
 
-A lógica em questão é evidenciada no código a seguir:
+&emsp;A lógica em questão é evidenciada no código a seguir:
 
 ```Python
 @app.websocket("/ws_control")
@@ -79,7 +79,7 @@ A lógica em questão é evidenciada no código a seguir:
 
 ### Funcionamento
 
-Uma abordagem crucial para garantir a segurança do sistema foi implementada através da detecção de obstáculos à frente ou atrás do robô. Essa funcionalidade desempenha um papel fundamental na prevenção de colisões e na garantia da integridade do equipamento e do ambiente ao seu redor.
+&emsp;Uma abordagem crucial para garantir a segurança do sistema foi implementada através da detecção de obstáculos à frente ou atrás do robô. Essa funcionalidade desempenha um papel fundamental na prevenção de colisões e na garantia da integridade do equipamento e do ambiente ao seu redor.
 
 A detecção de obstáculos permite que o robô reaja de forma proativa, impedindo qualquer movimento em direção a esses obstáculos, mesmo que o usuário tente comandar essa ação. Essa capacidade é especialmente vital em ambientes dinâmicos e imprevisíveis.
 
@@ -97,7 +97,7 @@ Essa abordagem dinâmica permite que o robô ajuste seu comportamento de acordo 
 
 ### Implementação do código
 
-Como explicado no documento de teleoperação do robô, foi criado uma classe ("Robot") que tem por objetivo gerenciar os serviços, tópicos e ações relacionadas a ele. Dentro da classe é implementada a seguinte função, que aplica a lógica do LIDAR explicada anteriormente:
+&emsp;Como explicado no documento de teleoperação do robô, foi criado uma classe ("Robot") que tem por objetivo gerenciar os serviços, tópicos e ações relacionadas a ele. Dentro da classe é implementada a seguinte função, que aplica a lógica do LIDAR explicada anteriormente:
 
 ```Python
 def scan_callback(self, data):
@@ -146,7 +146,7 @@ def scan_callback(self, data):
                 broadcast(json.dumps({'obstacle': 'none'}))
 ```
 
-A partir do código acima, 'possível aplicar a lógica que ira movimentar o robô, explicitada a seguir:
+&emsp;A partir do código acima, 'possível aplicar a lógica que ira movimentar o robô, explicitada a seguir:
 
 ```Python
 def timer_callback(self):
@@ -178,7 +178,7 @@ def timer_callback(self):
         self.publisher.publish(twist)
 ```
 
-Essa função, define a movimentação que o robô irá fazer dependendo do commando recebido pela interface. A lógica que envia esse comando é aplicada no seguinte código referente ao websocket:
+&emsp;Essa função, define a movimentação que o robô irá fazer dependendo do commando recebido pela interface. A lógica que envia esse comando é aplicada no seguinte código referente ao websocket:
 
 ```Python
 @app.websocket("/ws_control")
@@ -218,4 +218,6 @@ Essa função, define a movimentação que o robô irá fazer dependendo do comm
     return app
 ```
 
-Com base no que foi apresentado, é perceptível que o sistema de segurança do projeto Cannabot é uma solução robusta e confiável para garantir a operação segura do robô em ambientes dinâmicos e imprevisíveis. A integração de um botão de parada de emergência e um sistema de detecção de obstáculos com parada automática proporciona um controle preciso e preventivo, minimizando o risco de acidentes e danos. Essas medidas de segurança, detalhadamente implementadas e explicadas neste documento, asseguram que o robô opere de maneira eficiente e segura, protegendo tanto os operadores quanto o próprio equipamento. 
+## Considerações finais
+
+&emsp;Com base no que foi apresentado, é perceptível que o sistema de segurança do projeto Cannabot é uma solução robusta e confiável para garantir a operação segura do robô em ambientes dinâmicos e imprevisíveis. A integração de um botão de parada de emergência e um sistema de detecção de obstáculos com parada automática proporciona um controle preciso e preventivo, minimizando o risco de acidentes e danos. Essas medidas de segurança, detalhadamente implementadas e explicadas neste documento, asseguram que o robô opere de maneira eficiente e segura, protegendo tanto os operadores quanto o próprio equipamento. 
