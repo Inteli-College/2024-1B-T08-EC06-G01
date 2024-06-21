@@ -41,7 +41,7 @@ Na lista abaixo é possível clicar e ter acesso a versão final do projeto de c
 
 - [Arquitetura](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/arquitetura)
 - [Frontend](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/frontend)
-- [Backend](www.google.com)
+- [Backend](https://www.inteli.edu.br/quem-somos/)
 - [Inteligência Artificial](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/ia)
 - [Operação do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/teleoperacao)
 - [Medição de temperatura](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/sensor_temperatura)
