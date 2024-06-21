@@ -161,7 +161,7 @@ class Robot(Node):
         self.get_logger().info(f'Temperatura: {jsonified}')
         broadcast(json.dumps({
             'temperature': jsonified['temperature_celsius'],
-            'position_x': jsonified_position['location_x'], jsonified_position['location_y']
+            'position_x': jsonified_position['location_x'], 'position_y': jsonified_position['location_y']
         }))
 
 
