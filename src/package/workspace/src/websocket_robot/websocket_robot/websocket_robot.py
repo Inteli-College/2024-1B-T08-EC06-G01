@@ -18,7 +18,7 @@ clients = set()
 
 class Robot(Node):
     def __init__(self):
-        super().__init__('ros_turtlebot_teleop') # type: ignore
+        super().__init__('ros_turtlebot_teleop')
 
         self.publisher = self.create_publisher(Twist, '/cmd_vel', 10)
 
@@ -40,12 +40,12 @@ class Robot(Node):
             qos_profile=qos_profile_sensor_data
         )
 
-        self.safe_distance = 0.2 # Distância de segurança em metros
+        self.safe_distance = 0.2  # Distância de segurança em metros
 
         self.timer = self.create_timer(0.1, self.timer_callback)
         self.get_logger().info('Aguardando o estado de prontidão do robô...')
 
-         # Cliente de serviço
+        # Cliente de serviço
         self.cli = self.create_client(Empty, '/emergency_stop_teleop')
         while not self.cli.wait_for_service(timeout_sec=1.0):
             self.get_logger().info('Serviço /emergency_stop_teleop não disponível, esperando...')
@@ -65,38 +65,22 @@ class Robot(Node):
         if min(ranges) <= self.safe_distance:
             min_index = ranges.index(min(ranges))
             numero_indices = len(ranges)
-            # print('Número de índices:', numero_indices)
 
             # Calcular os índices que representam a frente e as traseiras
             valor_A = numero_indices // 4
             valor_B = valor_A * 3
 
-            # print('Valor A:', valor_A)
-            # print('Valor B:', valor_B)
-            # print('Índice:', min_index)
-
-            # Dividir o array de distâncias em frente (de valor_A até valor_B) e trás (de valor_B até o final mais de 0 até valor_A)
             if valor_A < min_index < valor_B:
-                # print("Obstáculo átras")
-                # return {'obstacle': 'back'}
-
                 if self.lidar_data != 'back':
                     print('Obstáculo detectado atrás')
                     self.lidar_data = 'back'
                     broadcast(json.dumps({'obstacle': 'back'}))
             else:
-                # print("Obstáculo na frente")
-                # return {'obstacle': 'front'}
-
                 if self.lidar_data != 'front':
                     print('Obstáculo detectado à frente')
                     self.lidar_data = 'front'
                     broadcast(json.dumps({'obstacle': 'front'}))
         else:
-            # Se não houver obstáculos próximos, continue em frente
-            # print('Nenhum obstáculo detectado')
-            # return {'obstacle': 'none'}
-
             if self.lidar_data != 'none':
                 print('Nenhum obstáculo detectado')
                 self.lidar_data = 'none'
@@ -143,27 +127,28 @@ class Robot(Node):
         self.odom_counter += 1
         self.reported_speed = msg.twist.twist
 
-        if type(msg.pose.pose) == Pose and self.odom_counter % 20 == 0:
+        if self.odom_counter % 20 == 0:
             self.odom_counter = 0
             current_position = msg.pose.pose.position
-            # broadcast(json.dumps({'position': {'x': current_position.x, 'y': current_position.y}}))
-
-            temp_callback(current_position)
+            position_data = {
+                'location_x': current_position.x,
+                'location_y': current_position.y
+            }
+            self.temp_callback(self.temp_data, position_data)
 
         if not self.ready:
             self.ready = True
             self.get_logger().info('Robô disponível! Iniciando teleoperação...')
 
-
     def temp_callback(self, msg, position):
-        jsonified_position = json.loads(position) 
+        jsonified_position = position
         jsonified = json.loads(msg.data)
         self.get_logger().info(f'Temperatura: {jsonified}')
         broadcast(json.dumps({
             'temperature': jsonified['temperature_celsius'],
-            'position_x': jsonified_position['location_x'], 'position_y': jsonified_position['location_y']
+            'position_x': jsonified_position['location_x'],
+            'position_y': jsonified_position['location_y']
         }))
-
 
     def emergency(self):
         self.get_logger().info('PARADA DE EMERGÊNCIA ATIVADA')
@@ -177,7 +162,6 @@ class Robot(Node):
 def ws_app(robot):
     app = FastAPI()
 
-    # Rota para receber comandos de movimento do robô
     @app.websocket("/ws_control")
     async def websocket_endpoint(websocket: WebSocket):
         await websocket.accept()
@@ -186,19 +170,13 @@ def ws_app(robot):
 
         try:
             while True:
-                # Receber o comando de movimento do robô
                 data = await websocket.receive_text()
-
                 print(f"Recebido: {data}")
-
-                # Parse do JSON recebido
                 message_data = json.loads(data)
-                command = message_data['control']  # Comando de movimento
+                command = message_data['control']
                 print(f"Comando: {command}")
-                # Atualizar o estado do robô
 
                 if command not in ['stopped', 'forward', 'left', 'right', 'backward', 'emergency']:
-                    # Enviar mensagem de erro pelo WebSocket
                     await websocket.send_text(json.dumps({'error': 'Comando inválido'}))
                     continue
 
@@ -207,17 +185,6 @@ def ws_app(robot):
                     break
 
                 robot.state = command
-
-                # Enviar aviso de obstaculo
-                # await websocket.send_text(json.dumps(robot.scan_callback()))
-
-                # Verificar se o comando é de parada de emergência
-                #if command == 'emergency_stop':
-                 #   robot.call_emergency_stop_service()
-                #else:
-                    # Atualizar o estado do robô
-                  #  robot.state = command
-
 
         except Exception as e:
             print(f"Erro: {e}")
@@ -235,7 +202,6 @@ def main(args=None):
     rclpy.init(args=args)
     robot = Robot()
 
-    # Iniciar o servidor WebSocket em uma thread separada
     ws_thread = threading.Thread(target=lambda: uvicorn.run(ws_app(robot), host="0.0.0.0", port=3000))
     ws_thread.start()
 
