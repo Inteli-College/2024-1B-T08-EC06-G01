@@ -12,7 +12,7 @@ description: Essa secção detalha o frontend finalizado, indicando as mudanças
 
 <div align="center">
 
-![](../../../../..\docs\static\img\sprint5\)
+![](../../../../..\docs\static\img\sprint5\cadastro.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -22,7 +22,7 @@ Fonte: Elaborado pelo grupo Cannabot
 
 <div align="center">
 
-![](../../../../..\docs\static\img\sprint5\)
+![](../../../../..\docs\static\img\sprint5\login.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -34,7 +34,7 @@ Fonte: Elaborado pelo grupo Cannabot
 
 <div align="center">
 
-![](../../../../..\docs\static\img\sprint5\)
+![](../../../../..\docs\static\img\sprint5\homeside.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -44,7 +44,7 @@ Fonte: Elaborado pelo grupo Cannabot
 
 <div align="center">
 
-![](../../../../..\docs\static\img\sprint5\)
+![](../../../../..\docs\static\img\sprint5\home.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -56,7 +56,7 @@ Fonte: Elaborado pelo grupo Cannabot
 
 <div align="center">
 
-![](../../../../..\docs\static\img\sprint5\)
+![](../../../../..\docs\static\img\sprint3\movement.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -68,15 +68,7 @@ Fonte: Elaborado pelo grupo Cannabot
 
 <div align="center">
 
-![](../../../../..\docs\static\img\sprint5\)
-Fonte: Elaborado pelo grupo Cannabot
-</div>
-
-&emsp;A tabela que está disponível possui as seguintes colunas:
-
-<div align="center">
-
-![](../../../../..\docs\static\img\sprint5\)
+![](../../../../..\docs\static\img\sprint5\uso.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
 
@@ -86,6 +78,6 @@ Fonte: Elaborado pelo grupo Cannabot
 
 <div align="center">
 
-![](../../../../..\docs\static\img\sprint5\)
+![](../../../../..\docs\static\img\sprint5\home.png)
 Fonte: Elaborado pelo grupo Cannabot
 </div>
