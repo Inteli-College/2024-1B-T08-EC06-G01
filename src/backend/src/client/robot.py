@@ -58,22 +58,34 @@ class Robot:
 			)
 
 		try:
+			print('entrei no try')
 			async for message in self.websocket: # type: ignore
 				await self._broadcast(message)
 
-				jsonified = json.loads(message)
-				if 'temperature' in jsonified and 'position' in jsonified:
+				print('oiiiii')
 
+
+				jsonified = json.loads(message)
+				print(f'esse eh o json {jsonified} e essa eh a message {message}')
+				
+				if 'temperature' in jsonified and 'position' in jsonified:
+					print('tamo aki')
+					print(float(jsonified['temperature']))
+					print(jsonified['position']['x'])
+					print(jsonified['position']['y'])
+					
 					current_time = datetime.now(tz=timezone('America/Sao_Paulo'))
 					current_time_naive = current_time.replace(tzinfo=None)
 
 					await TempModel.objects.create(
 						temp=float(jsonified['temperature']),
-						location_x = jsonified['position']['x'],
-						location_y = jsonified['position']['y'],
+						location_x=jsonified['position']['x'],
+						location_y=jsonified['position']['y'],
 						date=current_time_naive,
-						robot_id=1 # todo change
+						robot_id=1  # todo change
 					)
+				else:	
+					print("JSON message does not contain 'temperature' or 'position' keys")
 
 		except ConnectionClosedError:
 			print("Connection to robot has been lost, attempting to reconnect...")

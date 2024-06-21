@@ -146,18 +146,22 @@ class Robot(Node):
         if type(msg.pose.pose) == Pose and self.odom_counter % 20 == 0:
             self.odom_counter = 0
             current_position = msg.pose.pose.position
-            broadcast(json.dumps({'position': {'x': current_position.x, 'y': current_position.y}}))
+            # broadcast(json.dumps({'position': {'x': current_position.x, 'y': current_position.y}}))
+
+            temp_callback(current_position)
 
         if not self.ready:
             self.ready = True
             self.get_logger().info('Robô disponível! Iniciando teleoperação...')
 
 
-    def temp_callback(self, msg):
+    def temp_callback(self, msg, position):
+        jsonified_position = json.loads(position) 
         jsonified = json.loads(msg.data)
         self.get_logger().info(f'Temperatura: {jsonified}')
         broadcast(json.dumps({
-            'temperature': jsonified['temperature_celsius']
+            'temperature': jsonified['temperature_celsius'],
+            'position_x': jsonified_position['location_x'], jsonified_position['location_y']
         }))
 
 
