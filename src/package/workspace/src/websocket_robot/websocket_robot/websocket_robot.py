@@ -113,7 +113,7 @@ class Robot(Node):
 
     def timer_callback(self):
         twist = Twist()
-            print(f'Estado {self.state}')
+        print(f'Estado {self.state}')
         
         match self.state:
             case 'stopped':
