@@ -1,6 +1,6 @@
 ---
 title: "Modelo de Visão Computacional"
-sidebar_position: 1
+sidebar_position: 3
 description: Nessa secção será detalhado como está a implementação do modelo de machine learning utilizando visão computacional.
 ---
 
