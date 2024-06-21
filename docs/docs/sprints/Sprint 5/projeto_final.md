@@ -36,15 +36,16 @@ Durante a terceira sprint foi dado o início no desenvolvimento do [frontend](ht
 
 Além disso, outra parte importante do projeto foi a integração do robô com o [sensor de temperatura](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%204/Sensor/), visto que este é primordial para a geração de dados do projeto e entender como está a situação dentro do reboiler. 
 
-&emsp;Na quinta sprint o objetivo é finalizar o projeto e ajeitar alguns detalhes que faltam para uma entrega bem feita.  
-
+Na quinta sprint o objetivo é finalizar o projeto e ajeitar alguns detalhes que faltam para uma entrega bem feita.  
 Na lista abaixo é possível clicar e ter acesso a versão final do projeto de cada uma das partes que o compõem. 
 
-- [frontend](https://www.inteli.edu.br/)
-- [backend](https://www.inteli.edu.br/)
-- [inteligência artificial](https://www.inteli.edu.br/)
-- [operação do robô](https://www.inteli.edu.br/)
-- [como utilizar](https://www.inteli.edu.br/)
+- [Arquitetura](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/arquitetura)
+- [Frontend](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/frontend)
+- [Backend](www.google.com)
+- [Inteligência Artificial](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/ia)
+- [Operação do robô](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/teleoperacao)
+- [Medição de temperatura](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/sensor_temperatura)
+- [Como utilizar](www.google.com)
 
 
 Portanto, é possível perceber que ao longo das sprints muitas coisas foram mudando e se adaptando para que, no final, a entrega do projeto esteja funcionando de acordo com as especificações do parceiro.
