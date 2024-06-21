@@ -19,7 +19,8 @@ class Camera:
 
         # with open("yolo_v8_n_dirt_detection.pt", "wb") as f:
         #     print('oi eu sou o gustavo')
-        # self.yolo_model = YOLO("/app/client/yolo_v8_n_dirt_detection.pt")
+        
+        self.yolo_model = YOLO("yolo_v8_n_dirt_detection.pt")
 
     async def connect(self):
         """Connect to the camera WebSocket and start listening for messages."""
@@ -48,23 +49,19 @@ class Camera:
             img_data = base64.b64decode(data["bytes"])
             np_arr = np.frombuffer(img_data, np.uint8)
             img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-            results = self.yolo_model.predict(img)  # Rodar o modelo YOLO
-
-            # print("Results:", results)
 
             results = await asyncio.to_thread(self.yolo_model.predict, img)
             results = results[0]
 
-            # print("Results:", results)
-
             # Printar o probs
-            print("Probs:", results.probs)
+            # print("Probs:", results.probs)
             
             # Detectar se foi detectado sujeira ou não
             if results.names[0] is not None:
                 await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
                     "message": "Sujeira detectada"
                 }}))
+    
 
     async def add_client(self, client: WebSocket):
         self.clients.add(client)

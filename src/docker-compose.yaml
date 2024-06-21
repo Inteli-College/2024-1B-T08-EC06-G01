@@ -9,8 +9,6 @@ services:
       VITE_VIDEO_WEBSOCKET: "ws://10.128.0.26:8765/"
     ports:
       - "80:80"
-    depends_on:
-      - backend
     container_name: cannabot-frontend
   postgres:
     build: ./database

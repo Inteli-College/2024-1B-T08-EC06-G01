@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from client.robot import robot
 
-# from client.camera import camera
+from client.camera import camera
 from database.postgres import database
 from routes.router import router
 
@@ -46,11 +46,11 @@ async def lifespan(app: FastAPI):
 				f"Error connecting to robot, please check if the robot is online: {e}"
 			)
 
-		# try:
-		#     await camera.connect()
-		#     print("Camera connected")
-		# except Exception as e:
-		#     print(f"Error connecting to camera, please check if the camera is online: {e}")
+		try:
+		    await camera.connect()
+		    print("Camera connected")
+		except Exception as e:
+		    print(f"Error connecting to camera, please check if the camera is online: {e}")
 
 		yield
 	finally:
@@ -67,7 +67,7 @@ app = FastAPI(lifespan=lifespan)
 
 app.state.database = database
 app.state.robot = robot
-# app.state.camera = camera
+app.state.camera = camera
 
 
 app.include_router(router)
