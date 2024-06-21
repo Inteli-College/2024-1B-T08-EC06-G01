@@ -54,9 +54,9 @@ Portanto, é possível perceber que ao longo das sprints muitas coisas foram mud
 
 &emsp;Durante as últimas 10 semanas, o grupo Cannabot atuou no desenvolvimento de um robô teleoperado para a medição de temperatura e detecção de anomalias dentro de um reboiler, em parceria com a Atvos.
 
-No vídeo abaixo é possível conferir uma demonstração do robô em funcionamento na sua versão mais atual. [![Demonstração](https://img.youtube.com/vi/flXGKFtNTiY/0.jpg)](https://www.youtube.com/watch?v=flXGKFtNTiY)
+No vídeo abaixo é possível conferir uma demonstração do robô em funcionamento na sua versão mais atual. [![Demonstração](https://img.youtube.com/vi/muJQy38vtec/0.jpg)](https://www.youtube.com/watch?v=muJQy38vtec)
 
 
-Além disso, foi criada uma seção de [próximos passos](https://www.inteli.edu.br/), pensada para os funcionários da Atvos que irão continuar o desenvolvimento da solução. Esta seção contém sugestões de features que podem ser implementadas, mas que não fizeram parte do escopo inicial ou não houve tempo suficiente para implementação.
+Além disso, foi criada uma seção de [próximos passos](https://inteli-college.github.io/2024-1B-T08-EC06-G01/sprints/Sprint%205/projeto_final/proximos), pensada para os funcionários da Atvos que irão continuar o desenvolvimento da solução. Esta seção contém sugestões de features que podem ser implementadas, mas que não fizeram parte do escopo inicial ou não houve tempo suficiente para implementação.
 
 

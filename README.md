@@ -104,3 +104,7 @@ Rode o script de instalação e execução automático:
 chmod +x ros-run.bash
 ./ros-run.bash
 ```
+
+## Demonstração da Solução
+
+No vídeo abaixo é possível conferir uma demonstração do robô em funcionamento na sua versão final do projeto. [![Demonstração](https://img.youtube.com/vi/muJQy38vtec/0.jpg)](https://www.youtube.com/watch?v=muJQy38vtec)
