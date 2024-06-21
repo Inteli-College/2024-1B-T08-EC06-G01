@@ -1,6 +1,6 @@
 ---
-title: "Sensor de temperatura do robô"
-sidebar_position: 4
+title: "Sensor de temperatura"
+sidebar_position: 3
 description: Nessa secção será detalhado como foi implementado o sensor de temperatura no robô.
 ---
 
@@ -12,7 +12,7 @@ description: Nessa secção será detalhado como foi implementado o sensor de te
 
 <p align="center"><b>Imagem do Sensor</b></p>
 <div align="center">
-  ![](../../../../static/img/sprint5/sensorBME280.png)
+  ![](../../../../../static/img/sprint5/sensorBME280.png)
   <p><b>Fonte:</b>Imagem retirada do artigo de utilização do sensor do randomnerdtutorials</p>
 </div>
 
@@ -31,7 +31,7 @@ Segue abaixo a imagem da conexão do sensor de temperatura com o Raspberry Pi 4:
 
 <p align="center"><b>Conexão do sensor com a placa</b></p>
 <div align="center">
-  ![](../../../../static/img/sprint5/conexaoSensorTempRasp.png)
+  ![](../../../../../static/img/sprint5/conexaoSensorTempRasp.png)
   <p><b>Fonte:</b>Imagem retirada do artigo de utilização do sensor do randomnerdtutorials</p>
 </div>
 

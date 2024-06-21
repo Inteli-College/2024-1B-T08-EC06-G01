@@ -9,7 +9,7 @@ Esse desenvolvimento pode ser acompanhado a seguir:
 
 ## Telas e Tecnologias 
 
-&emsp; Antes de mais nada é primordial comentar sobre as tecnologias que foram utilizadas para desenvolver o frontend. O grupo opteu por desenvolver as telas utilizando as seguintes tecnologias: Vue com vite e Tailwind. 
+&emsp; Antes de mais nada é primordial comentar sobre as tecnologias que foram utilizadas para desenvolver o frontend. O grupo opteu por desenvolver as telas utilizando as seguintes tecnologias: cd. 
 
 &emsp; O motivo da escolhas dessas técnologias é que os membros do grupo que ficaram responsáveis por fazer o frontend gostariam de aprender novas tecnologias. Assim, o Vue se torna uma escolha óbvia visto que é um framework muito utilizado na industria, totalmente open source e todo o código é escrito em uma única página. 
 
