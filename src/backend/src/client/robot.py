@@ -18,6 +18,8 @@ class Robot:
 	def __init__(self):
 		self.websocket = None
 		self.clients = set()
+		self.position = None
+		self.temperature = None
 
 	async def connect(self):
 		"""Connect to the robot WebSocket and start listening for messages."""
@@ -59,31 +61,39 @@ class Robot:
 
 		try:
 			print('entrei no try')
-			async for message in self.websocket: # type: ignore
+			async for message in self.websocket:  # type: ignore
 				await self._broadcast(message)
 
 				print('oiiiii')
 
-
 				jsonified = json.loads(message)
 				print(f'esse eh o json {jsonified} e essa eh a message {message}')
-				
-				if 'temperature' in jsonified and 'position' in jsonified:
+
+				if 'position' in jsonified:
+					self.position = jsonified['position']
+				if 'temperature' in jsonified:
+					self.temperature = jsonified['temperature']
+
+				if self.position and self.temperature:
 					print('tamo aki')
-					print(float(jsonified['temperature']))
-					print(jsonified['position']['x'])
-					print(jsonified['position']['y'])
-					
+					print(float(self.temperature))
+					print(self.position['x'])
+					print(self.position['y'])
+
 					current_time = datetime.now(tz=timezone('America/Sao_Paulo'))
 					current_time_naive = current_time.replace(tzinfo=None)
 
 					await TempModel.objects.create(
-						temp=float(jsonified['temperature']),
-						location_x=jsonified['position']['x'],
-						location_y=jsonified['position']['y'],
+						temp=float(self.temperature),
+						location_x=self.position['x'],
+						location_y=self.position['y'],
 						date=current_time_naive,
 						robot_id=1  # todo change
 					)
+					
+					# Reset after saving
+					self.position = None
+					self.temperature = None
 				else:	
 					print("JSON message does not contain 'temperature' or 'position' keys")
 
