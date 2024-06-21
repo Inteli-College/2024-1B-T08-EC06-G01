@@ -8,19 +8,24 @@ import numpy as np
 import websockets
 from fastapi import WebSocket
 from websockets.exceptions import ConnectionClosedError
-# from ultralytics import YOLO
+from ultralytics import YOLO
+from queue import Queue
+from threading import Thread, Event
 
 CAMERA_WEBSOCKET_URL = os.environ.get('CAMERA_WEBSOCKET_URL') or ""
+PROCESSING_DELAY = float(os.environ.get('PROCESSING_DELAY', 0.1))  # Delay in seconds between processing images
 
 class Camera:
     def __init__(self):
         self.websocket = None
         self.clients = set()
-
-        # with open("yolo_v8_n_dirt_detection.pt", "wb") as f:
-        #     print('oi eu sou o gustavo')
-        
         self.yolo_model = YOLO("yolo_v8_n_dirt_detection.pt")
+        self.image_queue = Queue()
+        self.stop_event = Event()
+
+        # Start the processing thread
+        self.processing_thread = Thread(target=self._process_images)
+        self.processing_thread.start()
 
     async def connect(self):
         """Connect to the camera WebSocket and start listening for messages."""
@@ -28,12 +33,10 @@ class Camera:
         self.websocket = await websockets.connect(CAMERA_WEBSOCKET_URL)
         asyncio.create_task(self._broadcast_forever())
 
-    
     async def _broadcast_forever(self):
         """Listen for messages from the WebSocket of the camera and broadcast them to all connected clients."""
         try:
             async for message in self.websocket: # type: ignore
-                # print(f"Received message from robot: {message}")
                 await self.process_message(message)
         except ConnectionClosedError:
             print("Connection to camera has been lost, attempting to reconnect...")
@@ -49,19 +52,22 @@ class Camera:
             img_data = base64.b64decode(data["bytes"])
             np_arr = np.frombuffer(img_data, np.uint8)
             img = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
+            self.image_queue.put(img)
 
-            results = await asyncio.to_thread(self.yolo_model.predict, img)
-            results = results[0]
+    def _process_images(self):
+        """Process images from the queue."""
+        while not self.stop_event.is_set():
+            if not self.image_queue.empty():
+                img = self.image_queue.get()
+                results = self.yolo_model.predict(img)[0]
 
-            # Printar o probs
-            # print("Probs:", results.probs)
-            
-            # Detectar se foi detectado sujeira ou não
-            if results.names[0] is not None:
-                await self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
-                    "message": "Sujeira detectada"
-                }}))
-    
+                # Detectar se foi detectado sujeira ou não
+                if results.names[0] is not None:
+                    asyncio.run(self._broadcast(json.dumps({ "type": "SPacketInfo", "data": {
+                        "message": "Sujeira detectada"
+                    }})))
+                self.image_queue.task_done()
+            self.stop_event.wait(PROCESSING_DELAY)
 
     async def add_client(self, client: WebSocket):
         self.clients.add(client)
@@ -108,5 +114,6 @@ class Camera:
         if self.websocket:
             await self.websocket.close()
         self.websocket = None
+        self.stop_event.set()
 
 camera = Camera()

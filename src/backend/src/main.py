@@ -57,7 +57,7 @@ async def lifespan(app: FastAPI):
 		if robot_.websocket:
 			await robot_.close()
 
-		# if camera.websocket: await camera.close()
+		if camera.websocket: await camera.close()
 
 		if database_.is_connected:
 			await database_.disconnect()
