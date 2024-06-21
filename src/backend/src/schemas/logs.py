@@ -1,8 +1,6 @@
-from datetime import datetime
 from typing import Optional
 from datetime import datetime
 from pydantic import BaseModel, Field
-from datetime import datetime
 
 class Log(BaseModel):
     id: int = Field(default=None, gt=0)

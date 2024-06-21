@@ -22,13 +22,9 @@ CREATE TABLE media (
 CREATE TABLE temperature (
   id serial PRIMARY KEY,
   temp float,
-  robot_id integer REFERENCES robot (id)
-);
-
-CREATE TABLE location (
-  id serial PRIMARY KEY,
   location_x float,
   location_y float,
+  date timestamp,
   robot_id integer REFERENCES robot (id)
 );
 

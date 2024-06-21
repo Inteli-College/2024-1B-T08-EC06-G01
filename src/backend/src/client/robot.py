@@ -3,13 +3,14 @@ import json
 import os
 
 from utils.crypto import get_password_hash
-from models.temp import Temp as TempModel
 from models.robots import Robot as RobotModel
 from models.users import User as UserModel
-from models.location import Location as LocationModel
+from models.temp import Temp as TempModel
 import websockets
 from fastapi import WebSocket
 from websockets.exceptions import ConnectionClosedError
+from pytz import timezone
+from datetime import datetime
 
 ROBOT_WEBSOCKET_URL = os.environ.get('ROBOT_WEBSOCKET_URL') or ""
 
@@ -61,17 +62,17 @@ class Robot:
 				await self._broadcast(message)
 
 				jsonified = json.loads(message)
-				if 'temperature' in jsonified:
+				if 'temperature' in jsonified and 'position' in jsonified:
+
+					current_time = datetime.now(tz=timezone('America/Sao_Paulo'))
+					current_time_naive = current_time.replace(tzinfo=None)
+
 					await TempModel.objects.create(
 						temp=float(jsonified['temperature']),
-						robot_id=1 # todo change
-					)
-
-				if 'position' in jsonified:
-					await LocationModel.objects.create(
 						location_x = jsonified['position']['x'],
 						location_y = jsonified['position']['y'],
-						robot_id = 1 # todo change
+						date=current_time_naive,
+						robot_id=1 # todo change
 					)
 
 		except ConnectionClosedError:
