@@ -60,14 +60,17 @@
 │   └── static
 │       └── img
 │           └── integrantes
+├── src
+│   ├── backend
+│   ├── database
+│   ├── frontend
+│   ├── ia
+│   ├── package
+│   └── docker-compose.yaml
+│
 ├── LICENSE
 ├── README.md
-└── src
-    ├── meu_workspace
-    │   └── src
-    │       └── cannabot
-    ├── requirements.txt
-    └── ros-run.bash
+
 ```
 
 &emsp;&emsp;Dentre os arquivos e pastas presentes na raiz do projeto, define-se:
@@ -98,9 +101,14 @@ Entre na pasta do projeto:
 cd 2024-1B-T08-EC06-G01/src
 ```
 
-Rode o script de instalação e execução automático:
+Rode o script docker e utilize o projeto:
 
 ```bash
-chmod +x ros-run.bash
-./ros-run.bash
+docker compose up
 ```
+
+Agora é só acessar o endereço *localhost:80* e utilizar a solução.
+
+## Demonstração da Solução
+
+No vídeo abaixo é possível conferir uma demonstração do robô em funcionamento na sua versão final do projeto. [![Demonstração](https://img.youtube.com/vi/muJQy38vtec/0.jpg)](https://www.youtube.com/watch?v=muJQy38vtec)

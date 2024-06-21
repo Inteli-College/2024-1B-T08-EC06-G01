@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import Sidebar from './components/SidebarComponent.vue';
+// import { useRoute } from 'vue-router';
+// import Sidebar from './components/SidebarComponent.vue';
 
-const route = useRoute();
+// const route = useRoute();
+
 </script>
 
 <template>
-  <div>
-    <Sidebar v-if="!route.meta.hideSidebar" />
+  <div id="app">
     <router-view></router-view>
+    <notifications group="foo" />
   </div>
 </template>
+
 
 <style scoped>
 .logo {
