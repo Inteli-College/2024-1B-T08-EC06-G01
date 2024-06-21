@@ -2,7 +2,7 @@ import json
 
 import pydantic
 from client.robot import robot
-from client.camera import camera
+# from client.camera import camera
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from schemas.websocket import ControlPacket
 from websockets.exceptions import ConnectionClosedError

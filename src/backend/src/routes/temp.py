@@ -80,6 +80,7 @@ async def list():
             "message": f"Erro interno do servidor: {e}"
         }, status_code=500)
 
+
 @router.get("/get/{temp_id}")
 async def get(temp_id: int):
     try: 
