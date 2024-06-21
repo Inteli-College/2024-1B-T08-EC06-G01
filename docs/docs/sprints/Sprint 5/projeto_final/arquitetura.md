@@ -9,7 +9,7 @@ description : Arquitetura final do sistema.
 
 ## Arquitetura do Sistema
 
-A&emsp; arquitetura do sistema foi dividida em quatro partes principais: robô, backend, frontend e docker. A seguir, cada uma dessas partes será detalhada.
+&emsp;A arquitetura do sistema foi dividida em quatro partes principais: robô, backend, frontend e docker. A seguir, cada uma dessas partes será detalhada.
 
 <p align="center"><b>Figura da arquitetura da solução</b></p>
 <div align="center">
