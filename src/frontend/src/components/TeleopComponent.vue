@@ -2,13 +2,17 @@
   <div class="flex justify-center items-center w-full">
     <div class="flex flex-col items-center space-y-2">
       <div>
-        <button :class="{ 'clicked': isForwardClicked }"><ArrowUp /></button>
+        <button @mouseover="mouseOverFn" @mouseleave="mouseLeaveFn" :class="{ 'clicked': isForwardClicked }"><ArrowUp /></button>
+
       </div>
       <div class="flex space-x-2">
-        <button :class="{ 'clicked': isLeftClicked }"><ArrowLeft /></button>
-        <button :class="{ 'clicked': isBackwardClicked }"><ArrowDown /></button>
-        <button :class="{ 'clicked': isRightClicked }"><ArrowRight /></button>
+        <button @mouseover="mouseOverFn" @mouseleave="mouseLeaveFn" :class="{ 'clicked': isLeftClicked }"><ArrowLeft /></button>
+        <button @mouseover="mouseOverFn" @mouseleave="mouseLeaveFn" :class="{ 'clicked': isBackwardClicked }"><ArrowDown /></button>
+        <button @mouseover="mouseOverFn" @mouseleave="mouseLeaveFn" :class="{ 'clicked': isRightClicked }"><ArrowRight /></button>
       </div>
+      <p v-show="showMessage">
+        {{ message }} 
+        </p>
     </div>
   </div>
 </template>
@@ -55,13 +59,25 @@
         isBackwardClicked: false,
         isLeftClicked: false,
         isRightClicked: false,
-        websocket: websocket
+        websocket: websocket,
+        message: 'Use as setas do teclado para movimentar o robô',
+        showMessage: false
       }
     },
 
 
     // Em métodos vocÊ define as funções que serão chamadas no template
     methods: {
+      mouseOverFn() {
+        this.showMessage = true;
+        console.log('Mouse Over')
+      },
+
+      mouseLeaveFn() {
+        this.showMessage = false;
+        console.log('Mouse Leave')
+      },
+
       emergencyStop() {
         console.log('Emergency Stop')
         this.websocket.send(JSON.stringify({

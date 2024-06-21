@@ -8,7 +8,7 @@ import numpy as np
 import websockets
 from fastapi import WebSocket
 from websockets.exceptions import ConnectionClosedError
-from ultralytics import YOLO
+# from ultralytics import YOLO
 
 CAMERA_WEBSOCKET_URL = os.environ.get('CAMERA_WEBSOCKET_URL') or ""
 

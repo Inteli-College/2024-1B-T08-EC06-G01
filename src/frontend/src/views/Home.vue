@@ -24,19 +24,17 @@
         <thead>
           <tr>
             <th>Data</th>
-            <th>Hora</th>
             <th>Localização no eixo X</th>
             <th>Localização no eixo Y</th>
             <th>Temperatura</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in paginatedItems" :key="item.id">
+          <tr v-for="item in items" :key="item.id">
             <td>{{ item.date }}</td>
-            <td>{{ item.time }}</td>
-            <td>{{ item.xlocation }}</td>
-            <td>{{ item.ylocation }}</td>
-            <td>{{ item.temperature }}</td>
+            <td>{{ item.location_x }}</td>
+            <td>{{ item.location_y }}</td>
+            <td>{{ item.temp }}</td>
           </tr>
         </tbody>
       </table>
@@ -76,6 +74,7 @@ const selectedOption = ref(null);
 const heatmapImage = ref(null);
 const currentPage = ref(1);
 const itemsPerPage = ref(5);
+const items = ref([]); // Defina items como uma variável reativa aaaaaa
 
 function toggleDropdown() {
   isOpen.value = !isOpen.value;
@@ -86,10 +85,11 @@ async function fetchData() {
     const response = await axios.get('http://localhost:8000/temp/list');
     if (response.data.error) {
       console.error('Erro ao buscar dados:', response.data.message);
-    } else {
-      items.value = response.data.data;
-      heatmapImage.value = response.data.heatmap;
+      return;
     }
+    items.value = response.data.data; // Atualiza os dados recebidos da API
+    heatmapImage.value = response.data.heatmap;
+    console.log(response.data.data); // Exibe os dados recebidos no console (opcional)
   } catch (error) {
     console.error('Erro ao buscar dados:', error);
   }
@@ -109,13 +109,7 @@ function sortItems() {
   }
 }
 
-// Computed properties para paginação
-const items = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage.value;
-  const end = start + itemsPerPage.value;
-  return items.value.slice(start, end);
-});
-
+// Computed property para calcular o número total de páginas
 const totalPages = computed(() => {
   return Math.ceil(items.value.length / itemsPerPage.value);
 });
@@ -126,7 +120,7 @@ function changePage(page) {
 }
 
 onMounted(() => {
-  fetchData();
+  fetchData(); // Chama fetchData() quando o componente é montado
 });
 </script>
 

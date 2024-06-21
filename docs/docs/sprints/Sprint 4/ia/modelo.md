@@ -8,7 +8,7 @@ description: Nessa secção iremos mostrar como realizamos a implementação de 
 
 ## Introdução
 
-&emsp;O modelo de visão computacional é um elemento importante no projeto. A implementação foi feita pensando em diminuir a carga cognitiva para o operador do robô. Assim, a ia é capaz de detectar determinado objeto estranho que possa estar dentro do reboiler durante a operação. Nesta secção estarão documentados o processo de treinamento do modelo, dataset utilizado, implementação e próximos passos. 
+&emsp;O modelo de visão computacional é um elemento importante no projeto. A implementação foi feita pensando em diminuir a carga cognitiva para o operador do robô. Assim, a ia é capaz de detectar determinado objeto estranho que possa estar dentro do reboiler durante a operação. Nesta secção estarão documentados o processo de treinamento do modelo, dataset utilizado, implementação e próximos passos.
 
 ## Modelo
 &emsp;Precisando de um modelo de visão computacional que fosse rápido em conseguir detectar objetos estranhos dentro do reboiler foi utilizado o modelo [YOLO V8](https://github.com/ultralytics/ultralytics). Esse é um modelo muito utilizado por diversas pessoas e empresas ao redor do globo. Possui uma ampla documentação e pode ser aplicado em diversos tipos de problemas que requerem o uso de visão computacional.
